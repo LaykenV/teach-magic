@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { configDotenv } from "dotenv";
+import path from "path";
+import { log } from "console";
+configDotenv({ path: path.resolve(process.cwd(), ".env") });
+log(process.env);
+log(process.env.OPENAI_API_KEY);
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
