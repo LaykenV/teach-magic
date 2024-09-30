@@ -3,7 +3,3 @@
     slide_paragraphs: string[];
     slide_image_prompt?: string;
   }
-  
- export interface SlideViewerProps {
-    slides: Slide[];
-  }

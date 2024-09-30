@@ -2,13 +2,14 @@
 import SlideViewer from "@/components/SlideViewer";
 import PromptForm from "../../components/PromptForm";
 import { useState } from "react";
-import { Slide, SlideViewerProps } from "@/types/types";
+import { Slide } from "@/types/types";
 
 export default function PromptPage() {
   const [prompt, setPrompt] = useState("");
   const [slides, setSlides] = useState<Slide[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function PromptPage() {
       if (responseJson) {
         setLoading(false);
         setSlides(parsedResponse.slides);
+        setImageUrl(responseJson.imageUrl);
       }
     } catch (error) {
       setLoading(false);
@@ -59,7 +61,7 @@ export default function PromptPage() {
         </button>
       </form>
       {error && <p className="text-red-500">{error}</p>}
-      {slides && <SlideViewer slides={slides} />}
+      {slides && <SlideViewer slides={slides} imageUrl={imageUrl} />}
     </div>
   );
 }
