@@ -9,7 +9,7 @@ export default function PromptPage() {
   const [slides, setSlides] = useState<Slide[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrls, setImageUrls] = useState<string[] | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function PromptPage() {
       if (responseJson) {
         setLoading(false);
         setSlides(parsedResponse.slides);
-        setImageUrl(responseJson.imageUrl);
+        setImageUrls(responseJson.imageUrls);
       }
     } catch (error) {
       setLoading(false);
@@ -61,7 +61,7 @@ export default function PromptPage() {
         </button>
       </form>
       {error && <p className="text-red-500">{error}</p>}
-      {slides && <SlideViewer slides={slides} imageUrl={imageUrl} />}
+      {slides && <SlideViewer slides={slides} imageUrls={imageUrls} />}
     </div>
   );
 }

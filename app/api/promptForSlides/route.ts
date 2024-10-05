@@ -1,5 +1,6 @@
+
 import { NextResponse } from 'next/server';
-import { promptGPT, promptFirstImage } from '../../../utils/prompt';
+import { promptGPT, promptFirst2Images } from '../../../utils/prompt';
 
 export async function POST(request: Request) {
     try {
@@ -7,15 +8,15 @@ export async function POST(request: Request) {
         console.log(prompt);
         const response = await promptGPT(prompt);
         console.log(response);
-        let imageUrl = null;
+        let imageUrls = null;
         if (response?.content) {
             const parsedResponse = JSON.parse(response.content);
-            imageUrl = await promptFirstImage(parsedResponse.slides[0].slide_image_prompt);
-            console.log(imageUrl);
+            imageUrls = await promptFirst2Images([parsedResponse.slides[0].slide_image_prompt, parsedResponse.slides[1].slide_image_prompt]);
+            console.log(imageUrls);
         }
-        return NextResponse.json({ success: true, response, imageUrl });
+        return NextResponse.json({ success: true, response, imageUrls });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, error: error });
-    }
+    }   
 }

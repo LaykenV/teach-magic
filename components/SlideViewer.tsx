@@ -3,10 +3,10 @@ import { Slide } from '@/types/types';
 
 interface SlideViewerProps {
     slides: Slide[];
-    imageUrl: string | null;
+    imageUrls: string[] | null;
   }
 
-const SlideViewer = ({ slides: slides, imageUrl }: SlideViewerProps) => {
+const SlideViewer = ({ slides: slides, imageUrls }: SlideViewerProps) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [slide, setSlide] = useState<Slide | null>(null);
 
@@ -29,9 +29,9 @@ const SlideViewer = ({ slides: slides, imageUrl }: SlideViewerProps) => {
             {slide && (
                 <div className="flex flex-col items-center justify-center w-[100%] gap-4">
                     <h2 className='text-3xl font-bold'>{slide.slide_title}</h2>
-                    {slide.slide_image_prompt && imageUrl && slideIndex === 0 && (
+                    {slide.slide_image_prompt && imageUrls && imageUrls[slideIndex] && (
                         <img
-                            src={imageUrl}
+                            src={imageUrls[slideIndex]}
                             alt={slide.slide_title}
                         />
                     )}
