@@ -4,6 +4,7 @@ import "./globals.css";
 import { configDotenv } from "dotenv";
 import path from "path";
 import { log } from "console";
+import Provider from "@/components/Provider";
 configDotenv({ path: path.resolve(process.cwd(), ".env") });
 log(process.env);
 log(process.env.OPENAI_API_KEY);
@@ -31,11 +32,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <Provider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </Provider>
     </html>
   );
 }
