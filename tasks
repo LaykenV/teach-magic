@@ -1,13 +1,27 @@
+import { idText } from "typescript"
+
 Decide structure
 
-login page
+landing page (clerk) -> dashboard [my creations, my account [logout, edit details], showcase, generate, faq and help ] -> generate [grade level, prompt, submit] -> slide viewer
 
-clerk, drizzle, db setup
+landing page
 
-set up system prompt to gpt and leonardo - fine tuned model
+clerk
 
-set up slide generator
+drizzle
+
+db setup  // create creations table with index on user_id, add createCreation to promptForSlides, update context slides to array, save prompt response to context, redirect to slideviewer and set up id fetching
+
+which img model?
+
+save creation to db and img to bucket // set up img hosting
+
+fetch creation from db and img from bucket
+
+slideviewer/id and restructure generate page
 
 set up slide UI and interactions
 
-set up templates
+style everything
+
+slides -> creations

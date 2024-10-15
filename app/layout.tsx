@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { configDotenv } from "dotenv";
-import path from "path";
-import { log } from "console";
 import Provider from "@/components/Provider";
-configDotenv({ path: path.resolve(process.cwd(), ".env") });
-log(process.env);
-log(process.env.OPENAI_API_KEY);
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { ModeToggle } from "@/components/theme/ThemeToggle";
+//configDotenv({ path: path.resolve(process.cwd(), ".env-local") });
+console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,14 +19,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Provider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </Provider>
-    </html>
+    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+      <html lang="en" suppressHydrationWarning={true}>
+            <Provider>
+              <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                    >
+                  {children}
+                  <ModeToggle />
+                </ThemeProvider>
+              </body>
+            </Provider>
+      </html>
+    </ClerkProvider>
   );
 }

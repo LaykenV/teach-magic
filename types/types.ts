@@ -3,3 +3,19 @@
     slide_paragraphs: string[];
     slide_image_prompt?: string;
   }
+
+  export interface UserEntry {
+    id: string;
+    email: string;
+    name: string;
+  }
+
+  export interface CreationEntry {
+    user_id: string;
+    slides: any[];
+  }
+
+
+
+
+  

@@ -1,8 +1,5 @@
 "use client";
-import SlideViewer from "@/components/SlideViewer";
-import PromptForm from "../../components/PromptForm";
 import { useState } from "react";
-import { Slide } from "@/types/types";
 import { useSlideContext } from "@/context/SlideContext";
 import { useRouter } from "next/navigation";
 
@@ -34,10 +31,13 @@ export default function PromptPage() {
       const responseJson = await response.json();
       const parsedResponse = JSON.parse(responseJson.response.content);
 
-      setSlides(parsedResponse.slides);
-      setImageUrls(responseJson.imageUrls);
+      //setSlides(parsedResponse.slides);
+      //setImageUrls(responseJson.imageUrls);
 
-      router.push("/SlideViewer");
+      //api route to save creation
+      //also push to context
+
+      //router.push(`/SlideViewer?id=${newCreation.id}`);
     } catch (error) {
       setError("Failed to generate slides");
       console.error(error);
