@@ -55,11 +55,16 @@ export default async function Home() {
     slides: creation.slides,
     created_at: creation.created_at,
   }));
-  //pass creations to my creations page
 
-  //generate new creation
 
   //gallery of creations
+  // create showcase table, load data, and fetch here
+
+  //FAQ and help
+
+  //discord?
+
+
   return (
     <div>
       <div>Dashboard {userId} {user?.name}</div>

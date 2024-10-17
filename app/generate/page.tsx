@@ -48,6 +48,8 @@ export default function PromptPage() {
     }
   };
 
+  // grade level options?
+
   return (
     <div className="flex flex-col items-center justify-start h-screen gap-[20%]">
       <div className="mt-[10%] font-bold text-3xl">Generate Slides Here</div>

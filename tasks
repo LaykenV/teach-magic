@@ -1,14 +1,13 @@
-import { idText } from "typescript"
 
-Decide structure
+//Decide structure
 
-landing page (clerk) -> dashboard [my creations, my account [logout, edit details], showcase, generate, faq and help ] -> generate [grade level, prompt, submit] -> slide viewer
+//landing page (clerk) -> dashboard [my creations, my account [logout, edit details], showcase, generate, faq and help ] -> generate [grade level, prompt, submit] -> slide viewer
 
-landing page
+//landing page
 
-clerk
+//clerk
 
-drizzle
+//drizzle
 
 db setup  // create creations table with index on user_id, test creating creation, then fetching it
 
@@ -18,6 +17,6 @@ save creation to db and img to bucket // set up img hosting
 
 restructure generate page
 
-set up slide interactions
+set up slide interactions !!!
 
-style everything
+style everything and build ui

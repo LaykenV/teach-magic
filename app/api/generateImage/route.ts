@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(404).json({ error: 'Creation not found.' });
     }
 
-    const updatedSlides = [...creation.slides as any];
+    const updatedSlides = [...creation.slides as any[]];
 
     // Generate the image
     const imageUrl = await promptImage(slideImagePrompt);
