@@ -1,20 +1,40 @@
 
-import { NextResponse } from 'next/server';
-import { promptGPT, promptFirst2Images } from '../../../utils/prompt';
+import { NextResponse, NextRequest } from 'next/server';
+import { promptGPT, promptImage } from '../../../utils/prompt';
+import { getAuth } from '@clerk/nextjs/server';
+import { createCreation } from '@/utils/createCreation';
 
-export async function POST(request: Request) {
+
+export async function POST(request: NextRequest) {
     try {
         const { prompt } = await request.json();
+        const {userId} = getAuth(request);
+        if (!userId) {
+            NextResponse.json({ success: false, error: 'Unauthorized' });
+        }
         console.log(prompt);
         const response = await promptGPT(prompt);
         console.log(response);
         let imageUrls = null;
-        if (response?.content) {
+        if (response?.content && userId) {
             const parsedResponse = JSON.parse(response.content);
-            imageUrls = await promptFirst2Images([parsedResponse.slides[0].slide_image_prompt, parsedResponse.slides[1].slide_image_prompt]);
-            console.log(imageUrls);
+            let slides = parsedResponse.slides;
+            
+            const initialImagePromises = slides.slice(0, 2).map(async (slide: any) => {
+                const imageUrl = await promptImage(slide.slide_image_prompt);
+                slide.slide_image_url = imageUrl;
+              });
+
+            await Promise.all(initialImagePromises);
+
+            for (let i = 2; i < slides.length; i++) {
+                slides[i].slide_img_url = null;
+            }
+
+            const creation = await createCreation({ user_id: userId, slides });
+            return NextResponse.json({ success: true, creation });
+
         }
-        return NextResponse.json({ success: true, response, imageUrls });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ success: false, error: error });

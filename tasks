@@ -10,18 +10,14 @@ clerk
 
 drizzle
 
-db setup  // create creations table with index on user_id, add createCreation to promptForSlides, update context slides to array, save prompt response to context, redirect to slideviewer and set up id fetching
+db setup  // create creations table with index on user_id, test creating creation, then fetching it
 
 which img model?
 
 save creation to db and img to bucket // set up img hosting
 
-fetch creation from db and img from bucket
+restructure generate page
 
-slideviewer/id and restructure generate page
-
-set up slide UI and interactions
+set up slide interactions
 
 style everything
-
-slides -> creations

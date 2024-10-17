@@ -79,7 +79,7 @@ export async function promptGPT(prompt: string): Promise<OpenAI.Chat.Completions
     }
 }
 
-export async function promptFirst2Images(prompt: string[]): Promise<string[] | null> {
+export async function promptImage(prompt: string): Promise<string | null> {
     const apiKey = process.env.OPENAI_API_KEY;
     
     const openai = new OpenAI({
@@ -88,23 +88,19 @@ export async function promptFirst2Images(prompt: string[]): Promise<string[] | n
 
     try {
         const completion1 = await openai.images.generate({
-            model: "dall-e-3",
+            model: "dall-e-2",
             prompt: prompt[0],
             size: "1024x1024",
           });
 
-          const completion2 = await openai.images.generate({
-            model: "dall-e-3",
-            prompt: prompt[1],
-            size: "1024x1024",
-          });
+          
 
-        if (!completion1.data[0].url || !completion2.data[0].url) {
+        if (!completion1.data[0].url) {
             return null;
         }
 
-        return [completion1.data[0].url, completion2.data[0].url] || null;
-        
+        return completion1.data[0].url;
+
     } catch (error) {
         console.error("Error fetching completion:", error);
         return null;

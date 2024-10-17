@@ -2,13 +2,15 @@
 import { useState } from "react";
 import { useSlideContext } from "@/context/SlideContext";
 import { useRouter } from "next/navigation";
+import { jaccardDistance } from "drizzle-orm";
+import { Creation } from "@/drizzle/schema";
 
 export default function PromptPage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { setSlides, setImageUrls } = useSlideContext();
+  const { userCreations, setUserCreations} = useSlideContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,14 +32,14 @@ export default function PromptPage() {
 
       const responseJson = await response.json();
       const parsedResponse = JSON.parse(responseJson.response.content);
+      const newCreation: Creation = parsedResponse.creation;
+      console.log(newCreation);
+      
 
-      //setSlides(parsedResponse.slides);
-      //setImageUrls(responseJson.imageUrls);
+      setUserCreations([...userCreations, newCreation]);
 
-      //api route to save creation
-      //also push to context
-
-      //router.push(`/SlideViewer?id=${newCreation.id}`);
+      router.push(`/SlideViewer?id=${newCreation.id}`);
+      
     } catch (error) {
       setError("Failed to generate slides");
       console.error(error);

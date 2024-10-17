@@ -7,6 +7,9 @@ import ClientTest from '@/components/ClientTest';
 import { User } from '@/drizzle/schema';
 import SetUserContext from '@/components/SetContext';
 import { UserEntry } from '@/types/types';
+import Router from 'next/router';
+import { creationsTable } from '@/drizzle/schema';
+import { Creation } from '@/drizzle/schema';
 
 
 export default async function Home() {
@@ -45,7 +48,13 @@ export default async function Home() {
   console.log('user', user);
 
   //query db for user creations with userId
-
+  const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, userId));
+  const formattedCreations: Creation[] = userCreations.map((creation: any) => ({
+    id: creation.id,
+    user_id: creation.user_id,
+    slides: creation.slides,
+    created_at: creation.created_at,
+  }));
   //pass creations to my creations page
 
   //generate new creation
@@ -59,6 +68,15 @@ export default async function Home() {
       <UserButton />
       <SetUserContext user={user} />
       <ClientTest />
+      <button onClick={() => Router.push('/generate')}>Generate</button>
+      <div>user creations</div>
+      {formattedCreations.map((creation) => (
+        <div key={creation.id}>
+          <h2>{creation.id}</h2>
+          <p>{creation.slides[0].slide_title}</p>
+          <button onClick={() => Router.push(`/SlideViewer?id=${creation.id}`)}>View</button>
+        </div>
+      ))}
     </div>
   );
 }

@@ -20,7 +20,15 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
       })
       .returning();
 
-    return newCreation;
+      // Structure the creation data as per the 'Creation' interface
+  const formattedCreation: Creation = {
+      id: newCreation.id,
+      user_id: newCreation.user_id,
+      created_at: newCreation.created_at,
+      slides: newCreation.slides as any[], // Ensure that 'slides' are correctly typed
+  };
+
+    return formattedCreation;
   } catch (error) {
     console.error('Error inserting creation:', error);
     throw new Error('Failed to create creation.');

@@ -20,7 +20,12 @@ export const creationsTable = pgTable('creations', {
     created_at: timestamp('created_at').notNull().defaultNow(),
 });
   
-  export type Creation = typeof creationsTable.$inferSelect;
+  export type Creation = {
+    id: string;
+    user_id: string;
+    slides: any[];
+    created_at: Date;
+  }
 
 
   export type User = typeof usersTable.$inferSelect;
