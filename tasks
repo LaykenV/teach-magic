@@ -9,14 +9,18 @@
 
 //drizzle
 
-db setup  // create creations table with index on user_id, test creating creation, then fetching it
+//db setup
 
-which img model?
 
-save creation to db and img to bucket // set up img hosting
+
+save creation to db and img to bucket // set up img hosting and retrieve from bucket
+
+which img model? //choose ai model
+
+optimize fetching with context // if navigate to dashboard dont fully reload
 
 restructure generate page
 
-set up slide interactions !!!
+set up slide interactions !!! // montessori learning, choose path, dynamic prompting, quiz slides
 
 style everything and build ui

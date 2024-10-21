@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Slide } from '@/types/types';
 import { Creation } from '@/drizzle/schema';
+import Image from "next/image";
 
 interface SlideViewerProps {
   creation: Creation;
@@ -13,6 +14,24 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
   useEffect(() => {
     if (creation.slides && creation.slides.length > 0) {
       setSlide(creation.slides[slideIndex]);
+
+      // Preload the next slide's image
+      if (slideIndex + 1 < creation.slides.length) {
+        const nextSlide = creation.slides[slideIndex + 1];
+        if (nextSlide.slide_image_url) {
+          const img = new window.Image();
+          img.src = nextSlide.slide_image_url;
+        }
+      }
+
+      // Preload the previous slide's image
+      if (slideIndex > 0) {
+        const prevSlide = creation.slides[slideIndex - 1];
+        if (prevSlide.slide_image_url) {
+          const img = new window.Image();
+          img.src = prevSlide.slide_image_url;
+        }
+      }
     }
   }, [slideIndex, creation.slides]);
 
@@ -33,10 +52,12 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
 
           {/* Slide Image or Placeholder */}
           {slide.slide_image_url ? (
-            <img
+            <Image
               src={slide.slide_image_url}
               alt={slide.slide_title}
               className="w-full h-auto max-h-96 object-contain mb-4 rounded-md"
+              width={1024}
+              height={1024}
             />
           ) : (
             <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center mb-4 rounded-md">

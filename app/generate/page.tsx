@@ -31,8 +31,8 @@ export default function PromptPage() {
       }
 
       const responseJson = await response.json();
-      const parsedResponse = JSON.parse(responseJson.response.content);
-      const newCreation: Creation = parsedResponse.creation;
+      console.log(responseJson);
+      const newCreation: Creation = responseJson.creation;
       console.log(newCreation);
       
 

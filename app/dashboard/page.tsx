@@ -7,9 +7,9 @@ import ClientTest from '@/components/ClientTest';
 import { User } from '@/drizzle/schema';
 import SetUserContext from '@/components/SetContext';
 import { UserEntry } from '@/types/types';
-import Router from 'next/router';
 import { creationsTable } from '@/drizzle/schema';
 import { Creation } from '@/drizzle/schema';
+import UserCreations from '@/components/UserCreations';
 
 
 export default async function Home() {
@@ -56,6 +56,8 @@ export default async function Home() {
     created_at: creation.created_at,
   }));
 
+  //set user creations to formattedCreations
+
 
   //gallery of creations
   // create showcase table, load data, and fetch here
@@ -73,15 +75,8 @@ export default async function Home() {
       <UserButton />
       <SetUserContext user={user} />
       <ClientTest />
-      <button onClick={() => Router.push('/generate')}>Generate</button>
       <div>user creations</div>
-      {formattedCreations.map((creation) => (
-        <div key={creation.id}>
-          <h2>{creation.id}</h2>
-          <p>{creation.slides[0].slide_title}</p>
-          <button onClick={() => Router.push(`/SlideViewer?id=${creation.id}`)}>View</button>
-        </div>
-      ))}
+      <UserCreations userCreations={formattedCreations} />
     </div>
   );
 }
