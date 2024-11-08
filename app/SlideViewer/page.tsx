@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import SlideViewer from "@/components/SlideViewer";
 import { useSlideContext } from "@/context/SlideContext";
 import { Creation } from "@/drizzle/schema";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
+import { SlideWithImage } from "@/types/types";
 
 export default function SlideViewerPage() {
   const router = useRouter();
@@ -55,50 +56,19 @@ export default function SlideViewerPage() {
           const fetchedCreation: Creation = await response.json();
           setCreation(fetchedCreation);
           console.log("fetchedCreation", fetchedCreation);
-        } catch (err: any) {
+        } catch (err: unknown) {
           console.error(err);
-          setError(err.message || "An unexpected error occurred.");
+          setError(err instanceof Error ? err.message : "An unexpected error occurred.");
         } finally {
           setLoading(false);
         }
       };
-
+      
       fetchCreation();
     }
   }, [id, userCreations, router]);
-
-  useEffect(() => {
-    if (error) {
-      console.error(error);
-      const timer = setTimeout(() => {
-        router.replace("/generate");
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [error, router]);
-
-  useEffect(() => {
-    console.log(creation);
-    
-    if (creation && !isGeneratingImagesRef.current && !imagesGenerated) {
-      const slidesWithoutImages = creation.slides.filter((slide) => !slide.slide_image_url);
-      if (slidesWithoutImages.length > 0) {
-        isGeneratingImagesRef.current = true;
-        generateImagesSequentially(creation.slides as any[])
-          .then(() => {
-            isGeneratingImagesRef.current = false;
-            setImagesGenerated(true);
-          })
-          .catch(() => {
-            isGeneratingImagesRef.current = false;
-          });
-      } else {
-        setImagesGenerated(true);
-      }
-    }
-  }, [creation, imagesGenerated]);
-
-  const generateImagesSequentially = async (slides: any[]) => {
+  
+  const generateImagesSequentially = useCallback(async (slides: SlideWithImage[]) => {
     let creationUpdated = false;
     for (let i = 0; i < slides.length; i++) {
       const slide = slides[i];
@@ -149,7 +119,39 @@ export default function SlideViewerPage() {
       // All images are already generated
       setImagesGenerated(true);
     }
-  };
+  }, [creation, userCreations, setUserCreations, userId]);
+
+  useEffect(() => {
+    if (error) {
+      console.error(error);
+      const timer = setTimeout(() => {
+        router.replace("/generate");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, router]);
+
+  useEffect(() => {
+    console.log(creation);
+    
+    if (creation && !isGeneratingImagesRef.current && !imagesGenerated) {
+      const slidesWithoutImages = creation.slides.filter((slide) => !slide.slide_image_url);
+      if (slidesWithoutImages.length > 0) {
+        isGeneratingImagesRef.current = true;
+        generateImagesSequentially(creation.slides as SlideWithImage[])
+          .then(() => {
+            isGeneratingImagesRef.current = false;
+            setImagesGenerated(true);
+          })
+          .catch(() => {
+            isGeneratingImagesRef.current = false;
+          });
+      } else {
+        setImagesGenerated(true);
+      }
+    }
+  }, [creation, imagesGenerated, generateImagesSequentially]);
+
 
   if (loading) {
     return <p className="text-center mt-10">Loading...</p>;
