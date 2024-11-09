@@ -1,13 +1,13 @@
   // Define the slide types
   type TitleSlide = {
-    slide_type: 'title';
+    slide_type: string;
     slide_title: string;
     slide_image_prompt: string;
     slide_image_url?: string | null; 
   };
 
   type ContentSlide = {
-    slide_type: 'content';
+    slide_type: string;
     slide_title: string;
     slide_paragraphs: string[];
     slide_image_prompt: string;
@@ -20,7 +20,7 @@
   };
 
   type QuestionSlide = {
-    slide_type: 'question';
+    slide_type: string;
     slide_title: string;
     question: string;
     answer_choices: AnswerChoice[];

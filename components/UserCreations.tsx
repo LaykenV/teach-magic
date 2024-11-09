@@ -1,9 +1,8 @@
 "use client";
 import { Creation } from "@/drizzle/schema";
-import Image from "next/image";
 import Link from 'next/link'
 import { useRouter } from "next/navigation";
-import React, {useState} from "react";
+import React from "react";
 
 interface UserCreationsProps {
   userCreations: Creation[];

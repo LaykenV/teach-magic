@@ -1,6 +1,5 @@
 // drizzle/schema.ts
-import { pgTable, text, integer, bigint, jsonb, uuid, timestamp } from 'drizzle-orm/pg-core';
-import { array } from 'zod';
+import { pgTable, text, integer, jsonb, uuid, timestamp } from 'drizzle-orm/pg-core';
 
 export const usersTable = pgTable('users', {
   id: text('id').notNull(),
@@ -23,6 +22,7 @@ export const creationsTable = pgTable('creations', {
   export type Creation = {
     id: string;
     user_id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slides: any[];
     created_at: Date;
   }

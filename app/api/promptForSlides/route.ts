@@ -4,6 +4,12 @@ import { getAuth } from '@clerk/nextjs/server';
 import { createCreation } from '@/utils/createCreation';
 import { Slide } from '@/types/types';
 
+type DataFromPrompt = {
+  title_slide: Slide;
+  content_slides: Slide[];
+  question_slide: Slide;
+};
+
 export async function POST(request: NextRequest) {
   try {
     const { prompt } = await request.json();
@@ -18,14 +24,23 @@ export async function POST(request: NextRequest) {
     console.log(response);
 
     if (response?.content && userId) {
-      const parsedResponse = JSON.parse(response.content);
-      const slides: Slide[] = parsedResponse.slides;
+      const parsedResponse: DataFromPrompt = JSON.parse(response.content);
+      const { title_slide, content_slides, question_slide } = parsedResponse;
+       // Combine the slides into a single array
+       const slides: Slide[] = [
+        { ...title_slide, slide_type: 'title' },
+        ...content_slides.map((slide) => ({
+          ...slide,
+          slide_type: 'content'
+        })),
+        { ...question_slide, slide_type: 'question' }
+      ];
 
       let imageSlideCount = 0;
       const imagePromises: Promise<void>[] = [];
 
       for (const slide of slides) {
-        if (slide.slide_type === 'title' || slide.slide_type === 'content') {
+        if ((slide.slide_type === 'title' || slide.slide_type === 'content') && 'slide_image_prompt' in slide) {
           if (imageSlideCount < 2) {
             const imagePromise = (async () => {
               const imageUrl = await promptImage(slide.slide_image_prompt);

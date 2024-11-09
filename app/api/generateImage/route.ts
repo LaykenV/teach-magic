@@ -6,6 +6,7 @@ import { db } from '@/drizzle/db'; // Adjust the import path based on your proje
 import { creationsTable } from '@/drizzle/schema'; // Adjust the import path based on your project structure
 import { eq, and } from 'drizzle-orm/expressions';
 import { promptImage } from '@/utils/prompt'; // Ensure this path is correct
+import { Slide } from '@/types/types';
 
 export async function POST(request: NextRequest) {
   console.log(`[generateImage] Received POST request.`);
@@ -61,14 +62,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Clone and update the slides array
-    const updatedSlides = [...(creationRecord.slides as any[])];
+    const updatedSlides = [...(creationRecord.slides as Slide[])];
 
     // Generate the image
     const imageUrl = await promptImage(slideImagePrompt);
     console.log(`[generateImage] Generated image URL: ${imageUrl}`);
 
     // Update the specific slide
-    if (updatedSlides[slideIndex]) {
+    if (updatedSlides[slideIndex] && 'slide_image_url' in updatedSlides[slideIndex]) {
       updatedSlides[slideIndex].slide_image_url = imageUrl;
     } else {
       console.log(`[generateImage] Slide index ${slideIndex} out of bounds.`);

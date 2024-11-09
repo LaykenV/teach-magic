@@ -1,173 +1,110 @@
-"use client";
-import { useEffect, useState, useRef, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import SlideViewer from "@/components/SlideViewer";
-import { useSlideContext } from "@/context/SlideContext";
-import { Creation } from "@/drizzle/schema";
-import { useAuth } from "@clerk/nextjs";
-import Link from "next/link";
-import { SlideWithImage } from "@/types/types";
+import SlideViewer from '@/components/SlideViewer';
+import Link from 'next/link';
+import { SlideWithImage } from '@/types/types';
+import { Creation, creationsTable } from '@/drizzle/schema';
+import { db } from '@/drizzle/db';
+import { promptImage } from '@/utils/prompt';
+import { eq } from 'drizzle-orm/expressions';
+import { Slide } from '@/types/types';
 
-export default function SlideViewerPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const { userCreations, setUserCreations } = useSlideContext();
-  const { userId } = useAuth();
-  const [creation, setCreation] = useState<Creation | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const isGeneratingImagesRef = useRef(false); // Flag to prevent loops
-  const [imagesGenerated, setImagesGenerated] = useState(false); // Tracks if images are generated
+interface SlideViewerPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-  const id = searchParams.get("id");
+async function getCreationById(id: string) {
+  // Fetch the creation from the database using your ORM or database client
+  const [creation] = await db.select().from(creationsTable).where(eq(creationsTable.id, id));
 
-  useEffect(() => {
-    if (!id) {
-      setError("No creation ID provided.");
-      setLoading(false);
-      router.replace("/generate");
-      return;
-    }
+  const c: Creation = {
+    id: creation.id,
+    user_id: creation.user_id,
+    created_at: creation.created_at,
+    slides: creation.slides as Slide[],
+  };
 
-    // Search for the creation in the context
-    const existingCreation = userCreations.find((creation) => creation.id === id);
-
-    if (existingCreation) {
-      console.log("existingCreation", existingCreation);
-      setCreation(existingCreation);
-      setLoading(false);
-    } else {
-      // Fetch the creation from the API
-      const fetchCreation = async () => {
-        try {
-          const response = await fetch("/api/getCreation", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ id }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Failed to fetch creation.");
-          }
-
-          const fetchedCreation: Creation = await response.json();
-          setCreation(fetchedCreation);
-          console.log("fetchedCreation", fetchedCreation);
-        } catch (err: unknown) {
-          console.error(err);
-          setError(err instanceof Error ? err.message : "An unexpected error occurred.");
-        } finally {
-          setLoading(false);
-        }
-      };
-      
-      fetchCreation();
-    }
-  }, [id, userCreations, router]);
-  
-  const generateImagesSequentially = useCallback(async (slides: SlideWithImage[]) => {
-    let creationUpdated = false;
-    for (let i = 0; i < slides.length; i++) {
-      const slide = slides[i];
-      if (!slide.slide_image_url && creation) {
-        try {
-          const response = await fetch("/api/generateImage", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              creationId: creation.id,
-              slideIndex: i,
-              slideImagePrompt: slide.slide_image_prompt,
-            }),
-          });
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || "Image generation failed");
-          }
-
-          const updatedSlide = await response.json();
-
-          const updatedSlides = [...creation.slides];
-          updatedSlides[i] = updatedSlide;
-          const updatedCreation: Creation = { ...creation, slides: updatedSlides };
-          setCreation(updatedCreation);
-          creationUpdated = true;
-
-          if (userId === creation.user_id) {
-            const updatedUserCreations = userCreations.map((c) => {
-              if (c.id === creation?.id) {
-                const updatedSlides = [...c.slides];
-                updatedSlides[i] = updatedSlide;
-                return { ...c, slides: updatedSlides };
-              }
-              return c;
-            });
-            setUserCreations(updatedUserCreations);
-          }
-        } catch (error) {
-          console.error(`Failed to generate image for slide ${i + 1}:`, error);
-          // Optionally handle retries or show error messages to the user
-        }
-      }
-    }
-
-    if (!creationUpdated) {
-      // All images are already generated
-      setImagesGenerated(true);
-    }
-  }, [creation, userCreations, setUserCreations, userId]);
-
-  useEffect(() => {
-    if (error) {
-      console.error(error);
-      const timer = setTimeout(() => {
-        router.replace("/generate");
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [error, router]);
-
-  useEffect(() => {
-    console.log(creation);
-    
-    if (creation && !isGeneratingImagesRef.current && !imagesGenerated) {
-      const slidesWithoutImages = creation.slides.filter((slide) => !slide.slide_image_url);
-      if (slidesWithoutImages.length > 0) {
-        isGeneratingImagesRef.current = true;
-        generateImagesSequentially(creation.slides as SlideWithImage[])
-          .then(() => {
-            isGeneratingImagesRef.current = false;
-            setImagesGenerated(true);
-          })
-          .catch(() => {
-            isGeneratingImagesRef.current = false;
-          });
-      } else {
-        setImagesGenerated(true);
-      }
-    }
-  }, [creation, imagesGenerated, generateImagesSequentially]);
+  return c;
+}
 
 
-  if (loading) {
-    return <p className="text-center mt-10">Loading...</p>;
+async function generateImage(slideImagePrompt: string): Promise<string | null> {
+  try {
+    const imageUrl = await promptImage(slideImagePrompt);
+    return imageUrl;
+  } catch (error) {
+    console.error('Error generating image:', error);
+    return null;
+  }
+}
+
+
+async function updateSlideImageUrl(creationId: string, slideIndex: number, imageUrl: string) {
+  // Update the slide's image URL in the database
+  const [creation] = await db.select().from(creationsTable).where(eq(creationsTable.id, creationId));
+
+  const newSlides = [...creation.slides as Slide[]];
+
+  if ('slide_image_url' in newSlides[slideIndex]) {
+    newSlides[slideIndex].slide_image_url = imageUrl;
   }
 
-  if (error) {
-    return <p className="text-center mt-10 text-red-500">{error}</p>;
+  await db.update(creationsTable).set({ slides: newSlides }).where(eq(creationsTable.id, creationId));
+}
+
+export default async function SlideViewerPage({ searchParams }: SlideViewerPageProps) {
+  const id = searchParams.id as string;
+
+  if (!id) {
+    return (
+      <div className="flex flex-col items-center justify-start min-h-screen p-4">
+        <p className="text-center mt-10">No creation ID provided.</p>
+        <Link href="/generate" className="text-blue-500 hover:underline">
+          Go back to Generate
+        </Link>
+      </div>
+    );
   }
+
+  // Fetch the creation from the database
+  let creation: Creation = await getCreationById(id);
 
   if (!creation) {
-    return <p className="text-center mt-10">No creation found.</p>;
+    return (
+      <div className="flex flex-col items-center justify-start min-h-screen p-4">
+        <p className="text-center mt-10">Creation not found.</p>
+        <Link href="/generate" className="text-blue-500 hover:underline">
+          Go back to Generate
+        </Link>
+      </div>
+    );
+  }
+
+  // Check for slides with null slide_image_url and generate images
+  const slidesToUpdate: { slide: SlideWithImage; index: number }[] = creation.slides
+    .map((slide, index) => ({ slide, index }))
+    .filter(
+      ({ slide }) =>
+        slide.slide_image_url == null &&
+        (slide.slide_type === 'title' || slide.slide_type === 'content')
+    );
+
+  if (slidesToUpdate.length > 0) {
+    for (const { slide, index } of slidesToUpdate) {
+      const imageUrl = await generateImage(slide.slide_image_prompt);
+      if (imageUrl) {
+        slide.slide_image_url = imageUrl;
+        // Update the slide in the database
+        await updateSlideImageUrl(creation.id, index, imageUrl);
+      }
+    }
+    // Refetch the updated creation
+    creation = await getCreationById(id);
   }
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-4">
-      <Link href={`/dashboard`} className="text-blue-500 hover:underline">Back to Dashboard</Link>
+      <Link href={`/dashboard`} className="text-blue-500 hover:underline">
+        Back to Dashboard
+      </Link>
       <h1 className="text-3xl font-bold mb-4">Slide Viewer</h1>
       <SlideViewer creation={creation} />
     </div>

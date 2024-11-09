@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useSlideContext } from "@/context/SlideContext";
 import { useRouter } from "next/navigation";
-import { jaccardDistance } from "drizzle-orm";
 import { Creation } from "@/drizzle/schema";
 
 export default function PromptPage() {
