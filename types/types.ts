@@ -1,5 +1,5 @@
   // Define the slide types
-  type TitleSlide = {
+  export type TitleSlide = {
     slide_type: string;
     slide_title: string;
     slide_image_prompt: string;

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Creation } from '@/drizzle/schema';
-import Image from 'next/image';
+import { CldImage } from 'next-cloudinary';
 
 interface SlideViewerProps {
   creation: Creation;
@@ -19,7 +19,8 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
   useEffect(() => {
     setSelectedAnswerIndex(null);
     setShowAnswerFeedback(false);
-  }, [slideIndex]);
+    console.log("SlideViewer useEffect", creation);
+  }, [slideIndex, creation]);
 
   const handleNextSlide = () => {
     setSlideIndex((prevIndex) => Math.min(prevIndex + 1, creation.slides.length - 1));
@@ -46,12 +47,11 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
             <>
               {/* Slide Image or Placeholder */}
               {slide.slide_image_url ? (
-                <Image
+                <CldImage
+                  width='724'
+                  height='724'
                   src={slide.slide_image_url}
-                  alt={slide.slide_title}
-                  className="w-full h-auto max-h-96 object-contain mb-4 rounded-md"
-                  width={1024}
-                  height={1024}
+                  alt='Slide Image'
                 />
               ) : (
                 <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center mb-4 rounded-md">
@@ -65,13 +65,12 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
             <>
               {/* Slide Image or Placeholder */}
               {slide.slide_image_url ? (
-                <Image
-                  src={slide.slide_image_url}
-                  alt={slide.slide_title}
-                  className="w-full h-auto max-h-96 object-contain mb-4 rounded-md"
-                  width={1024}
-                  height={1024}
-                />
+                <CldImage
+                width='724'
+                height='724'
+                src={slide.slide_image_url}
+                alt='Slide Image'
+              />
               ) : (
                 <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center mb-4 rounded-md">
                   <p className="text-gray-500">Image not available.</p>

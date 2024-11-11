@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Slide } from "@/types/types";
 import { Creation, User } from "@/drizzle/schema";
 
 interface SlideContextType {

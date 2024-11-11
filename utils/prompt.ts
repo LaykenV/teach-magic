@@ -1,83 +1,9 @@
 import { OpenAI } from "openai";
 import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
-
-
-/*export async function promptGPT(prompt: string): Promise<OpenAI.Chat.Completions.ChatCompletionMessage | null> {
-    const apiKey = process.env.OPENAI_API_KEY;
-
-    const Slide = z.object({
-        slide_title: z.string(),
-        slide_paragraphs: z.array(z.string()),
-        slide_image_prompt: z.string().optional(),
-        slide_notes: z.string()
-      });
-
-    const Response = z.object({
-        slides: z.array(Slide),
-    });
-
-    const systemPrompt = `
-    You are an AI assistant specialized in creating educational slide content based on user input. Your task is to generate a structured array of slides in JSON format suitable for presentation purposes.
-
-    **Instructions:**
-
-    - **Output Format:** 
-        - The output should be a JSON object with a \`slides\` array containing objects for each slide.
-        - Each slide object must have the following properties:
-        - \`slide_title\`: The title of the slide.
-        - \`slide_paragraphs\`: An array containing two engaging paragraphs (2-3 sentences each) that elaborate on the slide's topic.
-        - \`slide_image_prompt\`: A descriptive prompt for generating an image relevant to the slide's content, following a **modern minimalist** theme.
-        - \`slide_notes\`: Notes for the presenter to provide context or clarify the slide's content.
-
-
-    - **Slide Structure:**
-        - **Total Slides:** Generate 8 to 10 slides, including the title slide.
-        - **First Slide (Title Slide):**
-        - \`slide_title\`: The main topic provided by the user.
-        - \`slide_paragraphs\`: Leave empty or include a subtitle if appropriate.
-        - \`slide_image_prompt\`: A descriptive prompt for an image that represents the overall topic, adhering to the **modern minimalist** theme.
-        - \`slide_notes\`: Provide context or clarify the topic's significance.
-        - **Subsequent Slides:**
-        - \`slide_title\`: A concise title summarizing the slide's content.
-        - \`slide_paragraphs\`: Two engaging paragraphs (2-3 sentences each) that elaborate on the slide's topic.
-        - \`slide_image_prompt\`: A prompt to generate an image relevant to the slide's content, following the **modern minimalist** theme.
-        - \`slide_notes\`: Provide context or clarify the slide's content for the presenter to speak on.
-    - **Content Guidelines:**
-        - Ensure all information is accurate, clear, and appropriate for educational purposes.
-        - Present the content logically, covering various aspects of the topic.
-        - The paragraphs should be informative and engaging, suitable for presentation slides.
-        - The image prompts should be detailed enough to generate high-quality, relevant images in the **modern minimalist** theme.
-
-    - **Restrictions:**
-        - Do not include any additional text or explanations outside of the specified format.
-        - Do not mention these instructions or acknowledge that you are an AI language model in the output.
-        - Do not include any disallowed content such as personal opinions, inappropriate language, or confidential information.
-    `;
-    
-    const openai = new OpenAI({
-        apiKey,
-    });
-
-    try {
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [
-                { role: "system", content: systemPrompt },
-                {
-                    role: "user",
-                    content: prompt,
-                },
-            ],
-            response_format: zodResponseFormat(Response, "slides"),
-        });
-
-        return completion.choices[0].message || null;
-    } catch (error) {
-        console.error("Error fetching completion:", error);
-        return null;
-    }
-}*/
+import axios from 'axios';
+import FormData from 'form-data';
+import { v2 as cloudinary } from 'cloudinary';
 
 export async function promptGPT(
     prompt: string
@@ -217,35 +143,109 @@ export async function promptGPT(
     }
   };
 
-export async function promptImage(prompt: string): Promise<string | null> {
-    const apiKey = process.env.OPENAI_API_KEY;
-    
-    const openai = new OpenAI({
-        apiKey,
-    });
-
-    console.log(prompt, "prompt");
-    
-
-    try {
-        const completion1 = await openai.images.generate({
-            model: "dall-e-3",
-            prompt: prompt,
-            size: "1024x1024",
-          });
-
-          
-
-        if (!completion1.data[0].url) {
-            return null;
-        }
-
-        console.log(completion1.data[0].url, "completion1.data[0].url");
-
-        return completion1.data[0].url;
-
-    } catch (error) {
-        console.error("Error fetching completion:", error);
-        return null;
+  export async function promptImage(
+    prompt: string,
+    creationId: string,
+    slideIndex: number
+  ): Promise<string | null> {
+    const apiKey = process.env.STABILITY_API_KEY;
+    if (!apiKey) {
+      console.error("Stability API key is not defined.");
+      return null;
     }
-}
+  
+    const apiUrl = 'https://api.stability.ai/v2beta/stable-image/generate/core';
+  
+    // Construct FormData with fixed parameters
+    const form = new FormData();
+    form.append('prompt', prompt);
+    form.append('output_format', 'webp'); // Fixed output format
+  
+    // Set headers
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${apiKey}`,
+      ...form.getHeaders(),
+      Accept: 'image/*', // Request binary image data
+    };
+  
+    try {
+      const response = await axios.post(apiUrl, form, {
+        headers,
+        responseType: 'arraybuffer', // Receive binary data
+        validateStatus: () => true, // Handle status codes manually
+      });
+  
+      if (response.status === 200) {
+        // Image bytes received
+        const imageBuffer: Buffer = Buffer.from(response.data, 'binary');
+        console.log('Image successfully generated.');
+        console.log(`Image buffer length: ${imageBuffer.length} bytes`);
+
+  
+        // Call uploadImage function
+        const imageUrl = await uploadImage(imageBuffer, creationId, slideIndex);
+  
+        // Return the image URL
+        return imageUrl;
+      } else {
+        // Handle errors based on status code
+        console.error(`Error ${response.status}: ${response.data.toString()}`);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error generating image:", error);
+      return null;
+    }
+  }
+
+  export async function uploadImage(
+        imageBuffer: Buffer,
+        creationId: string,
+        slideIndex: number
+    ): Promise<string | null> {
+        const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+        const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY;
+        const apiSecret = process.env.CLOUDINARY_API_SECRET;
+    
+        if (!cloudName || !apiKey || !apiSecret) {
+        console.error("Cloudinary configuration variables are not all defined.");
+        return null;
+        }
+    
+        // Configure Cloudinary (only need to do this once globally)
+        cloudinary.config({
+        cloud_name: cloudName,
+        api_key: apiKey,
+        api_secret: apiSecret,
+        });
+
+        const uploadResult = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream({
+                public_id: `${creationId}-${slideIndex}`,
+                tags: ['teach-magic'],
+                resource_type: 'image',
+                overwrite: true,
+                folder: 'generated_images', // Optional: specify a folder
+                }, (error, result) => {
+                    if (error) {
+                        console.error('Error uploading image to Cloudinary:', error);
+                        reject(error);
+                    } else {
+                        console.log(result);
+                        if (result) {
+                            console.log('Image successfully uploaded to Cloudinary:', result.secure_url);
+                            console.log(result);
+                            resolve(result.public_id);
+                        } else {
+                        console.error('Error uploading image to Cloudinary: no secure_url returned');
+                        reject('Error uploading image to Cloudinary: no secure_url returned');
+                        }
+                    }
+            }).end(imageBuffer);
+        });
+
+        console.log(uploadResult);
+
+        return uploadResult as string;
+    }
+    

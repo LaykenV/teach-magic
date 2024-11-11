@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSlideContext } from '@/context/SlideContext';
 import { User } from '@/drizzle/schema';
 

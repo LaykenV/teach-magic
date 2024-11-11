@@ -1,6 +1,6 @@
 import { db } from '@/drizzle/db';
 import { creationsTable, Creation } from '@/drizzle/schema';
-import { CreationEntry } from '@/types/types';
+import { CreationEntry, Slide } from '@/types/types';
 
 
 /**
@@ -25,7 +25,7 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
       id: newCreation.id,
       user_id: newCreation.user_id,
       created_at: newCreation.created_at,
-      slides: newCreation.slides as any[], // Ensure that 'slides' are correctly typed
+      slides: newCreation.slides as Slide[], // Ensure that 'slides' are correctly typed
   };
 
     return formattedCreation;

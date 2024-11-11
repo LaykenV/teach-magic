@@ -13,14 +13,16 @@
 
 
 
-save creation to db and img to bucket // set up img hosting and retrieve from bucket
+//save creation to db and img to bucket // set up img hosting and retrieve from bucket
 
-which img model? //choose ai model
+//when to gen images?
 
-optimize fetching with context // if navigate to dashboard dont fully reload
+//which img model? //choose ai model
 
-restructure generate page
+//optimize fetching with context // if navigate to dashboard dont fully reload
 
-set up slide interactions !!! // montessori learning, choose path, dynamic prompting, quiz slides
+restructure generate page // do we need gen page? can it be done in the dashboard? what pages can we add?
 
-style everything and build ui
+//set up slide interactions !!! // montessori learning, choose path, dynamic prompting, quiz slides
+
+style everything and build ui // vo and magicUI and ask dylan for code

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useSlideContext } from "@/context/SlideContext";
 import { useRouter } from "next/navigation";
 import { Creation } from "@/drizzle/schema";
 
@@ -9,7 +8,6 @@ export default function PromptPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { userCreations, setUserCreations} = useSlideContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,9 +32,6 @@ export default function PromptPage() {
       const newCreation: Creation = responseJson.creation;
       console.log(newCreation);
       
-
-      setUserCreations([...userCreations, newCreation]);
-
       router.push(`/SlideViewer?id=${newCreation.id}`);
       
     } catch (error) {

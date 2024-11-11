@@ -1,5 +1,5 @@
 // app/api/generateImage/route.ts
-
+/*
 import { NextResponse, NextRequest } from 'next/server';
 import { getAuth } from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db'; // Adjust the import path based on your project structure
@@ -90,4 +90,4 @@ export async function POST(request: NextRequest) {
     console.error('[generateImage] Error generating image:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
-}
+}*/
