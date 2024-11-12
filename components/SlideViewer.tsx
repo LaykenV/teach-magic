@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Creation } from '@/drizzle/schema';
-import { CldImage } from 'next-cloudinary';
+import { CldImage, getCldImageUrl } from 'next-cloudinary';
 
 interface SlideViewerProps {
   creation: Creation;
@@ -14,6 +14,8 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
   const [showAnswerFeedback, setShowAnswerFeedback] = useState<boolean>(false);
 
   const slide = creation.slides[slideIndex];
+  const nextSlide = creation.slides[slideIndex + 1];
+  const prevSlide = creation.slides[slideIndex - 1];
 
   // Reset answer selection when changing slides
   useEffect(() => {
@@ -34,6 +36,27 @@ const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
     setSelectedAnswerIndex(index);
     setShowAnswerFeedback(true);
   };
+
+   // Preload next and previous images
+   useEffect(() => {
+    const preloadImage = (url: string) => {
+      const img = new Image();
+      const cloudUrl = getCldImageUrl({
+        width: 724,
+        height: 724,
+        src: url
+      })
+      img.src = cloudUrl;
+    };
+
+    if (nextSlide?.slide_image_url) {
+      preloadImage(nextSlide.slide_image_url);
+    }
+
+    if (prevSlide?.slide_image_url) {
+      preloadImage(prevSlide.slide_image_url);
+    }
+  }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url]);
 
   return (
     <div className="slide-viewer flex flex-col items-center justify-center w-full max-w-4xl mx-auto p-4">
