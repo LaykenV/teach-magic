@@ -52,11 +52,7 @@ export default async function SlideViewerPage({ searchParams }: SlideViewerPageP
   }
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-4">
-      <Link href={`/dashboard`} className="text-blue-500 hover:underline">
-        Back to Dashboard
-      </Link>
-      <h1 className="text-3xl font-bold mb-4">Slide Viewer</h1>
+    <div className="h-screen w-screen flex flex-col items-center justify-center">
       <SlideViewer creation={creation} />
     </div>
   );

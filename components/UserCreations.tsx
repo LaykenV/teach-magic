@@ -3,25 +3,41 @@
 import React, { useState } from 'react'
 import { Creation } from '@/drizzle/schema'
 import Link from 'next/link'
-import { useRouter } from "next/navigation"
+import { useRouter } from 'next/navigation'
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertCircle, Loader2, Plus, Trash } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { Textarea } from "@/components/ui/textarea"
+import { RainbowButton } from './ui/rainbow-button'
 
 interface UserCreationsProps {
   userCreations: Creation[]
 }
 
 export default function UserCreations({ userCreations }: UserCreationsProps) {
-  const router = useRouter()
   const [creations, setCreations] = useState<Creation[]>(userCreations)
   const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set())
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [prompt, setPrompt] = useState("")
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const deleteCreation = async (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
     event.stopPropagation()
     setError(null)
     setSuccess(null)
@@ -56,8 +72,38 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
     }
   }
 
-  const handleCardClick = (id: string) => {
-    router.push(`/SlideViewer?id=${id}`)
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch("/api/promptForSlides", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.statusText}`)
+      }
+
+      const responseJson = await response.json()
+      console.log(responseJson)
+      const newCreation: Creation = responseJson.creation
+      console.log(newCreation)
+      
+      setIsDrawerOpen(false)
+      router.push(`/SlideViewer?id=${newCreation.id}`)
+      
+    } catch (error) {
+      setError("Failed to generate slides. Please try again.")
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -87,7 +133,7 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
           </CardContent>
           <CardFooter className="justify-center">
             <Button asChild>
-              <Link href="/generate">
+              <Link prefetch={true} href="/generate">
                 <Plus className="mr-2 h-4 w-4" />
                 Create your first
               </Link>
@@ -99,31 +145,33 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
           {creations.map((creation) => (
             <Card 
               key={creation.id} 
-              className="overflow-hidden cursor-pointer transition-shadow hover:shadow-lg"
-              onClick={() => handleCardClick(creation.id)}
+              className="overflow-hidden transition-shadow hover:shadow-lg"
             >
-              <CardHeader className="p-0">
-                {creation.slides[0]?.slide_image_url ? (
-                  <div className="relative aspect-video">
-                    <CldImage
-                      width={400}
-                      height={225}
-                      src={creation.slides[0].slide_image_url}
-                      alt={creation.slides[0].slide_title || 'Slide Image'}
-                      className="object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="bg-muted aspect-video flex items-center justify-center">
-                    <span className="text-muted-foreground">No image</span>
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="p-4">
-                <CardTitle className="text-lg line-clamp-2">
-                  {creation.slides[0]?.slide_title || 'Untitled Creation'}
-                </CardTitle>
-              </CardContent>
+              <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true} className="block">
+                <CardHeader className="p-0">
+                  {creation.slides[0]?.slide_image_url ? (
+                    <div className="relative aspect-video">
+                      <CldImage
+                        loading='eager'
+                        width={400}
+                        height={225}
+                        src={creation.slides[0].slide_image_url}
+                        alt={creation.slides[0].slide_title || 'Slide Image'}
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="bg-muted aspect-video flex items-center justify-center">
+                      <span className="text-muted-foreground">No image</span>
+                    </div>
+                  )}
+                </CardHeader>
+                <CardContent className="p-4">
+                  <CardTitle className="text-lg line-clamp-2">
+                    {creation.slides[0]?.slide_title || 'Untitled Creation'}
+                  </CardTitle>
+                </CardContent>
+              </Link>
               <CardFooter className="p-4 pt-0 flex justify-end">
                 <Button
                   variant="destructive"
@@ -143,6 +191,57 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
           ))}
         </div>
       )}
+      
+      <div className='flex items-center justify-center w-auto pt-20'>
+        <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+          <DrawerTrigger asChild>
+            <RainbowButton>Create New Slides</RainbowButton>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Generate Slides</DrawerTitle>
+              <DrawerDescription>
+                Enter your topic or lesson idea, and well create a set of slides for you.
+              </DrawerDescription>
+            </DrawerHeader>
+            <form onSubmit={handleSubmit}>
+              <div className="p-4 pb-0">
+                <div className="space-y-2">
+                  <label htmlFor="prompt" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Enter your prompt:
+                  </label>
+                  <Textarea
+                    id="prompt"
+                    placeholder="e.g., Explain the water cycle for 5th grade students"
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    className="min-h-[100px]"
+                    required
+                  />
+                </div>
+              </div>
+              <DrawerFooter>
+                <Button 
+                  type="submit" 
+                  disabled={loading || prompt.trim().length === 0}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Generating...
+                    </>
+                  ) : (
+                    'Generate Slides'
+                  )}
+                </Button>
+                <DrawerClose asChild>
+                  <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+              </DrawerFooter>
+            </form>
+          </DrawerContent>
+        </Drawer>
+      </div>
     </div>
   )
 }

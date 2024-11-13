@@ -41,7 +41,7 @@ export default async function Home() {
           </div>
           <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
             <Image 
-              src="/assets/mock.png" 
+              src="/assets/Capture.png" 
               layout="fill" 
               objectFit="cover" 
               alt="TeachMagic platform preview" 

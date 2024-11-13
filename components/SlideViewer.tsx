@@ -1,207 +1,171 @@
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import { Creation } from '@/drizzle/schema';
-import { CldImage, getCldImageUrl } from 'next-cloudinary';
+import React, { useEffect, useState } from 'react'
+import { Creation } from '@/drizzle/schema'
+import { CldImage, getCldImageUrl } from 'next-cloudinary'
+import Link from 'next/link'
+import { ChevronLeft, ChevronRight, Home } from 'lucide-react'
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 interface SlideViewerProps {
-  creation: Creation;
+  creation: Creation
 }
 
-const SlideViewer: React.FC<SlideViewerProps> = ({ creation }) => {
-  const [slideIndex, setSlideIndex] = useState(0);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
-  const [showAnswerFeedback, setShowAnswerFeedback] = useState<boolean>(false);
+export default function SlideViewer({ creation }: SlideViewerProps) {
+  const [slideIndex, setSlideIndex] = useState(0)
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null)
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState<boolean>(false)
 
-  const slide = creation.slides[slideIndex];
-  const nextSlide = creation.slides[slideIndex + 1];
-  const prevSlide = creation.slides[slideIndex - 1];
+  const slide = creation.slides[slideIndex]
+  const nextSlide = creation.slides[slideIndex + 1]
+  const prevSlide = creation.slides[slideIndex - 1]
 
-  // Reset answer selection when changing slides
   useEffect(() => {
-    setSelectedAnswerIndex(null);
-    setShowAnswerFeedback(false);
-    console.log("SlideViewer useEffect", creation);
-  }, [slideIndex, creation]);
+    setSelectedAnswerIndex(null)
+    setShowAnswerFeedback(false)
+  }, [slideIndex, creation])
 
   const handleNextSlide = () => {
-    setSlideIndex((prevIndex) => Math.min(prevIndex + 1, creation.slides.length - 1));
-  };
+    setSlideIndex((prevIndex) => Math.min(prevIndex + 1, creation.slides.length - 1))
+  }
 
   const handlePreviousSlide = () => {
-    setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
+    setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
+  }
 
   const handleSelectAnswer = (index: number) => {
-    setSelectedAnswerIndex(index);
-    setShowAnswerFeedback(true);
-  };
+    setSelectedAnswerIndex(index)
+    setShowAnswerFeedback(true)
+  }
 
-   // Preload next and previous images
-   useEffect(() => {
+  useEffect(() => {
     const preloadImage = (url: string) => {
-      const img = new Image();
+      const img = new Image()
       const cloudUrl = getCldImageUrl({
-        width: 724,
-        height: 724,
+        width: 960,
+        height: 540,
         src: url
       })
-      img.src = cloudUrl;
-    };
+      img.src = cloudUrl
+    }
 
     if (nextSlide?.slide_image_url) {
-      preloadImage(nextSlide.slide_image_url);
+      preloadImage(nextSlide.slide_image_url)
     }
 
     if (prevSlide?.slide_image_url) {
-      preloadImage(prevSlide.slide_image_url);
+      preloadImage(prevSlide.slide_image_url)
     }
-  }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url]);
+  }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url])
 
   return (
-    <div className="slide-viewer flex flex-col items-center justify-center w-full max-w-4xl mx-auto p-4">
-      {slide ? (
-        <div className="slide-content flex flex-col items-center justify-center w-full bg-white shadow-md rounded-lg p-6 mb-6">
-          {/* Slide Title */}
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">{slide.slide_title}</h2>
+    <div className="relative h-screen w-screen bg-black text-white overflow-hidden">
+      <Link href="/dashboard" prefetch={true} className="absolute top-4 left-4 z-10">
+        <Button variant="ghost" size="icon">
+          <Home className="h-6 w-6" />
+          <span className="sr-only">Back to Dashboard</span>
+        </Button>
+      </Link>
 
-          {/* Render content based on slide_type */}
-          {slide.slide_type === 'title' && (
-            <>
-              {/* Slide Image or Placeholder */}
-              {slide.slide_image_url ? (
-                <CldImage
-                  width='724'
-                  height='724'
-                  src={slide.slide_image_url}
-                  alt='Slide Image'
-                />
-              ) : (
-                <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center mb-4 rounded-md">
-                  <p className="text-gray-500">Image not available.</p>
-                </div>
-              )}
-            </>
-          )}
+      <div className="absolute inset-0 flex items-center justify-center p-4">
+        {slide ? (
+          <div className="w-full max-w-6xl flex flex-col items-center justify-center gap-[6%] h-full">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">{slide.slide_title}</h2>
 
-          {slide.slide_type === 'content' && (
-            <>
-              {/* Slide Image or Placeholder */}
-              {slide.slide_image_url ? (
-                <CldImage
-                width='724'
-                height='724'
-                src={slide.slide_image_url}
-                alt='Slide Image'
-              />
-              ) : (
-                <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center mb-4 rounded-md">
-                  <p className="text-gray-500">Image not available.</p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+              {(slide.slide_type === 'title' || slide.slide_type === 'content') && slide.slide_image_url && (
+                <div className="w-full md:w-1/2">
+                  <CldImage
+                    width={960}
+                    height={540}
+                    src={slide.slide_image_url}
+                    alt={slide.slide_title || 'Slide Image'}
+                    className="rounded-lg object-cover"
+                  />
                 </div>
               )}
 
-              {/* Slide Paragraphs */}
-              <div className="slide-paragraphs flex flex-col gap-2">
-                {slide.slide_paragraphs.map((paragraph: string, idx: number) => (
-                  <p key={idx} className="text-lg md:text-xl text-center">
-                    {paragraph}
-                  </p>
-                ))}
+            {(slide.slide_type === 'content' || slide.slide_type === 'question') && (
+
+              <div className={cn("w-full", slide.slide_image_url ? "md:w-1/2" : "md:w-3/4")}>
+                {slide.slide_type === 'content' && (
+                  <div className="space-y-4">
+                    {slide.slide_paragraphs.map((paragraph: string, idx: number) => (
+                      <p key={idx} className="text-lg md:text-xl">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {slide.slide_type === 'question' && (
+                  <div className="space-y-4">
+                    <p className="text-xl md:text-2xl font-semibold">{slide.question}</p>
+                    <div className="space-y-2">
+                      {slide.answer_choices.map((choice: { answer_text: string; correct: boolean }, index: number) => (
+                        <Button
+                        key={index}
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left",
+                          showAnswerFeedback && (
+                              selectedAnswerIndex === index
+                              ? (choice.correct ? "bg-green-500 text-white" : "bg-red-500 text-white")
+                              : (choice.correct ? "bg-green-500 text-white" : "")
+                            )
+                          )}
+                          onClick={() => handleSelectAnswer(index)}
+                          disabled={showAnswerFeedback}
+                          >
+                          {choice.answer_text}
+                        </Button>
+                      ))}
+                    </div>
+                    {showAnswerFeedback && selectedAnswerIndex !== null && (
+                      <p className={cn(
+                        "font-semibold text-center text-xl",
+                        slide.answer_choices[selectedAnswerIndex].correct ? "text-green-400" : "text-red-400"
+                      )}>
+                        {slide.answer_choices[selectedAnswerIndex].correct
+                          ? "Correct!"
+                          : "Incorrect. The correct answer is highlighted."}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
-            </>
-          )}
-
-          {slide.slide_type === 'question' && (
-            <>
-              {/* Question Text */}
-              <p className="text-lg md:text-xl text-center mb-4">{slide.question}</p>
-
-              {/* Answer Choices */}
-              <div className="answer-choices w-full flex flex-col items-center">
-                {slide.answer_choices.map((choice: { answer_text: string; correct: boolean }, index: number) => {
-                  let buttonStyle = 'border-black hover:bg-gray-100';
-                  if (showAnswerFeedback) {
-                    if (selectedAnswerIndex === index) {
-                      buttonStyle = choice.correct
-                        ? 'border-green-500 bg-green-100'
-                        : 'border-red-500 bg-red-100';
-                    } else if (choice.correct) {
-                      buttonStyle = 'border-green-500 bg-green-100';
-                    } else {
-                      buttonStyle = 'border-gray-300';
-                    }
-                  }
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleSelectAnswer(index)}
-                      className={`w-full md:w-1/2 px-4 py-2 mb-2 text-left rounded-md border-2 ${buttonStyle} transition duration-200`}
-                      disabled={showAnswerFeedback}
-                    >
-                      {choice.answer_text}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Feedback */}
-              {showAnswerFeedback && selectedAnswerIndex !== null && (
-                <div className="mt-4">
-                  {slide.answer_choices[selectedAnswerIndex].correct ? (
-                    <p className="text-green-600 font-bold">Correct!</p>
-                  ) : (
-                    <p className="text-red-600 font-bold">
-                      Incorrect. The correct answer is highlighted.
-                    </p>
-                  )}
-                </div>
               )}
-            </>
-          )}
+            </div>
 
-          {/* Slide Indicator */}
-          <div className="slide-indicator mt-4 text-sm text-gray-600">
-            Slide {slideIndex + 1} of {creation.slides.length}
+            <div className="mt-10 text-center text-sm text-gray-400">
+              Slide {slideIndex + 1} of {creation.slides.length}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="w-full flex items-center justify-center bg-gray-100 h-64 rounded-lg mb-6">
-          <p className="text-gray-500">No slide available.</p>
-        </div>
-      )}
+        ) : (
+          <p className="text-xl">No slide available.</p>
+        )}
+      </div>
+        
 
       {/* Navigation Buttons */}
-      <div className="navigation-buttons flex flex-row gap-4">
-        {/* Previous Slide Button */}
-        <button
-          onClick={handlePreviousSlide}
-          disabled={slideIndex === 0}
-          className={`prev-slide px-4 py-2 rounded-md border-2 ${
-            slideIndex === 0
-              ? 'border-gray-300 text-gray-300 cursor-not-allowed'
-              : 'border-black text-white bg-black hover:bg-gray-800'
-          } transition duration-200`}
-          aria-label="Previous Slide"
-        >
-          Previous Slide
-        </button>
+      <button
+        onClick={handlePreviousSlide}
+        disabled={slideIndex === 0}
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white opacity-50 hover:opacity-100 transition-opacity duration-200"
+        aria-label="Previous Slide"
+      >
+        <ChevronLeft className="h-12 w-12" />
+      </button>
 
-        {/* Next Slide Button */}
-        <button
-          onClick={handleNextSlide}
-          disabled={slideIndex === creation.slides.length - 1}
-          className={`next-slide px-4 py-2 rounded-md border-2 ${
-            slideIndex === creation.slides.length - 1
-              ? 'border-gray-300 text-gray-300 cursor-not-allowed'
-              : 'border-black text-white bg-black hover:bg-gray-800'
-          } transition duration-200`}
-          aria-label="Next Slide"
-        >
-          Next Slide
-        </button>
-      </div>
+      <button
+        onClick={handleNextSlide}
+        disabled={slideIndex === creation.slides.length - 1}
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white opacity-50 hover:opacity-100 transition-opacity duration-200"
+        aria-label="Next Slide"
+      >
+        <ChevronRight className="h-12 w-12" />
+      </button>
     </div>
-  );
-};
-
-export default SlideViewer;
+  )
+}

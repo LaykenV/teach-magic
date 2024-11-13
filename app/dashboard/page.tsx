@@ -5,10 +5,8 @@ import { eq } from 'drizzle-orm/expressions';
 import { creationsTable } from '@/drizzle/schema';
 import { Creation } from '@/drizzle/schema';
 import UserCreations from '@/components/UserCreations';
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, ImageIcon, BrainCircuit, Plus } from 'lucide-react';
-import Link from 'next/link';
+import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 
 export default async function Dashboard() {
   const { userId } = auth();
@@ -34,12 +32,6 @@ export default async function Dashboard() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">TeachMagic</h1>
           <nav className="flex items-center space-x-4">
-            <Button asChild variant="ghost">
-              <Link href="/generate">
-                <Plus className="mr-2 h-4 w-4" />
-                New Creation
-              </Link>
-            </Button>
             <UserButton />
           </nav>
         </div>
