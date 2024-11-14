@@ -70,7 +70,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
 
       <div className="absolute inset-0 flex items-center justify-center p-4">
         {slide ? (
-          <div className="w-full max-w-6xl flex flex-col items-center justify-center gap-[6%] h-full">
+          <div className="w-full max-w-6xl flex flex-col items-center justify-center gap-[4%] h-full">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">{slide.slide_title}</h2>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">

@@ -7,12 +7,14 @@ import { Creation } from '@/drizzle/schema';
 import UserCreations from '@/components/UserCreations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const { userId } = auth();
   const clerkUser = await currentUser();
 
   if (!userId || !clerkUser) {
+    redirect('/')
     return <div>No user found</div>;
   }
   const stringId = userId.toString();

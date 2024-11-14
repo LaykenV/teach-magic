@@ -37,7 +37,7 @@ export default function PromptForm() {
         id="prompt"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        className="mt-2 w-full rounded-md border-2 border-gray-300 p-2 text-black"
+        className="mt-2 w-full rounded-md border-2 border-gray-300 p-2"
       />
       <button type="submit" className="w-full border-white border-2 rounded-md p-2 mt-4 text-white bg-black hover:bg-gray-800">
         Generate Slides
