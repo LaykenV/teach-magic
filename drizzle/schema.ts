@@ -18,6 +18,7 @@ export const creationsTable = pgTable('creations', {
     slides: jsonb('slides').notNull(), // JSONB array to store slides
     quiz: jsonb('quiz').notNull(), // JSONB array to store quiz questions
     created_at: timestamp('created_at').notNull().defaultNow(),
+    age_group: text('age_group').notNull()
 });
 
 

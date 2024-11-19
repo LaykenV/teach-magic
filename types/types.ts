@@ -42,6 +42,7 @@
     slides: any[];
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     quiz: any[];
+    age_group: string;
   }
 
   export type Creation = {
@@ -52,6 +53,7 @@
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     quiz: Quiz;
     created_at: Date;
+    age_group: string;
   }
 
 

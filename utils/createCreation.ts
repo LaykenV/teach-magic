@@ -19,6 +19,7 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
         user_id: creation.user_id,
         slides: JSON.stringify(creation.slides), // Ensure slides are serialized as JSON
         quiz: JSON.stringify(creation.quiz), // Ensure quiz is serialized as JSON
+        age_group: creation.age_group
       })
       .returning();
 
@@ -29,6 +30,7 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
       created_at: newCreation.created_at,
       slides: newCreation.slides as Slide[], // Ensure that 'slides' are correctly typed
       quiz: newCreation.quiz as Quiz, // Ensure that 'quiz' are correctly typed
+      age_group: newCreation.age_group
   };
 
     return formattedCreation;

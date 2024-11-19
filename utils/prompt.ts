@@ -8,34 +8,34 @@ import { ContentSlide } from '@/types/types';
 
 
 export async function promptGPT(
-  prompt: string
-): Promise<OpenAI.Chat.Completions.ChatCompletionMessage | null> {
-  const apiKey = process.env.OPENAI_API_KEY;
-  
-  // Content Slide Schema (unchanged)
-  const ContentSlide = z.object({
-  slide_type: z.literal("content"),
-  slide_title: z.string(),
-  slide_paragraphs: z.array(z.string()),
-  slide_image_prompt: z.string(),
-  slide_image_url: z.string().optional(),
-  });
+    prompt: string,
+    age_group: 'elementary' | 'middle-school' | 'high-school' | 'college'
+  ): Promise<OpenAI.Chat.Completions.ChatCompletionMessage | null> {
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    // Content Slide Schema (unchanged)
+    const ContentSlide = z.object({
+      slide_type: z.literal("content"),
+      slide_title: z.string(),
+      slide_paragraphs: z.array(z.string()),
+      slide_image_prompt: z.string(),
+      slide_image_url: z.string().optional(),
+    });
 
     // Title Slide Schema (unchanged)
     const TitleSlide = z.object({
-    slide_type: z.literal("title"),
-    slide_title: z.string(),
-    slide_image_prompt: z.string(),
-    slide_image_url: z.string().optional(),
+      slide_type: z.literal("title"),
+      slide_title: z.string(),
+      slide_image_prompt: z.string(),
+      slide_image_url: z.string().optional(),
     });
-
 
     // Define the response schema
     const Response = z.object({
-    title_slide: TitleSlide,
-    content_slides: z.array(ContentSlide)
+      title_slide: TitleSlide,
+      content_slides: z.array(ContentSlide),
     });
-  
+
     const openai = new OpenAI({
       apiKey,
     });
@@ -44,6 +44,41 @@ export async function promptGPT(
       You are an AI assistant specialized in creating educational slide content based on user input. Your task is to generate a structured JSON object containing slides suitable for presentation purposes, adhering to the specified slide types and structure.
 
       **Instructions:**
+
+      - **Audience Adaptation:**
+          - **Age Group Considerations:**
+              - The content should be tailored to the **${age_group}** audience.
+              - Adjust the language complexity, depth of explanation, and examples to suit **${age_group}** students.
+              - Use appropriate vocabulary and concepts that are accessible and engaging for **${age_group}** learners.
+          - **Engagement Strategies:**
+              - Incorporate teaching methods and examples that resonate with **${age_group}** students.
+      ${
+        age_group === 'elementary'
+          ? `
+              - Use simple language and clear explanations.
+              - Include engaging stories or characters when appropriate.
+              - Utilize relatable examples from everyday experiences of children.
+              `
+          : age_group === 'middle-school'
+          ? `
+              - Use clear language with moderate complexity.
+              - Introduce foundational concepts and relatable examples.
+              - Encourage curiosity with interesting facts or questions.
+              `
+          : age_group === 'high-school'
+          ? `
+              - Use advanced vocabulary and more complex explanations.
+              - Incorporate critical thinking and analytical aspects.
+              - Include real-world applications and case studies.
+              `
+          : age_group === 'college'
+          ? `
+              - Use sophisticated language and in-depth explanations.
+              - Incorporate complex theories, data, and critical analysis.
+              - Reference current research and advanced concepts.
+              `
+          : ''
+      }
 
       - **Output Format:**
           - The output should be a JSON object with the following properties:
@@ -67,7 +102,7 @@ export async function promptGPT(
               - **Properties for Each Content Slide:**
                   - \`slide_type\`: \`"content"\`
                   - \`slide_title\`: A concise title summarizing the slide's content.
-                  - \`slide_paragraphs\`: An array containing **two or three if needed** engaging paragraphs (each 4-5 sentences) that elaborate on the slide's topic.
+                  - \`slide_paragraphs\`: An array containing **two or three** engaging paragraphs (each 4-5 sentences) that elaborate on the slide's topic.
                   - \`slide_image_prompt\`: A prompt to generate an image relevant to the slide's content, following the **modern minimalist** theme.
                   - \`slide_image_url\`: Set to \`null\`.
               - **Notes:**
@@ -100,7 +135,7 @@ export async function promptGPT(
     try {
       console.log(prompt);
       console.log(zodResponseFormat(Response, "slides"));
-      
+
       const completion = await openai.chat.completions.create({
         model: "gpt-4o",
         messages: [
@@ -110,25 +145,26 @@ export async function promptGPT(
             content: prompt,
           },
         ],
-        // Adjust the response format to match the updated Response schema
         response_format: zodResponseFormat(Response, "slides"),
       });
 
       console.log(completion.choices[0].message);
 
-      // do something to join the object into an array [TitleSlide, ContentSlides, QuestionSlide] and then return it
-  
-      return completion.choices[0].message || null;
+      // Combine the title slide and content slides into a single array if needed
+      // For example:
+      // const slides = [completion.choices[0].message?.content.title_slide, ...completion.choices[0].message?.content.content_slides];
 
-      
+      return completion.choices[0].message || null;
     } catch (error) {
       console.error("Error fetching completion:", error);
       return null;
     }
-  };
+  }
+
 
   export async function generateQuiz(
-    contentSlides: ContentSlide[]
+    contentSlides: ContentSlide[],
+    age_group: 'elementary' | 'middle-school' | 'high-school' | 'college'
   ): Promise<OpenAI.Chat.Completions.ChatCompletionMessage | null> {
     const apiKey = process.env.OPENAI_API_KEY;
     const openai = new OpenAI({ apiKey });
@@ -148,36 +184,76 @@ export async function promptGPT(
     });
   
     // Define the Response schema
-    //const Response = z.array(QuestionSlide);
     const Response = z.object({
       questions: z.array(QuestionSlide),
     });
   
-    // Construct the system prompt
     const systemPrompt = `
-      You are an AI assistant specialized in creating quiz questions based on educational content provided. Your task is to generate a structured JSON object containing a series of multiple-choice questions that are relevant, accurate, and thought-provoking, based on the content of the slides provided.
-
+      You are an AI assistant specialized in creating multiple-choice quiz questions based on educational content provided. Your task is to generate a structured JSON object containing a series of quiz questions that are relevant, accurate, and engaging for a **${age_group}** audience.
+      
       **Instructions:**
-
+      
+      - **Audience Adaptation:**
+          - **Age Group Considerations:**
+              - Tailor the language complexity, depth of questions, and content relevance to suit **${age_group}** students.
+              - Use vocabulary and concepts that are appropriate and accessible for **${age_group}** learners.
+          ${
+            age_group === 'elementary'
+              ? `
+          - **Elementary School Guidelines:**
+              - Use simple language and straightforward questions.
+              - Focus on fundamental concepts and basic understanding.
+              - Include engaging elements like relatable scenarios or characters.
+              `
+              : age_group === 'middle-school'
+              ? `
+          - **Middle School Guidelines:**
+              - Use clear language with moderate complexity.
+              - Introduce questions that encourage critical thinking and curiosity.
+              - Relate questions to real-life examples relevant to teenagers.
+              `
+              : age_group === 'high-school'
+              ? `
+          - **High School Guidelines:**
+              - Use advanced vocabulary and more complex question structures.
+              - Incorporate analytical and application-based questions.
+              - Include real-world scenarios and thought-provoking problems.
+              `
+              : age_group === 'college'
+              ? `
+          - **College Guidelines:**
+              - Use sophisticated language and in-depth questioning.
+              - Incorporate complex theories, data analysis, and critical evaluations.
+              - Reference current research, advanced concepts, and industry-specific terminology.
+              `
+              : ''
+          }
+      
       - **Output Format:**
           - The output should be a JSON object with the following property:
               - \`questions\`: An array of question slide objects.
           - Each question slide object within the \`questions\` array must adhere to the following structure:
-
+      
               - **Properties:**
                   - \`slide_type\`: \`"question"\`
-                  - \`slide_title\`: A title for the question slide.
+                  - \`slide_title\`: A concise title for the question slide.
                   - \`question\`: A multiple-choice question based on the content provided.
-                  - \`answer_choices\`: An array containing **four** objects, each with:
+                  - \`answer_choices\`: An array containing **four** answer choice objects, each with:
                       - \`answer_text\`: The text of the answer choice.
                       - \`correct\`: A boolean indicating whether this choice is the correct answer (\`true\` or \`false\`).
-
+      
       - **Content Guidelines:**
-          - Generate questions that are directly related to the content slides provided.
-          - Ensure all questions are accurate and the correct answer is unambiguously correct.
-          - Make the questions thought-provoking and educational.
-          - Only one answer choice should be marked as correct (\`correct: true\`), and the rest as \`false\`.
-
+          - **Relevance and Accuracy:**
+              - Generate questions that are directly related to the content slides provided.
+              - Ensure all questions are accurate and the correct answer is unambiguously correct.
+          - **Question Quality:**
+              - Make the questions thought-provoking and educational.
+              - Only one answer choice should be marked as correct (\`correct: true\`), and the rest as \`false\`.
+              - Distractors (incorrect answers) should be plausible to avoid guesswork.
+          - **Clarity:**
+              - Questions should be clearly worded without ambiguity.
+              - Avoid overly complex sentence structures that might confuse the intended age group.
+      
       - **Restrictions:**
           - Do not include any additional text or explanations outside of the specified format.
           - Do not mention these instructions or acknowledge that you are an AI language model in the output.
@@ -185,9 +261,11 @@ export async function promptGPT(
       `;
   
     // Prepare the contentSlides as context
-    const content = contentSlides.map((slide, index) => {
-            return `Slide ${index + 1} Title: ${slide.slide_title} Slide Paragraphs: ${slide.slide_paragraphs.join(' ')}`;
-      }).join('\n');
+    const content = contentSlides
+      .map((slide, index) => {
+        return `Slide ${index + 1} Title: ${slide.slide_title}\nSlide Paragraphs: ${slide.slide_paragraphs.join(' ')}`;
+      })
+      .join('\n\n');
   
     try {
       const completion = await openai.chat.completions.create({
@@ -196,16 +274,15 @@ export async function promptGPT(
           { role: "system", content: systemPrompt },
           {
             role: "user",
-            content: `Based on the following slides, generate quiz questions:${content}`,
+            content: `Based on the following slides, generate quiz questions:\n\n${content}`,
           },
         ],
         response_format: zodResponseFormat(Response, "questions"),
       });
       console.log(completion.choices[0].message);
   
-      // Parse the response
-      return completion.choices[0].message || null;  
-
+      // Return the response
+      return completion.choices[0].message || null;
     } catch (error) {
       console.error("Error fetching quiz questions:", error);
       return null;

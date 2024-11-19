@@ -19,7 +19,7 @@ type DataFromQuiz = {
 export async function POST(request: NextRequest) {
   try {
     // Parse the incoming JSON request
-    const { prompt } = await request.json();
+    const { prompt, age_group } = await request.json();
     const { userId } = getAuth(request);
 
     // Check if the user is authenticated
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     console.log(`Received prompt: ${prompt}`);
 
     // Generate content using GPT
-    const response = await promptGPT(prompt);
+    const response = await promptGPT(prompt, age_group);
     console.log(`GPT Response: ${JSON.stringify(response)}`);
 
     
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       const { title_slide, content_slides } = parsedResponse;
       const quizPrompt = content_slides as ContentSlide[];
 
-      const quizResponse = await generateQuiz(quizPrompt);
+      const quizResponse = await generateQuiz(quizPrompt, age_group);
       if (quizResponse?.content) {
         console.log(`Quiz Response: ${JSON.stringify(quizResponse)}`);
       
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       ];
 
       // Create a new creation record in the database
-      const creation = await createCreation({ user_id: userId, slides, quiz: questions });
+      const creation = await createCreation({ user_id: userId, slides, quiz: questions, age_group });
 
       // Prepare promises for image generation and uploading
       const imagePromises: Promise<void>[] = [];
@@ -106,6 +106,7 @@ export async function POST(request: NextRequest) {
         created_at: updatedCreation.created_at,
         slides: updatedCreation.slides as Slide[], // Ensure that 'slides' are correctly typed
         quiz: updatedCreation.quiz as Quiz, // Ensure that 'quiz' are correctly typed
+        age_group: updatedCreation.age_group
     };
 
       console.log(`Final creation record: ${JSON.stringify(updatedCreation)}`);

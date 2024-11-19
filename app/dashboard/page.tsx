@@ -27,6 +27,7 @@ export default async function Dashboard() {
     slides: creation.slides,
     quiz: creation.quiz,
     created_at: creation.created_at,
+    age_group: creation.age_group
   }));
 
   return (
