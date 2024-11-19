@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Creation } from '@/drizzle/schema'
+import { Creation } from '@/types/types'
 import { CldImage, getCldImageUrl } from 'next-cloudinary'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Home } from 'lucide-react'
@@ -14,29 +14,17 @@ interface SlideViewerProps {
 
 export default function SlideViewer({ creation }: SlideViewerProps) {
   const [slideIndex, setSlideIndex] = useState(0)
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null)
-  const [showAnswerFeedback, setShowAnswerFeedback] = useState<boolean>(false)
 
   const slide = creation.slides[slideIndex]
   const nextSlide = creation.slides[slideIndex + 1]
   const prevSlide = creation.slides[slideIndex - 1]
-
-  useEffect(() => {
-    setSelectedAnswerIndex(null)
-    setShowAnswerFeedback(false)
-  }, [slideIndex, creation])
-
+  
   const handleNextSlide = () => {
     setSlideIndex((prevIndex) => Math.min(prevIndex + 1, creation.slides.length - 1))
   }
 
   const handlePreviousSlide = () => {
     setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
-  }
-
-  const handleSelectAnswer = (index: number) => {
-    setSelectedAnswerIndex(index)
-    setShowAnswerFeedback(true)
   }
 
   useEffect(() => {
@@ -86,7 +74,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
                 </div>
               )}
 
-            {(slide.slide_type === 'content' || slide.slide_type === 'question') && (
+            {slide.slide_type === 'content' && 'slide_paragraphs' in slide && (
 
               <div className={cn("w-full", slide.slide_image_url ? "md:w-1/2" : "md:w-3/4")}>
                 {slide.slide_type === 'content' && (
@@ -96,42 +84,6 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
                         {paragraph}
                       </p>
                     ))}
-                  </div>
-                )}
-
-                {slide.slide_type === 'question' && (
-                  <div className="space-y-4">
-                    <p className="text-xl md:text-2xl font-semibold">{slide.question}</p>
-                    <div className="space-y-2">
-                      {slide.answer_choices.map((choice: { answer_text: string; correct: boolean }, index: number) => (
-                        <Button
-                        key={index}
-                        variant="outline"
-                        className={cn(
-                          "w-full justify-start text-left",
-                          showAnswerFeedback && (
-                              selectedAnswerIndex === index
-                              ? (choice.correct ? "bg-green-500 text-white" : "bg-red-500 text-white")
-                              : (choice.correct ? "bg-green-500 text-white" : "")
-                            )
-                          )}
-                          onClick={() => handleSelectAnswer(index)}
-                          disabled={showAnswerFeedback}
-                          >
-                          {choice.answer_text}
-                        </Button>
-                      ))}
-                    </div>
-                    {showAnswerFeedback && selectedAnswerIndex !== null && (
-                      <p className={cn(
-                        "font-semibold text-center text-xl",
-                        slide.answer_choices[selectedAnswerIndex].correct ? "text-green-400" : "text-red-400"
-                      )}>
-                        {slide.answer_choices[selectedAnswerIndex].correct
-                          ? "Correct!"
-                          : "Incorrect. The correct answer is highlighted."}
-                      </p>
-                    )}
                   </div>
                 )}
               </div>

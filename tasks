@@ -28,3 +28,21 @@ restructure generate page // do we need gen page? can it be done in the dashboar
 //style everything and build ui // vo and magicUI and ask dylan for code
 
 ideas for new pages and features? // community creations, quiz to go with the slides?, generate page with options (age group, quiz difficulty), coins with purchase
+
+// quiz prompt function and quiz viewer // update route, update db, update schema, update types, update dashboard sc, createCreation
+
+// add quiz to creation
+
+// add quiz to creation card
+
+// improve slides prompt, maybe split into multiple prompts, add shadcn table?
+
+figure out how to make slides more engaging
+
+ rewrite generate page with options, or add opitons to drawer
+
+ add community creations
+
+ tokens and stripe?
+
+restyle everything, add dock 

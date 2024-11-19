@@ -6,7 +6,7 @@
     slide_image_url?: string | null; 
   };
 
-  type ContentSlide = {
+  export type ContentSlide = {
     slide_type: string;
     slide_title: string;
     slide_paragraphs: string[];
@@ -19,17 +19,16 @@
     correct: boolean;
   };
 
-  type QuestionSlide = {
+  type Question = {
     slide_type: string;
     slide_title: string;
     question: string;
     answer_choices: AnswerChoice[];
   };
 
-   export type Slide = TitleSlide | ContentSlide | QuestionSlide;
+   export type Slide = TitleSlide | ContentSlide;
 
-   export type SlideWithImage = TitleSlide | ContentSlide;
-
+   export type Quiz = Question[];
 
   export interface UserEntry {
     id: string;
@@ -41,6 +40,18 @@
     user_id: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     slides: any[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    quiz: any[];
+  }
+
+  export type Creation = {
+    id: string;
+    user_id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    slides: Slide[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    quiz: Quiz;
+    created_at: Date;
   }
 
 

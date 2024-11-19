@@ -1,12 +1,12 @@
-import SlideViewer from '@/components/SlideViewer';
 import Link from 'next/link';
 import { creationsTable } from '@/drizzle/schema';
 import { Creation } from '@/types/types'
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { Slide, Quiz } from '@/types/types';
+import QuizViewer from '@/components/QuizViewer';
 
-interface SlideViewerPageProps {
+interface QuizViewerPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
@@ -25,7 +25,7 @@ async function getCreationById(id: string) {
   return c;
 }
 
-export default async function SlideViewerPage({ searchParams }: SlideViewerPageProps) {
+export default async function QuizViewerPage({ searchParams }: QuizViewerPageProps) {
   const id = searchParams.id as string;
 
   if (!id) {
@@ -55,7 +55,7 @@ export default async function SlideViewerPage({ searchParams }: SlideViewerPageP
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
-      <SlideViewer creation={creation} />
+      <QuizViewer creation={creation} />
     </div>
   );
 }

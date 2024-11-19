@@ -1,6 +1,7 @@
 import { db } from '@/drizzle/db';
-import { creationsTable, Creation } from '@/drizzle/schema';
-import { CreationEntry, Slide } from '@/types/types';
+import { creationsTable } from '@/drizzle/schema';
+import { Creation } from '@/types/types';
+import { CreationEntry, Slide, Quiz } from '@/types/types';
 
 
 /**
@@ -17,6 +18,7 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
       .values({
         user_id: creation.user_id,
         slides: JSON.stringify(creation.slides), // Ensure slides are serialized as JSON
+        quiz: JSON.stringify(creation.quiz), // Ensure quiz is serialized as JSON
       })
       .returning();
 
@@ -26,6 +28,7 @@ export async function createCreation(creation: CreationEntry): Promise<Creation>
       user_id: newCreation.user_id,
       created_at: newCreation.created_at,
       slides: newCreation.slides as Slide[], // Ensure that 'slides' are correctly typed
+      quiz: newCreation.quiz as Quiz, // Ensure that 'quiz' are correctly typed
   };
 
     return formattedCreation;

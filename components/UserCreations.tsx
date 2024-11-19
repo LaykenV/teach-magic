@@ -1,13 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Creation } from '@/drizzle/schema'
+import { Creation } from '@/types/types'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertCircle, Loader2, Plus, Trash } from 'lucide-react'
+import { AlertCircle, Loader2, Plus, Trash, BookOpen } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
   Drawer,
@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/drawer"
 import { Textarea } from "@/components/ui/textarea"
 import { RainbowButton } from './ui/rainbow-button'
+import { Badge } from '@/components/ui/badge'
 
 interface UserCreationsProps {
   userCreations: Creation[]
@@ -143,51 +144,79 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {creations.map((creation) => (
-            <Card 
-              key={creation.id} 
-              className="overflow-hidden transition-shadow hover:shadow-lg"
-            >
-              <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true} className="block">
-                <CardHeader className="p-0">
-                  {creation.slides[0]?.slide_image_url ? (
-                    <div className="relative aspect-video">
-                      <CldImage
-                        loading='eager'
-                        width={400}
-                        height={225}
-                        src={creation.slides[0].slide_image_url}
-                        alt={creation.slides[0].slide_title || 'Slide Image'}
-                        className="object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <div className="bg-muted aspect-video flex items-center justify-center">
-                      <span className="text-muted-foreground">No image</span>
-                    </div>
-                  )}
-                </CardHeader>
-                <CardContent className="p-4">
-                  <CardTitle className="text-lg line-clamp-2">
-                    {creation.slides[0]?.slide_title || 'Untitled Creation'}
-                  </CardTitle>
-                </CardContent>
-              </Link>
-              <CardFooter className="p-4 pt-0 flex justify-end">
-                <Button
-                  variant="destructive"
-                  size="icon"
-                  onClick={(e) => deleteCreation(creation.id, e)}
-                  disabled={deletingIds.has(creation.id)}
-                >
-                  {deletingIds.has(creation.id) ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Trash className="h-4 w-4" />
-                  )}
-                  <span className="sr-only">Delete creation</span>
-                </Button>
-              </CardFooter>
-            </Card>
+            <Card key={creation.id} className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] group">
+            <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true} className="block">
+              <CardHeader className="p-0">
+                {creation.slides[0]?.slide_image_url ? (
+                  <div className="relative aspect-video">
+                    <CldImage
+                      loading='eager'
+                      width={400}
+                      height={225}
+                      src={creation.slides[0].slide_image_url}
+                      alt={creation.slides[0].slide_title || 'Slide Image'}
+                      className="object-cover w-full h-full"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-opacity duration-300" />
+                  </div>
+                ) : (
+                  <div className="bg-muted aspect-video flex items-center justify-center">
+                    <span className="text-muted-foreground">No image</span>
+                  </div>
+                )}
+              </CardHeader>
+              <CardContent className="p-4">
+                <CardTitle className="text-lg font-semibold line-clamp-2 mb-2 group-hover:text-primary transition-colors duration-300">
+                  {creation.slides[0]?.slide_title || 'Untitled Creation'}
+                </CardTitle>
+                <Badge variant="secondary" className="text-xs">
+                  {creation.slides.length} {creation.slides.length === 1 ? 'slide' : 'slides'}
+                </Badge>
+              </CardContent>
+            </Link>
+            <CardFooter className="p-4 pt-0 flex justify-between items-center">
+              <div className="flex space-x-2">
+                <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
+                  <Button variant="outline" size="icon" className="group-hover:border-primary group-hover:text-primary transition-colors duration-300">
+                    <BookOpen className="h-4 w-4" />
+                    <span className="sr-only">View slides</span>
+                  </Button>
+                </Link>
+                <Link href={`/Quiz?id=${creation.id}`}>
+                  <Button variant="outline" size="icon" className="group-hover:border-primary group-hover:text-primary transition-colors duration-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="h-4 w-4"
+                    >
+                      <path d="M9 11l3 3L22 4" />
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                    </svg>
+                    <span className="sr-only">Take quiz</span>
+                  </Button>
+                </Link>
+              </div>
+              <Button
+                variant="destructive"
+                size="icon"
+                onClick={(e) => deleteCreation(creation.id, e)}
+                disabled={deletingIds.has(creation.id)}
+                className="hover:bg-destructive/90 transition-colors duration-300"
+              >
+                {deletingIds.has(creation.id) ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Trash className="h-4 w-4" />
+                )}
+                <span className="sr-only">Delete creation</span>
+              </Button>
+            </CardFooter>
+          </Card>
           ))}
         </div>
       )}

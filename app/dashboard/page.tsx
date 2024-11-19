@@ -3,7 +3,7 @@ import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { creationsTable } from '@/drizzle/schema';
-import { Creation } from '@/drizzle/schema';
+import { Creation } from '@/types/types'
 import UserCreations from '@/components/UserCreations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
@@ -25,6 +25,7 @@ export default async function Dashboard() {
     id: creation.id,
     user_id: creation.user_id,
     slides: creation.slides,
+    quiz: creation.quiz,
     created_at: creation.created_at,
   }));
 

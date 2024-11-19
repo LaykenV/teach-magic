@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { promptGPT, promptImage } from '../../../utils/prompt';
+import { generateQuiz, promptGPT, promptImage } from '../../../utils/prompt';
 import { getAuth } from '@clerk/nextjs/server';
 import { createCreation } from '@/utils/createCreation';
-import { Slide } from '@/types/types';
+import { Slide, ContentSlide, Quiz, Creation } from '@/types/types';
 import { db } from '@/drizzle/db';
 import { creationsTable } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
@@ -10,7 +10,10 @@ import { eq } from 'drizzle-orm';
 type DataFromPrompt = {
   title_slide: Slide;
   content_slides: Slide[];
-  question_slide: Slide;
+};
+
+type DataFromQuiz = {
+  questions: Quiz;
 };
 
 export async function POST(request: NextRequest) {
@@ -30,11 +33,22 @@ export async function POST(request: NextRequest) {
     const response = await promptGPT(prompt);
     console.log(`GPT Response: ${JSON.stringify(response)}`);
 
+    
+
     // Ensure the response contains content
     if (response?.content && userId) {
       // Parse the GPT response
       const parsedResponse: DataFromPrompt = JSON.parse(response.content);
-      const { title_slide, content_slides, question_slide } = parsedResponse;
+      const { title_slide, content_slides } = parsedResponse;
+      const quizPrompt = content_slides as ContentSlide[];
+
+      const quizResponse = await generateQuiz(quizPrompt);
+      if (quizResponse?.content) {
+        console.log(`Quiz Response: ${JSON.stringify(quizResponse)}`);
+      
+      const parsedQuizResponse: DataFromQuiz = JSON.parse(quizResponse.content);
+      console.log(parsedQuizResponse);
+      const { questions } = parsedQuizResponse;
 
       // Combine the slides into a single array with appropriate slide types
       const slides: Slide[] = [
@@ -43,11 +57,10 @@ export async function POST(request: NextRequest) {
           ...slide,
           slide_type: 'content'
         })),
-        { ...question_slide, slide_type: 'question' }
       ];
 
       // Create a new creation record in the database
-      const creation = await createCreation({ user_id: userId, slides });
+      const creation = await createCreation({ user_id: userId, slides, quiz: questions });
 
       // Prepare promises for image generation and uploading
       const imagePromises: Promise<void>[] = [];
@@ -87,11 +100,20 @@ export async function POST(request: NextRequest) {
       // Fetch the updated creation record (optional)
       const updatedCreation = await db.select().from(creationsTable).where(eq(creationsTable.id, creation.id)).limit(1).then(res => res[0]);
 
+      const formattedCreation: Creation = {
+        id: updatedCreation.id,
+        user_id: updatedCreation.user_id,
+        created_at: updatedCreation.created_at,
+        slides: updatedCreation.slides as Slide[], // Ensure that 'slides' are correctly typed
+        quiz: updatedCreation.quiz as Quiz, // Ensure that 'quiz' are correctly typed
+    };
+
       console.log(`Final creation record: ${JSON.stringify(updatedCreation)}`);
+      console.log(formattedCreation);
 
       // Return the updated creation record as a successful response
-      return NextResponse.json({ success: true, creation: updatedCreation }, { status: 200 });
-    } else {
+      return NextResponse.json({ success: true, creation: formattedCreation }, { status: 200 });
+    }} else {
       // Handle cases where the GPT response does not contain content
       console.error('Invalid GPT response: Missing content');
       return NextResponse.json({ success: false, error: 'Invalid response from GPT' }, { status: 400 });
