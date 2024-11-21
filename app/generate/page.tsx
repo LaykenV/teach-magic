@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Creation } from "@/drizzle/schema";
+import { Creation } from "@/types/types";
 
 export default function PromptPage() {
   const [prompt, setPrompt] = useState("");

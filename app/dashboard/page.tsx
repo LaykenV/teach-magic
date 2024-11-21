@@ -1,13 +1,14 @@
 import { UserButton } from '@clerk/nextjs';
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth, currentUser} from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
-import { creationsTable } from '@/drizzle/schema';
+import { creationsTable, usersTable, User } from '@/drizzle/schema';
 import { Creation } from '@/types/types'
 import UserCreations from '@/components/UserCreations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { redirect } from "next/navigation";
+import TokenCount from '@/components/TokenCount';
 
 export default async function Dashboard() {
   const { userId } = auth();
@@ -18,6 +19,10 @@ export default async function Dashboard() {
     return <div>No user found</div>;
   }
   const stringId = userId.toString();
+
+  const user = await db.select().from(usersTable).where(eq(usersTable.id, stringId));
+
+  const formattedUser: User = user[0];
 
   const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, stringId));
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,6 +41,7 @@ export default async function Dashboard() {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">TeachMagic</h1>
           <nav className="flex items-center space-x-4">
+            <TokenCount count={formattedUser.tokens} />
             <UserButton />
           </nav>
         </div>

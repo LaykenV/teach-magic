@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { CldImage } from "next-cloudinary"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { AlertCircle, Loader2, Plus, Trash, BookOpen } from 'lucide-react'
+import { AlertCircle, Loader2, Plus, Trash, BookOpen, Gem } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
   Drawer,
@@ -23,6 +23,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { RainbowButton } from './ui/rainbow-button'
 import { Badge } from '@/components/ui/badge'
+import { ProgressCircle } from './ui/progressCircle'
 
 interface UserCreationsProps {
   userCreations: Creation[]
@@ -261,7 +262,13 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
       <div className='flex items-center justify-center w-auto pt-20'>
         <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
           <DrawerTrigger asChild>
-            <RainbowButton>Create New Slides</RainbowButton>
+          <RainbowButton className="inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium sm:text-base">
+      <span>Create New Slides</span>
+      <div className="flex items-center space-x-1">
+        <span>1</span>
+        <Gem className="h-4 w-4 sm:h-5 sm:w-5" />
+      </div>
+    </RainbowButton>
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
@@ -304,24 +311,30 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
                   </div>
                 </div>
               </div>
-              <DrawerFooter>
-                <Button 
-                  type="submit" 
-                  disabled={loading || prompt.trim().length === 0 || !ageGroup}
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Generating...
-                    </>
-                  ) : (
-                    'Generate Slides'
-                  )}
-                </Button>
-                <DrawerClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DrawerClose>
-              </DrawerFooter>
+              {loading && <ProgressCircle />}
+              <DrawerFooter className="flex flex-col sm:flex-row gap-2">
+      <DrawerClose asChild>
+        <Button variant="destructive" className="w-full flex-1 sm:w-auto font-semibold">Cancel</Button>
+      </DrawerClose>
+      <Button 
+        type="submit" 
+        disabled={loading || prompt.trim().length === 0 || !ageGroup}
+        className="w-full sm:w-auto flex-1 justify-between items-center text-lg font-semibold"
+      >
+        <span className="flex-1">Generate Slides</span>
+        {loading ? (
+          <div className="flex items-center space-x-2">
+            <Loader2 className="h-5 w-5 mr-2 animated-spin" />
+            <span>Generating...</span>
+          </div>
+        ) : (
+          <div className="flex items-center space-x-1">
+            <span>1</span>
+            <Gem className="h-5 w-5" />
+          </div>
+        )}
+      </Button>
+    </DrawerFooter>
             </form>
           </DrawerContent>
         </Drawer>
