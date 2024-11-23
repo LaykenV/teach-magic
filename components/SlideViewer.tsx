@@ -50,7 +50,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
   return (
     <div className="relative h-screen w-screen bg-black text-white overflow-hidden">
       <Link href="/dashboard" prefetch={true} className="absolute top-4 left-4 z-10">
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" className='rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105'>
           <Home className="h-6 w-6" />
           <span className="sr-only">Back to Dashboard</span>
         </Button>

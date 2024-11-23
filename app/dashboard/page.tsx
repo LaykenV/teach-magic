@@ -9,10 +9,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { redirect } from "next/navigation";
 import TokenCount from '@/components/TokenCount';
+import { MyDock } from '@/components/MyDock';
 
 export default async function Dashboard() {
   const { userId } = auth();
   const clerkUser = await currentUser();
+
+  console.log(clerkUser);
 
   if (!userId || !clerkUser) {
     redirect('/')
@@ -58,6 +61,8 @@ export default async function Dashboard() {
         <div className="mb-12">
           <UserCreations userCreations={formattedCreations} />
         </div>
+
+        <MyDock />
 
         <div className="grid md:grid-cols-3 gap-8">
           <Card>

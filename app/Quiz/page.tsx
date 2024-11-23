@@ -20,6 +20,7 @@ async function getCreationById(id: string) {
     created_at: creation.created_at,
     slides: creation.slides as Slide[],
     quiz: creation.quiz as Quiz,
+    age_group: creation.age_group,
   };
 
   return c;
@@ -54,8 +55,6 @@ export default async function QuizViewerPage({ searchParams }: QuizViewerPagePro
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
       <QuizViewer creation={creation} />
-    </div>
   );
 }

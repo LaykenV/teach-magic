@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Creation } from '@/types/types'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -23,7 +23,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { RainbowButton } from './ui/rainbow-button'
 import { Badge } from '@/components/ui/badge'
-import { ProgressCircle } from './ui/progressCircle'
+import { Progress } from './ui/progress'
+import { MyDock } from './MyDock'
 
 interface UserCreationsProps {
   userCreations: Creation[]
@@ -65,10 +66,33 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [progress, setProgress] = useState(0);
   const [prompt, setPrompt] = useState("")
   const [ageGroup, setAgeGroup] = useState("");
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => setProgress(100), 30000)
+      const interval = setInterval(() => {
+        setProgress((oldProgress) => {
+          if (oldProgress === 100) {
+            clearInterval(interval)
+            return 100
+          }
+          const newProgress = oldProgress + 100 / 300 // 100% over 30 seconds (300 intervals of 100ms)
+          return Math.min(newProgress, 100)
+        })
+      }, 100)
+      return () => {
+        clearTimeout(timer)
+        clearInterval(interval)
+      }
+    } else {
+      setProgress(0)
+    }
+  }, [loading]);
 
   const deleteCreation = async (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
@@ -258,17 +282,13 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
           ))}
         </div>
       )}
-      
+
       <div className='flex items-center justify-center w-auto pt-20'>
         <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
           <DrawerTrigger asChild>
-          <RainbowButton className="inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium sm:text-base">
-      <span>Create New Slides</span>
-      <div className="flex items-center space-x-1">
-        <span>1</span>
-        <Gem className="h-4 w-4 sm:h-5 sm:w-5" />
-      </div>
-    </RainbowButton>
+            <RainbowButton id='triggerButton' className="inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium sm:text-base">
+              <span>Create Something New</span>
+            </RainbowButton>
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
@@ -311,30 +331,35 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
                   </div>
                 </div>
               </div>
-              {loading && <ProgressCircle />}
+              {loading && (
+                <div className="px-4 py-2">
+                  <Progress value={progress} className="w-full h-2" />
+                  <p className="text-sm text-center mt-2">Generating slides...</p>
+                </div>
+              )}
               <DrawerFooter className="flex flex-col sm:flex-row gap-2">
-      <DrawerClose asChild>
-        <Button variant="destructive" className="w-full flex-1 sm:w-auto font-semibold">Cancel</Button>
-      </DrawerClose>
-      <Button 
-        type="submit" 
-        disabled={loading || prompt.trim().length === 0 || !ageGroup}
-        className="w-full sm:w-auto flex-1 justify-between items-center text-lg font-semibold"
-      >
-        <span className="flex-1">Generate Slides</span>
-        {loading ? (
-          <div className="flex items-center space-x-2">
-            <Loader2 className="h-5 w-5 mr-2 animated-spin" />
-            <span>Generating...</span>
-          </div>
-        ) : (
-          <div className="flex items-center space-x-1">
-            <span>1</span>
-            <Gem className="h-5 w-5" />
-          </div>
-        )}
-      </Button>
-    </DrawerFooter>
+                <DrawerClose asChild>
+                  <Button variant="destructive" className="w-full flex-1 sm:w-auto font-semibold">Cancel</Button>
+                </DrawerClose>
+                <Button 
+                  type="submit" 
+                  disabled={loading || prompt.trim().length === 0 || !ageGroup}
+                  className="w-full sm:w-auto flex-1 justify-between items-center text-lg font-semibold"
+                >
+                  <span className="flex-1">Generate Slides</span>
+                  {loading ? (
+                    <div className="flex items-center space-x-2">
+                      <Loader2 className="h-5 w-5 mr-2 animated-spin" />
+                      <span>Generating...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center space-x-1">
+                      <span>1</span>
+                      <Gem className="h-5 w-5" />
+                    </div>
+                  )}
+                </Button>
+              </DrawerFooter>
             </form>
           </DrawerContent>
         </Drawer>
