@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { Creation } from '@/types/types'
 import { CldImage, getCldImageUrl } from 'next-cloudinary'
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight, Home } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Home, CheckSquare } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from './theme/ThemeToggle'
 
 interface SlideViewerProps {
   creation: Creation
@@ -48,13 +49,21 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
   }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url])
 
   return (
-    <div className="relative h-screen w-screen bg-black text-white overflow-hidden">
-      <Link href="/dashboard" prefetch={true} className="absolute top-4 left-4 z-10">
-        <Button variant="ghost" size="icon" className='rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105'>
-          <Home className="h-6 w-6" />
-          <span className="sr-only">Back to Dashboard</span>
-        </Button>
-      </Link>
+    <div className="relative h-screen w-screen bg-background text-foreground overflow-hidden">
+      <div className="absolute top-4 left-4 z-10 flex space-x-2">
+        <Link href="/dashboard" prefetch={true}>
+          <Button variant="outline" size="icon" className="rounded-full">
+            <Home className="h-4 w-4" />
+            <span className="sr-only">Back to Dashboard</span>
+          </Button>
+        </Link>
+        <Link href={`/Quiz?id=${creation.id}`} prefetch={true}>
+          <Button variant="outline" size="icon" className="rounded-full">
+            <CheckSquare className="h-4 w-4" />
+            <span className="sr-only">Take quiz</span>
+          </Button>
+        </Link>
+      </div>
 
       <div className="absolute inset-0 flex items-center justify-center p-4">
         {slide ? (
@@ -74,23 +83,22 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
                 </div>
               )}
 
-            {slide.slide_type === 'content' && 'slide_paragraphs' in slide && (
-
-              <div className={cn("w-full", slide.slide_image_url ? "md:w-1/2" : "md:w-3/4")}>
-                {slide.slide_type === 'content' && (
-                  <div className="space-y-4">
-                    {slide.slide_paragraphs.map((paragraph: string, idx: number) => (
-                      <p key={idx} className="text-lg md:text-xl">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {slide.slide_type === 'content' && 'slide_paragraphs' in slide && (
+                <div className={cn("w-full", slide.slide_image_url ? "md:w-1/2" : "md:w-3/4")}>
+                  {slide.slide_type === 'content' && (
+                    <div className="space-y-4">
+                      {slide.slide_paragraphs.map((paragraph: string, idx: number) => (
+                        <p key={idx} className="text-lg md:text-xl">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )}
             </div>
 
-            <div className="mt-10 text-center text-sm text-gray-400">
+            <div className="mt-10 text-center text-sm text-muted-foreground">
               Slide {slideIndex + 1} of {creation.slides.length}
             </div>
           </div>
@@ -99,25 +107,30 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
         )}
       </div>
         
-
       {/* Navigation Buttons */}
-      <button
+      <Button
         onClick={handlePreviousSlide}
         disabled={slideIndex === 0}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white opacity-50 hover:opacity-100 transition-opacity duration-200"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full"
+        size="icon"
+        variant="outline"
         aria-label="Previous Slide"
       >
-        <ChevronLeft className="h-12 w-12" />
-      </button>
+        <ChevronLeft className="h-4 w-4" />
+      </Button>
 
-      <button
+      <Button
         onClick={handleNextSlide}
         disabled={slideIndex === creation.slides.length - 1}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white opacity-50 hover:opacity-100 transition-opacity duration-200"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full"
+        size="icon"
+        variant="outline"
         aria-label="Next Slide"
       >
-        <ChevronRight className="h-12 w-12" />
-      </button>
+        <ChevronRight className="h-4 w-4" />
+      </Button>
+      <ModeToggle />
     </div>
   )
 }
+

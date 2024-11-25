@@ -4,13 +4,15 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw } from 'lucide-react'
+import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw, BookOpen } from 'lucide-react'
 import { Creation } from '@/types/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
+import { ModeToggle } from './theme/ThemeToggle'
+import confetti from 'canvas-confetti';
 
 interface QuizViewerProps {
   creation: Creation
@@ -67,14 +69,52 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
     setScore(0)
   }
 
+  const shootConfetti = () => {
+    const end = Date.now() + 3 * 1000; // 3 seconds
+    const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
+ 
+    const frame = () => {
+      if (Date.now() > end) return;
+ 
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        colors: colors,
+      });
+ 
+      requestAnimationFrame(frame);
+    };
+ 
+    frame();
+  };
+
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-y-auto bg-gradient-to-b from-primary/10 to-primary/5">
-      <Link href="/dashboard" prefetch={true} className="absolute top-4 left-4 z-10">
-        <Button variant="outline" size="icon" className="rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-          <Home className="h-5 w-5" />
-          <span className="sr-only">Home</span>
-        </Button>
-      </Link>
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-y-auto bg-gradient-to-b from-primary/10 to-primary/5 dark:bg-background/80">
+      <div className="absolute top-4 left-4 z-10 flex space-x-2">
+        <Link href="/dashboard" prefetch={true}>
+          <Button variant="outline" size="icon" className="rounded-full">
+            <Home className="h-4 w-4" />
+            <span className="sr-only">Back to Dashboard</span>
+          </Button>
+        </Link>
+        <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
+          <Button variant="outline" size="icon" className="rounded-full">
+            <BookOpen className="h-4 w-4" />
+            <span className="sr-only">View slides</span>
+          </Button>
+        </Link>
+      </div>
       <AnimatePresence mode="wait">
         <motion.div
           key={isSubmitted ? 'results' : currentQuestionIndex}
@@ -84,9 +124,9 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
           transition={{ duration: 0.3 }}
           className="w-full max-w-2xl mx-auto"
         >
-          <Card className="w-full max-w-2xl mx-auto shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardHeader className="bg-primary/5 rounded-t-lg">
-              <CardTitle className="text-xl sm:text-2xl font-bold text-center text-primary">
+          <Card className="w-full max-w-2xl mx-auto shadow-xl bg-card/50 dark:bg-card/50 backdrop-blur-sm">
+            <CardHeader className="bg-muted/50 dark:bg-muted/20 rounded-t-lg">
+              <CardTitle className="text-xl sm:text-2xl font-bold text-center text-primary dark:text-primary">
                 {isSubmitted ? 'Quiz Results' : `Question ${currentQuestionIndex + 1} of ${creation.quiz.length}`}
               </CardTitle>
             </CardHeader>
@@ -99,10 +139,10 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                     transition={{ type: 'spring', stiffness: 260, damping: 20 }}
                     className="text-center"
                   >
-                    <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-primary/10 mb-4">
-                      <Award className="h-16 w-16 text-primary" />
+                    <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-primary/10 dark:bg-primary/20 mb-4">
+                      <Award className="h-16 w-16 text-primary dark:text-primary-foreground" />
                     </div>
-                    <p className="text-3xl sm:text-4xl font-bold text-primary mb-2">
+                    <p className="text-3xl sm:text-4xl font-bold text-primary dark:text-primary-foreground mb-2">
                       {score} / {creation.quiz.length}
                     </p>
                     <p className="text-lg text-muted-foreground">
@@ -129,24 +169,24 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                             hidden: { opacity: 0, y: 20 },
                             visible: { opacity: 1, y: 0 },
                           }}
-                          className="bg-card rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow"
+                          className="bg-card dark:bg-card/80 rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow"
                         >
                           <div className="flex items-start space-x-3">
-                            <div className={`mt-1 p-1 rounded-full ${isCorrect ? 'bg-green-100' : 'bg-red-100'}`}>
+                            <div className={`mt-1 p-1 rounded-full ${isCorrect ? 'bg-green-100 dark:bg-green-900' : 'bg-red-100 dark:bg-red-900'}`}>
                               {isCorrect ? (
-                                <Check className="h-5 w-5 text-green-600" />
+                                <Check className="h-5 w-5 text-green-600 dark:text-green-400" />
                               ) : (
-                                <X className="h-5 w-5 text-red-600" />
+                                <X className="h-5 w-5 text-red-600 dark:text-red-400" />
                               )}
                             </div>
                             <div>
-                              <p className="font-semibold text-lg mb-2">{question.question}</p>
-                              <p className={`text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                              <p className="font-semibold text-lg mb-2 text-foreground">{question.question}</p>
+                              <p className={`text-sm ${isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 Your answer: {question.answer_choices[userAnswerIndex]?.answer_text || 'No answer selected'}
                               </p>
                               {!isCorrect && (
-                                <p className="text-sm text-green-600 mt-1">
-                                  Correct answer: {question.answer_choices.find((choice: any) => choice.correct)?.answer_text}
+                                <p className="text-sm text-green-600 dark:text-green-400 mt-1">
+                                  Correct answer: {question.answer_choices.find((choice) => choice.correct)?.answer_text}
                                 </p>
                               )}
                             </div>
@@ -158,7 +198,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold text-primary">{creation.quiz[currentQuestionIndex].question}</h3>
+                  <h3 className="text-xl font-semibold text-primary dark:text-primary">{creation.quiz[currentQuestionIndex].question}</h3>
                   <RadioGroup
                     onValueChange={(value) => handleAnswerSelect(parseInt(value))}
                     value={userAnswers[currentQuestionIndex]?.toString() || ''}
@@ -174,26 +214,26 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                           <motion.div
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center space-x-3 p-4 rounded-lg bg-card hover:bg-primary/5 transition-colors cursor-pointer"
+                            className="flex items-center space-x-3 p-4 rounded-lg bg-card dark:bg-card/80 hover:bg-primary/5 dark:hover:bg-primary/20 transition-colors cursor-pointer"
                           >
                             <RadioGroupItem
                               value={index.toString()}
                               id={`answer-${index}`}
                               className="peer sr-only"
                             />
-                            <div className="relative w-4 h-4 border-2 border-primary rounded-full flex items-center justify-center">
+                            <div className="relative w-4 h-4 border-2 border-primary dark:border-primary rounded-full flex items-center justify-center">
                               <motion.div
                                 initial={false}
                                 animate={{
                                   scale: userAnswers[currentQuestionIndex] === index ? 1 : 0,
                                 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                className="absolute w-2 h-2 bg-primary rounded-full"
+                                className="absolute w-2 h-2 bg-primary dark:bg-primary rounded-full"
                               />
                             </div>
                             <Label
                               htmlFor={`answer-${index}`}
-                              className="flex-grow cursor-pointer font-medium peer-checked:text-primary transition-colors duration-200 ease-in-out"
+                              className="flex-grow cursor-pointer font-medium peer-checked:text-primary dark:peer-checked:text-primary-foreground transition-colors duration-200 ease-in-out"
                             >
                               {choice.answer_text}
                             </Label>
@@ -205,7 +245,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                 </div>
               )}
             </CardContent>
-            <CardFooter className="flex flex-col sm:flex-row justify-between p-4 sm:p-6 bg-primary/5 rounded-b-lg gap-4">
+            <CardFooter className="flex flex-col sm:flex-row justify-between p-4 sm:p-6 bg-muted/50 dark:bg-muted/20 rounded-b-lg gap-4">
               {isSubmitted ? (
                 <Button onClick={resetQuiz} className="w-full rounded-full">
                   <RefreshCw className="h-4 w-4 mr-2" />
@@ -217,25 +257,37 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                     onClick={handleBack}
                     disabled={currentQuestionIndex === 0}
                     variant="outline"
-                    className="w-full sm:w-auto rounded-full transition-all duration-200 hover:bg-primary/10"
+                    className="w-full sm:w-auto rounded-full transition-all duration-200 hover:bg-primary/10 dark:hover:bg-primary/20 bg-background dark:bg-background/80"
                   >
                     <ChevronLeft className="h-4 w-4 mr-2" />
                     Back
                   </Button>
-                  <Button
-                    onClick={handleNext}
-                    disabled={userAnswers[currentQuestionIndex] === undefined}
-                    className="w-full sm:w-auto rounded-full transition-all duration-200 hover:bg-primary-dark"
-                  >
-                    {currentQuestionIndex === creation.quiz.length - 1 ? 'Submit Quiz' : 'Next'}
-                    <ChevronRight className="h-4 w-4 ml-2" />
-                  </Button>
+                  {currentQuestionIndex === creation.quiz.length - 1 ? (
+                    <Button
+                      onClick={() => {handleNext(); shootConfetti()}}
+                      disabled={userAnswers[currentQuestionIndex] === undefined}
+                      className="w-full sm:w-auto rounded-full transition-all duration-200 hover:bg-primary-dark"
+                    >
+                      Submit Quiz
+                      <ChevronRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleNext}
+                      disabled={userAnswers[currentQuestionIndex] === undefined}
+                      className="w-full sm:w-auto rounded-full transition-all duration-200 hover:bg-primary-dark"
+                    >
+                      Next
+                      <ChevronRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  )}
                 </>
               )}
             </CardFooter>
           </Card>
         </motion.div>
       </AnimatePresence>
+      <ModeToggle />
     </div>
   )
 }

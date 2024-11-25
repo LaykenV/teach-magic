@@ -1,5 +1,4 @@
-import { UserButton } from '@clerk/nextjs';
-import { auth, currentUser} from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { creationsTable, usersTable, User } from '@/drizzle/schema';
@@ -8,27 +7,23 @@ import UserCreations from '@/components/UserCreations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { redirect } from "next/navigation";
-import TokenCount from '@/components/TokenCount';
 import { MyDock } from '@/components/MyDock';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 export default async function Dashboard() {
   const { userId } = auth();
   const clerkUser = await currentUser();
 
-  console.log(clerkUser);
-
   if (!userId || !clerkUser) {
     redirect('/')
-    return <div>No user found</div>;
   }
   const stringId = userId.toString();
 
   const user = await db.select().from(usersTable).where(eq(usersTable.id, stringId));
-
   const formattedUser: User = user[0];
 
   const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, stringId));
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formattedCreations: Creation[] = userCreations.map((creation: any) => ({
     id: creation.id,
     user_id: creation.user_id,
@@ -40,20 +35,12 @@ export default async function Dashboard() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-primary text-primary-foreground py-4">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">TeachMagic</h1>
-          <nav className="flex items-center space-x-4">
-            <TokenCount count={formattedUser.tokens} />
-            <UserButton />
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-4">Welcome back, {clerkUser.firstName}!</h2>
-          <p className="text-xl text-muted-foreground">
+          <h2 className="text-3xl font-bold mb-2">Welcome back, {clerkUser.firstName}!</h2>
+          <p className="text-xl text-muted-foreground mb-4">
             Ready to create more amazing learning content?
           </p>
         </div>
@@ -62,50 +49,42 @@ export default async function Dashboard() {
           <UserCreations userCreations={formattedCreations} />
         </div>
 
-        <MyDock />
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <Card>
-            <CardHeader>
-              <BookOpen className="w-10 h-10 mb-2 text-primary" />
-              <CardTitle>Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Youve created {formattedCreations.length} learning modules so far. Keep up the great work!
-              </CardDescription>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <ImageIcon className="w-10 h-10 mb-2 text-primary" />
-              <CardTitle>AI-Generated Visuals</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Enhance your learning modules with custom AI-generated images. Try it in your next creation!
-              </CardDescription>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <BrainCircuit className="w-10 h-10 mb-2 text-primary" />
-              <CardTitle>Knowledge Check</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Dont forget to add interactive questions to your modules for better learning retention.
-              </CardDescription>
-            </CardContent>
-          </Card>
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <DashboardCard
+            icon={BookOpen}
+            title="Recent Activity"
+            description={`You've created ${formattedCreations.length} learning modules so far. Keep up the great work!`}
+          />
+          <DashboardCard
+            icon={ImageIcon}
+            title="AI-Generated Visuals"
+            description="Enhance your learning modules with custom AI-generated images on any topic!"
+          />
+          <DashboardCard
+            icon={BrainCircuit}
+            title="Knowledge Check"
+            description="Don't forget to take the interactive quiz for better learning retention."
+          />
         </div>
       </main>
 
-      <footer className="bg-muted mt-16 py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>© 2024 TeachMagic. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
+      <MyDock dashboard={true} />
     </div>
   );
 }
+
+function DashboardCard({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) {
+  return (
+    <Card className="bg-card hover:bg-accent transition-colors duration-300">
+      <CardHeader>
+        <Icon className="w-10 h-10 mb-2 text-primary" />
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription>{description}</CardDescription>
+      </CardContent>
+    </Card>
+  )
+}
+

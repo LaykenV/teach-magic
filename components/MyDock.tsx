@@ -5,13 +5,17 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import { UserButton } from "@clerk/nextjs";
 import { DockToggle } from "@/components/theme/DockToggle";
 import { Separator } from "@/components/ui/separator";
-import { Gem, Plus, Info, Pencil, DollarSign } from "lucide-react";
+import { Gem, Plus, Info, Pencil, DollarSign, Home } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { RainbowButton } from "./ui/rainbow-button";
 import ShinyButton from "./ui/shiny-button";
 
-export function MyDock() {
+interface MyDockProps {
+  dashboard: boolean;
+}
+
+export const MyDock = ({ dashboard }: MyDockProps) => {
   return (
     <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <Dock direction="middle" className="bg-background/80 backdrop-blur-sm border border-border rounded-full shadow-lg">
@@ -21,8 +25,8 @@ export function MyDock() {
             appearance={{
               elements: {
                 userButtonAvatarBox: {
-                  width: 24,
-                  height: 24,
+                  width: 28,
+                  height: 28,
                 },
               },
             }}
@@ -34,24 +38,33 @@ export function MyDock() {
 
         {/* Gem Icon linking to /pricing */}
         <DockIcon className="hover:text-primary transition-colors">
-          <Link href="/pricing">
+          <Link href="/pricing" prefetch>
             <DollarSign className="size-6" />
           </Link>
         </DockIcon>
 
         {/* Plus Icon */}
         <DockIcon className="relative">
-          <ShinyButton 
+            {dashboard ? 
+            <ShinyButton
             onClick={() => document.getElementById('triggerButton')?.click()}
             className="rounded-full bg-secondary text-secondary-foreground transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
           >
             <Pencil className="size-6" />
-          </ShinyButton>
+          </ShinyButton> :
+          <Link href="/dashboard" prefetch>
+            <ShinyButton
+                className="rounded-full bg-secondary text-secondary-foreground transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
+            >
+                <Home className="size-6" />
+            </ShinyButton>
+          </Link>
+          }
         </DockIcon>
 
         {/* About Us Icon linking to /about */}
         <DockIcon className="hover:text-primary transition-colors">
-          <Link href="/about">
+          <Link href="/about" prefetch>
             <Info className="size-6" />
           </Link>
         </DockIcon>
