@@ -100,16 +100,16 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-y-auto bg-gradient-to-b from-primary/10 to-primary/5 dark:bg-background/80">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-y-auto">
       <div className="absolute top-4 left-4 z-10 flex space-x-2">
         <Link href="/dashboard" prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
             <Home className="h-4 w-4" />
             <span className="sr-only">Back to Dashboard</span>
           </Button>
         </Link>
         <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
             <BookOpen className="h-4 w-4" />
             <span className="sr-only">View slides</span>
           </Button>
@@ -126,7 +126,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
         >
           <Card className="w-full max-w-2xl mx-auto shadow-xl bg-card/50 dark:bg-card/50 backdrop-blur-sm">
             <CardHeader className="bg-muted/50 dark:bg-muted/20 rounded-t-lg">
-              <CardTitle className="text-xl sm:text-2xl font-bold text-center text-primary dark:text-primary">
+              <CardTitle className="text-xl sm:text-2xl font-bold text-center text-foreground">
                 {isSubmitted ? 'Quiz Results' : `Question ${currentQuestionIndex + 1} of ${creation.quiz.length}`}
               </CardTitle>
             </CardHeader>
@@ -140,9 +140,9 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                     className="text-center"
                   >
                     <div className="inline-flex items-center justify-center w-32 h-32 rounded-full bg-primary/10 dark:bg-primary/20 mb-4">
-                      <Award className="h-16 w-16 text-primary dark:text-primary-foreground" />
+                      <Award className="h-16 w-16 text-primary dark:text-primary" />
                     </div>
-                    <p className="text-3xl sm:text-4xl font-bold text-primary dark:text-primary-foreground mb-2">
+                    <p className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
                       {score} / {creation.quiz.length}
                     </p>
                     <p className="text-lg text-muted-foreground">
@@ -198,7 +198,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold text-primary dark:text-primary">{creation.quiz[currentQuestionIndex].question}</h3>
+                  <h3 className="text-xl font-semibold text-card-foreground">{creation.quiz[currentQuestionIndex].question}</h3>
                   <RadioGroup
                     onValueChange={(value) => handleAnswerSelect(parseInt(value))}
                     value={userAnswers[currentQuestionIndex]?.toString() || ''}

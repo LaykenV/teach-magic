@@ -15,6 +15,7 @@ interface SlideViewerProps {
 
 export default function SlideViewer({ creation }: SlideViewerProps) {
   const [slideIndex, setSlideIndex] = useState(0)
+  console.log(creation)
 
   const slide = creation.slides[slideIndex]
   const nextSlide = creation.slides[slideIndex + 1]
@@ -49,16 +50,16 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
   }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url])
 
   return (
-    <div className="relative h-screen w-screen bg-background text-foreground overflow-hidden">
+    <div className="relative h-screen w-screen text-foreground overflow-hidden">
       <div className="absolute top-4 left-4 z-10 flex space-x-2">
         <Link href="/dashboard" prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
             <Home className="h-4 w-4" />
             <span className="sr-only">Back to Dashboard</span>
           </Button>
         </Link>
         <Link href={`/Quiz?id=${creation.id}`} prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full">
+          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
             <CheckSquare className="h-4 w-4" />
             <span className="sr-only">Take quiz</span>
           </Button>
@@ -111,7 +112,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
       <Button
         onClick={handlePreviousSlide}
         disabled={slideIndex === 0}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full hover:bg-foreground/10"
         size="icon"
         variant="outline"
         aria-label="Previous Slide"
@@ -122,7 +123,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
       <Button
         onClick={handleNextSlide}
         disabled={slideIndex === creation.slides.length - 1}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full hover:bg-foreground/10"
         size="icon"
         variant="outline"
         aria-label="Next Slide"

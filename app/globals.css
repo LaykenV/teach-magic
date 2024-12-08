@@ -14,67 +14,119 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Light Mode Colors: Vibrant and lively */
+    
+    /* Main background: Bright and clean */
+    --background: 210 50% 98%;        /* Light sky blue */
+    
+    /* Primary text: Deep and strong for contrast */
+    --foreground: 210 20% 15%;        /* Dark navy blue */
+    
+    /* Card and popover backgrounds: Slightly off-white with a hint of color */
+    --card: 210 50% 95%;             
+    --card-foreground: 210 20% 15%;
+    --popover: 210 50% 95%;
+    --popover-foreground: 210 20% 20%;
+    
+    /* Primary: Vibrant purple for calls-to-action */
+    --primary: 280 80% 55%;            /* Vivid purple */
+    --primary-foreground: 0 0% 100%;   /* White text */
+    
+    /* Secondary: Bright teal for secondary actions */
+    --secondary: 280 80% 55%;          /* Light teal */
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Muted elements: Light gray for subdued text */
+    --muted: 210 20% 85%;              
+    --muted-foreground: 210 15% 30%;
+    
+    /* Accent: Bright turquoise for highlights */
+    --accent: 280 80% 55%;              /* Vibrant turquoise */
+    --accent-foreground: 0 0% 100%;     /* White text */
+    
+    /* Destructive: Bold red for warnings or deletions */
+    --destructive: 0 80% 55%;           /* Bright red */
+    --destructive-foreground: 0 0% 100%; /* White text */
+    
+    /* Borders and inputs: Soft gray for subtle delineation */
+    --border: 210 20% 80%;             
+    --input: 210 20% 80%;
+    
+    /* Ring: Use the accent turquoise for focus rings */
+    --ring: 174 70% 55%;
+    
+    /* Chart colors: Diverse and vibrant for data visualization */
+    --chart-1: 200 80% 60%;   /* Bright blue */
+    --chart-2: 340 85% 65%;   /* Vivid magenta */
+    --chart-3: 50 85% 65%;    /* Bright yellow-orange */
+    --chart-4: 90 80% 60%;    /* Fresh green */
+    --chart-5: 280 80% 60%;   /* Vibrant purple */
+    
+    /* Border radius */
     --radius: 0.5rem;
-    --color-1: 0 100% 63%;
-    --color-2: 270 100% 63%;
-    --color-3: 210 100% 63%;
-    --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%;
+    
+    /* Additional color stops */
+    --color-1: 0 100% 63%;    /* Pure red */
+    --color-2: 270 100% 63%;  /* Pure purple */
+    --color-3: 210 100% 63%;  /* Pure blue */
+    --color-4: 195 100% 63%;  /* Pure teal */
+    --color-5: 90 100% 63%;   /* Pure green */
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --color-1: 0 100% 63%;
-    --color-2: 270 100% 63%;
-    --color-3: 210 100% 63%;
-    --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%;
+    /* Dark Mode Colors: Rich and vibrant against dark backgrounds */
+    
+    /* Main background: Deep and rich */
+    --background: 210 30% 15%;        /* Deep midnight blue */
+    
+    /* Primary text: Light and contrasting */
+    --foreground: 210 20% 95%;        /* Light sky blue */
+    
+    /* Card and popover backgrounds: Dark with subtle color */
+    --card: 210 30% 20%;             
+    --card-foreground: 210 20% 95%;
+    --popover: 210 30% 20%;
+    --popover-foreground: 210 20% 85%;
+    
+    /* Primary: Bright purple to stand out against dark background */
+    --primary: 280 80% 65%;            /* Vivid purple */
+    --primary-foreground: 210 20% 15%; /* Dark text for contrast if needed */
+    
+    /* Secondary: Rich teal for secondary actions */
+    --secondary: 180 70% 55%;          /* Rich teal */
+    --secondary-foreground: 210 20% 85%;
+    
+    /* Muted elements: Dark gray for subdued text */
+    --muted: 210 20% 25%;              
+    --muted-foreground: 210 15% 65%;
+    
+    /* Accent: Deep turquoise for highlights */
+    --accent: 280 80% 65%;              /* Deep turquoise */
+    --accent-foreground: 210 20% 95%;   /* Light text */
+    
+    /* Destructive: Bold red for warnings or deletions */
+    --destructive: 0 80% 45%;           /* Bright red */
+    --destructive-foreground: 210 20% 95%; /* Light text */
+    
+    /* Borders and inputs: Dark gray for subtle delineation */
+    --border: 210 20% 25%;             
+    --input: 210 20% 25%;
+    
+    /* Ring: Use the deep accent turquoise for focus rings */
+    --ring: 174 70% 45%;
+    
+    /* Chart colors: Diverse and vibrant for data visualization */
+    --chart-1: 200 80% 60%;   /* Bright blue */
+    --chart-2: 340 85% 65%;   /* Vivid magenta */
+    --chart-3: 50 85% 65%;    /* Bright yellow-orange */
+    --chart-4: 90 80% 60%;    /* Fresh green */
+    --chart-5: 280 80% 60%;   /* Vibrant purple */
+    
+    --color-1: 0 100% 63%;    /* Pure red */
+    --color-2: 270 100% 63%;  /* Pure purple */
+    --color-3: 210 100% 63%;  /* Pure blue */
+    --color-4: 195 100% 63%;  /* Pure teal */
+    --color-5: 90 100% 63%;   /* Pure green */
   }
 }
 

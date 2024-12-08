@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/FeatureCard";
 import { FAQAccordion } from "@/components/FAQAccordion";
-import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { Image as Image2, FileQuestion, Layers, Lightbulb, GraduationCap } from 'lucide-react';
 
 
@@ -73,7 +73,7 @@ export default async function Home() {
                 Unlock the Power of AI-Driven Learning
               </h2>
               <p className="text-xl text-muted-foreground">
-                Explore any topic imaginable with TeachMagic's revolutionary AI-powered teaching platform.
+                Explore any topic imaginable with TeachMagics revolutionary AI-powered teaching platform.
               </p>
               <SignUpButton mode="modal">
                 <Button size="lg" className="mt-4">Get Started for Free</Button>

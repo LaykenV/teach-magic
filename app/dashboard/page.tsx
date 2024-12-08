@@ -1,52 +1,56 @@
-import { auth, currentUser } from '@clerk/nextjs/server';
+"use cache"
+import { auth } from '@clerk/nextjs/server';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { creationsTable, usersTable, User } from '@/drizzle/schema';
 import { Creation } from '@/types/types'
-import UserCreations from '@/components/UserCreations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { redirect } from "next/navigation";
 import { MyDock } from '@/components/MyDock';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import CreationsLibrary from '@/components/CreationsLibrary';
+import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from 'next/cache'
 
-export default async function Dashboard() {
-  const { userId } = auth();
-  const clerkUser = await currentUser();
 
-  if (!userId || !clerkUser) {
-    redirect('/')
-  }
-  const stringId = userId.toString();
+ export const revalidate = 60; // revalidate every 60 seconds
 
-  const user = await db.select().from(usersTable).where(eq(usersTable.id, stringId));
-  const formattedUser: User = user[0];
-
-  const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, stringId));
+async function getUserCreations(userId: string) {
+  'use cache' // Cache just this function as well
+  cacheTag('user-creations') // tag to revalidate
+  cacheLife('max') // Choose the "max" profile to cache indefinitely
+  const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, userId));
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formattedCreations: Creation[] = userCreations.map((creation: any) => ({
     id: creation.id,
     user_id: creation.user_id,
     slides: creation.slides,
     quiz: creation.quiz,
     created_at: creation.created_at,
-    age_group: creation.age_group
+    age_group: creation.age_group,
   }));
+  return formattedCreations;
+}
+
+export default async function Dashboard() {
+  const { userId } = auth();
+  if (!userId) {
+    redirect('/');
+  }
+
+  const formattedCreations = await getUserCreations(userId);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-
       <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-2">Welcome back, {clerkUser.firstName}!</h2>
-          <p className="text-xl text-muted-foreground mb-4">
-            Ready to create more amazing learning content?
-          </p>
-        </div>
+        
 
         <div className="mb-12">
-          <UserCreations userCreations={formattedCreations} />
+          <CreationsLibrary initialCreations={formattedCreations} />
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -76,7 +80,7 @@ export default async function Dashboard() {
 
 function DashboardCard({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) {
   return (
-    <Card className="bg-card hover:bg-accent transition-colors duration-300">
+    <Card className="bg-card transition-colors duration-300">
       <CardHeader>
         <Icon className="w-10 h-10 mb-2 text-primary" />
         <CardTitle>{title}</CardTitle>

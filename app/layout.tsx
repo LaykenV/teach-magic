@@ -3,7 +3,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Provider from "@/components/Provider";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { ModeToggle } from "@/components/theme/ThemeToggle";
 //configDotenv({ path: path.resolve(process.cwd(), ".env-local") });
 console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
@@ -24,16 +23,16 @@ export default function RootLayout({
     <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <html lang="en" suppressHydrationWarning={true}>
             <Provider>
-              <body className="bg-white dark:bg-gray-900 text-black dark:text-white">
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange
                     >
-                  {children}
+                  <body className="bg-gradient-to-b from-primary/10 to-primary/5">
+                      {children}
+                  </body>
                 </ThemeProvider>
-              </body>
             </Provider>
       </html>
     </ClerkProvider>

@@ -30,6 +30,17 @@
 
    export type Quiz = Question[];
 
+   export type Creation = {
+     id: string;
+     user_id: string;
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     slides: Slide[];
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     quiz: Quiz;
+     created_at: Date;
+     age_group: string;
+   }
+   
   export interface UserEntry {
     id: string;
     email: string;
@@ -45,16 +56,6 @@
     age_group: string;
   }
 
-  export type Creation = {
-    id: string;
-    user_id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    slides: Slide[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    quiz: Quiz;
-    created_at: Date;
-    age_group: string;
-  }
 
 
 

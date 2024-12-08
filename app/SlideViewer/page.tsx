@@ -20,6 +20,7 @@ async function getCreationById(id: string) {
     created_at: creation.created_at,
     slides: creation.slides as Slide[],
     quiz: creation.quiz as Quiz,
+    age_group: creation.age_group
   };
 
   return c;

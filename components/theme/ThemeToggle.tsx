@@ -22,7 +22,7 @@ export function ModeToggle() {
     <Button
       variant="outline"
       size="icon"
-      className="fixed bottom-4 right-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
+      className="fixed bottom-4 right-4 p-2 hover:bg-foreground/10 rounded-full"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (

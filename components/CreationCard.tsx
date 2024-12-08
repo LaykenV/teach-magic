@@ -22,6 +22,7 @@ interface CreationCardProps {
   creation: Creation;
   deleting: boolean;
   onDelete: (id: string, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  self: boolean
 }
 
 const getAgeGroup = (ageGroup: string) => {
@@ -42,19 +43,19 @@ const getAgeGroup = (ageGroup: string) => {
 const getAgeGroupColor = (ageGroup: string) => {
   switch (ageGroup) {
     case 'elementary':
-      return 'bg-green-100 text-green-800';
+      return 'bg-green-800 hover:bg-green-800';
     case 'middle-school':
-      return 'bg-blue-100 text-blue-800';
+      return 'bg-blue-800 hover:bg-blue-800';
     case 'high-school':
-      return 'bg-purple-100 text-purple-800';
+      return 'bg-yellow-800 hover:bg-yellow-800';
     case 'college':
-      return 'bg-red-100 text-red-800';
+      return 'bg-red-800 hover:bg-red-800';
     default:
       return 'bg-gray-100 text-gray-800';
   }
 };
 
-const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelete }) => {
+const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelete, self }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -63,7 +64,7 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
   };
 
   return (
-    <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-[1.02] group">
+    <Card className="overflow-hidden bg-card transition-all duration-300 hover:shadow-lg hover:scale-[1.02] group text-card-foreground">
       <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true} className="block">
         <CardHeader className="p-0">
           {creation.slides[0]?.slide_image_url ? (
@@ -85,14 +86,14 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
           )}
         </CardHeader>
         <CardContent className="p-4">
-          <CardTitle className="text-lg font-semibold line-clamp-2 mb-2 group-hover:text-primary transition-colors duration-300 h-14 overflow-hidden">
+          <CardTitle className="text-lg font-semibold line-clamp-2 mb-2 transition-colors duration-300 h-14 overflow-hidden">
             {creation.slides[0]?.slide_title || 'Untitled Creation'}
           </CardTitle>
           <div className="flex flex-wrap gap-2">
-            <Badge variant="secondary" className="text-xs">
+            <Badge variant="default" className="text-xs text-white bg-primary hover:bg-primary">
               {creation.slides.length} {creation.slides.length === 1 ? 'slide' : 'slides'}
             </Badge>
-            <Badge variant="secondary" className={`text-xs ${getAgeGroupColor(creation.age_group)}`}>
+            <Badge variant="default" className={`text-xs text-white ${getAgeGroupColor(creation.age_group)}`}>
               {getAgeGroup(creation.age_group)}
             </Badge>
           </div>
@@ -101,13 +102,13 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
       <CardFooter className="p-4 pt-0 flex justify-between items-center">
         <div className="flex space-x-2">
           <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
-            <Button variant="outline" size="icon" className="group-hover:border-primary group-hover:text-primary transition-colors duration-300">
+            <Button variant="outline" size="icon" className="group-hover:border-primary transition-colors duration-300">
               <BookOpen className="h-4 w-4" />
               <span className="sr-only">View slides</span>
             </Button>
           </Link>
           <Link href={`/Quiz?id=${creation.id}`}>
-            <Button variant="outline" size="icon" className="group-hover:border-primary group-hover:text-primary transition-colors duration-300">
+            <Button variant="outline" size="icon" className="group-hover:border-primary transition-colors duration-300">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -131,6 +132,7 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
               variant="destructive"
               size="icon"
               className="hover:bg-destructive/90 transition-colors duration-300"
+              disabled={!self}
             >
               <Trash className="h-4 w-4" />
               <span className="sr-only">Delete creation</span>

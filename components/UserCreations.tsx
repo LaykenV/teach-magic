@@ -10,17 +10,20 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import CreationCard from './CreationCard';
 import CreateNewDrawer from './CreateNewDrawer';
+import { useSlideContext } from '@/context/SlideContext';
 
 interface UserCreationsProps {
-  userCreations: Creation[];
+  filteredCreations: Creation[];
+  self: boolean
 }
 
-export default function UserCreations({ userCreations }: UserCreationsProps) {
-  const [creations, setCreations] = useState<Creation[]>(userCreations);
+export default function UserCreations({ filteredCreations, self }: UserCreationsProps) {
+  //const [creations, setCreations] = useState<Creation[]>(userCreations);
   const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const router = useRouter();
+  const { userCreations, setUserCreations } = useSlideContext();
 
   const deleteCreation = async (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -43,8 +46,11 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
         throw new Error(errorData.error || `API error: ${response.statusText}`);
       }
 
-      setCreations((prevCreations) => prevCreations.filter((creation) => creation.id !== id));
+      const updatedCreations = userCreations.filter((creation) => creation.id !== id);
+      setUserCreations(updatedCreations);
+
       setSuccess('Creation deleted successfully.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Error deleting creation:', error);
       setError(error.message || 'Failed to delete creation.');
@@ -57,13 +63,15 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
     }
   };
 
-  const handleCreationSuccess = (newCreationId: string) => {
-    router.push(`/SlideViewer?id=${newCreationId}`);
+  const handleCreationSuccess = (newCreation: Creation) => {
+    const c = [...userCreations];
+    c.push(newCreation)
+    setUserCreations(c);
+    router.push(`/SlideViewer?id=${newCreation.id}`);
   };
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="text-3xl font-bold mb-6">My Creations</h2>
 
       {success && (
         <Alert variant="default" className="mb-6">
@@ -81,7 +89,7 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
         </Alert>
       )}
 
-      {creations.length === 0 ? (
+      {filteredCreations.length === 0 ? (
         <Card>
           <CardContent className="pt-6">
             <p className="text-center text-muted-foreground">You have no creations.</p>
@@ -97,12 +105,13 @@ export default function UserCreations({ userCreations }: UserCreationsProps) {
         </Card>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {creations.map((creation) => (
+          {filteredCreations.map((creation) => (
             <CreationCard
               key={creation.id}
               creation={creation}
               deleting={deletingIds.has(creation.id)}
               onDelete={deleteCreation}
+              self={self}
             />
           ))}
         </div>

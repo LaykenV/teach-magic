@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -16,10 +17,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { RainbowButton } from './ui/rainbow-button';
 import { Loader2, Plus } from 'lucide-react';
-import ShinyButton from './ui/shiny-button';
+import { Creation } from '@/types/types';
 
 interface CreateNewDrawerProps {
-  onSuccess: (newCreationId: string) => void;
+  onSuccess: (newCreation: Creation) => void;
 }
 
 const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
@@ -72,10 +73,10 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
       }
 
       const responseJson = await response.json();
-      const newCreationId = responseJson.creation.id;
+      const newCreation = responseJson.creation;
 
       setIsDrawerOpen(false);
-      onSuccess(newCreationId);
+      onSuccess(newCreation);
     } catch (error) {
       setError('Failed to generate slides. Please try again.');
       console.error(error);
@@ -94,11 +95,11 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
       <Plus className="mr-2 h-4 w-4" /> Create New Content
     </RainbowButton>
   </DrawerTrigger>
-  <DrawerContent className="bg-gradient-to-b from-background/80 to-background dark:from-background/90 dark:to-background/70 backdrop-blur-sm border-l border-border">
+  <DrawerContent className="bg-gradient-to-b from-background/80 to-background dark:from-background/90 dark:to-background/70 backdrop-blur-sm border-l border-primary">
     <DrawerHeader>
       <DrawerTitle className="text-foreground">Generate Slides</DrawerTitle>
       <DrawerDescription className="text-muted-foreground">
-        Enter your topic or lesson idea, and we'll create a set of slides for you.
+        Enter your topic or lesson idea, and we will create a set of slides for you.
       </DrawerDescription>
     </DrawerHeader>
     <form onSubmit={handleSubmit}>
@@ -107,16 +108,16 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
           <div className="space-y-2">
             <label
               htmlFor="age-group"
-              className="text-sm font-medium leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="text-md font-medium leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Please choose the age range to optimize for:
             </label>
             <Select value={ageGroup} onValueChange={setAgeGroup}>
-              <SelectTrigger id="age-group" className="bg-background/70 border-input/50 focus:border-input">
+              <SelectTrigger id="age-group" className="bg-background/70 focus:border-primary">
                 <SelectValue placeholder="Select age range" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="elementary">Elementary</SelectItem>
+                <SelectItem value="elementary" className='color-primary'>Elementary</SelectItem>
                 <SelectItem value="middle-school">Middle School</SelectItem>
                 <SelectItem value="high-school">High School</SelectItem>
                 <SelectItem value="college">College Level</SelectItem>
@@ -126,7 +127,7 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
           <div className="space-y-2">
             <label
               htmlFor="prompt"
-              className="text-sm font-medium leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="text-md font-medium leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               Enter your prompt:
             </label>
@@ -135,7 +136,7 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
               placeholder="e.g., Explain the water cycle for 5th grade students"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              className="min-h-[100px] bg-background/70 border-input/50 focus:border-input"
+              className="min-h-[100px] bg-background/70 focus:border-primary"
               required
             />
           </div>
@@ -155,7 +156,7 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess }) => {
         <Button
           type="submit"
           disabled={loading || prompt.trim().length === 0 || !ageGroup}
-          className="w-full sm:w-auto flex-1 justify-between items-center text-lg font-semibold"
+          className="w-full sm:w-auto flex-1 justify-between items-center text-lg font-semibold color-primary text-white"
         >
           {loading ? (
             <div className="flex items-center space-x-2 flex-1">

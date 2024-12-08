@@ -5,10 +5,8 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import { UserButton } from "@clerk/nextjs";
 import { DockToggle } from "@/components/theme/DockToggle";
 import { Separator } from "@/components/ui/separator";
-import { Gem, Plus, Info, Pencil, DollarSign, Home } from "lucide-react";
+import { Info, Pencil, DollarSign, Home } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { RainbowButton } from "./ui/rainbow-button";
 import ShinyButton from "./ui/shiny-button";
 
 interface MyDockProps {
@@ -48,15 +46,15 @@ export const MyDock = ({ dashboard }: MyDockProps) => {
             {dashboard ? 
             <ShinyButton
             onClick={() => document.getElementById('triggerButton')?.click()}
-            className="rounded-full bg-secondary text-secondary-foreground transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
+            className="rounded-full bg-primary transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
           >
-            <Pencil className="size-6" />
+            <Pencil className="size-6 text-secondary-foreground" />
           </ShinyButton> :
           <Link href="/dashboard" prefetch>
             <ShinyButton
-                className="rounded-full bg-secondary text-secondary-foreground transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
+                className="rounded-full bg-primary transition-all duration-300 ease-in-out transform hover:scale-110 shadow-md hover:shadow-lg p-2 w-10 h-10 flex items-center justify-center"
             >
-                <Home className="size-6" />
+                <Home className="size-6 text-secondary-foreground" />
             </ShinyButton>
           </Link>
           }

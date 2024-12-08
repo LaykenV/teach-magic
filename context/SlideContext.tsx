@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Creation, User } from "@/drizzle/schema";
+import { User } from "@/drizzle/schema";
+import { Creation } from "@/types/types";
 
 interface SlideContextType {
   userCreations: Creation[];

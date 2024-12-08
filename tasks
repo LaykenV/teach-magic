@@ -70,3 +70,42 @@ build about page
 //design dashboard, quiz button on slide viewer, modal for delete, move theme toggle
 
 redo landing page, drawer colors, loading optimizations, about page, community creations
+
+V1 COMPLETE - GREAT PRODUCT - MOVING TO V2
+
+
+setup extensions on new mac
+
+//learning paths, 3 options with img need new route that takes that in the img for title slide and creates a path and adds both ids. if there is already a path just append the new ideas
+
+//add paths to creations // add to db, add to prompt and types, update prompt route, add createPath route
+
+//update userCreations to include path cards
+
+
+redo color theme
+
+dashboard redesign - nice header, library and comm tabs, search, filter by grade, then nice cards
+
+use cache on dashboard
+
+
+optomize ai prompts, pick prod models
+create community creations
+
+
+redesign landing page with template
+
+redo pricing and about page
+
+setup stripe and payment
+
+add discord and others
+
+
+buy domain
+
+deploy
+
+market
+
