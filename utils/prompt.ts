@@ -148,7 +148,6 @@ export async function promptGPT(
       `;
 
     try {
-      console.log(prompt);
       console.log(zodResponseFormat(Response, "slides"));
 
       const completion = await openai.chat.completions.create({

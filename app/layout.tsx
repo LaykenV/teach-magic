@@ -4,7 +4,6 @@ import "./globals.css";
 import Provider from "@/components/Provider";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 //configDotenv({ path: path.resolve(process.cwd(), ".env-local") });
-console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY);
 
 
 export const metadata: Metadata = {
@@ -20,21 +19,22 @@ export default function RootLayout({
 
   //dock?
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-      <html lang="en" suppressHydrationWarning={true}>
-            <Provider>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                    >
-                  <body className="bg-gradient-to-b from-primary/10 to-primary/5">
-                      {children}
-                  </body>
-                </ThemeProvider>
-            </Provider>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <head />
+      <body className="bg-gradient-to-b from-primary/10 to-primary/5">
+        <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+          <Provider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </Provider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

@@ -6,7 +6,7 @@ import { Slide, ContentSlide, Quiz, Creation } from '@/types/types';
 import { db } from '@/drizzle/db';
 import { creationsTable } from '@/drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { revalidateTag } from 'next/cache';
+import cache from '@/lib/cache';
 
 type DataFromPrompt = {
   title_slide: Slide;
@@ -114,7 +114,8 @@ export async function POST(request: NextRequest) {
       console.log(formattedCreation);
 
       //invalidate user creations cache
-      revalidateTag('user-creations');
+      const cacheKey = `user-creations-${userId}`;
+      cache.del(cacheKey);
 
       // Return the updated creation record as a successful response
       return NextResponse.json({ success: true, creation: formattedCreation }, { status: 200 });

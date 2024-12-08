@@ -5,8 +5,7 @@ import { creationsTable } from '@/drizzle/schema'; // Adjust the import path bas
 import { eq, and } from 'drizzle-orm/expressions';
 import { v2 as cloudinary } from 'cloudinary';
 import { Slide } from '@/types/types';
-import { revalidateTag } from 'next/cache'
-
+import cache from '@/lib/cache';
 
 
 export async function DELETE(request: NextRequest) {
@@ -69,7 +68,8 @@ export async function DELETE(request: NextRequest) {
     cloudinary.api.delete_resources(imgUrls, {resource_type: 'image'}).then(result => console.log(result));
 
     // invalidate user creations cache
-    revalidateTag('user-creations');
+    const cacheKey = `user-creations-${userId}`;
+    cache.del(cacheKey);
 
     // Return a success response
     return NextResponse.json({ message: 'Creation deleted successfully.' }, { status: 200 });

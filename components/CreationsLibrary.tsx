@@ -32,22 +32,17 @@ export default function CreationsLibrary({ initialCreations }: CreationsLibraryP
   }, [initialCreations, userCreations, setUserCreations]);
 
   useEffect(() => {
-    console.log('d', ageFilter, searchTerm)
     const creations = activeTab === 'library' ? userCreations : community_creations
     setFilteredCreations(
       creations.filter((creation) => {
         const matchesSearch = creation.slides.some((slide) =>
           slide.slide_title.toLowerCase().includes(searchTerm.toLowerCase())
         )
-        console.log(matchesSearch)
         const matchesAge = !ageFilter || creation.age_group === ageFilter
-        console.log(matchesAge)
         return matchesSearch && matchesAge
       })
     )
   }, [activeTab, searchTerm, ageFilter, userCreations])
-
-  console.log(filteredCreations)
 
   return (
     <div className="container mx-auto py-8">

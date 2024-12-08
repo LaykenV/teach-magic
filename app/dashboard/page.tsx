@@ -1,38 +1,23 @@
-"use cache"
+// pages/dashboard.tsx
 import { auth } from '@clerk/nextjs/server';
-import { db } from '@/drizzle/db';
-import { eq } from 'drizzle-orm/expressions';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { creationsTable, usersTable, User } from '@/drizzle/schema';
-import { Creation } from '@/types/types'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
-import { redirect } from "next/navigation";
-import { MyDock } from '@/components/MyDock';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { redirect } from 'next/navigation';
+import { Creation } from '@/types/types';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import CreationsLibrary from '@/components/CreationsLibrary';
-import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from 'next/cache'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
+import { MyDock } from '@/components/MyDock';
+import { getUserCreations } from '@/utils/getUserCreations';
 
-
- export const revalidate = 60; // revalidate every 60 seconds
-
-async function getUserCreations(userId: string) {
-  'use cache' // Cache just this function as well
-  cacheTag('user-creations') // tag to revalidate
-  cacheLife('max') // Choose the "max" profile to cache indefinitely
-  const userCreations = await db.select().from(creationsTable).where(eq(creationsTable.user_id, userId));
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const formattedCreations: Creation[] = userCreations.map((creation: any) => ({
-    id: creation.id,
-    user_id: creation.user_id,
-    slides: creation.slides,
-    quiz: creation.quiz,
-    created_at: creation.created_at,
-    age_group: creation.age_group,
-  }));
-  return formattedCreations;
+interface DashboardProps {
+  formattedCreations: Creation[];
 }
 
 export default async function Dashboard() {
@@ -47,8 +32,6 @@ export default async function Dashboard() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        
-
         <div className="mb-12">
           <CreationsLibrary initialCreations={formattedCreations} />
         </div>
@@ -78,7 +61,15 @@ export default async function Dashboard() {
   );
 }
 
-function DashboardCard({ icon: Icon, title, description }: { icon: React.ElementType, title: string, description: string }) {
+function DashboardCard({
+  icon: Icon,
+  title,
+  description,
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}) {
   return (
     <Card className="bg-card transition-colors duration-300">
       <CardHeader>
@@ -89,6 +80,5 @@ function DashboardCard({ icon: Icon, title, description }: { icon: React.Element
         <CardDescription>{description}</CardDescription>
       </CardContent>
     </Card>
-  )
+  );
 }
-
