@@ -21,6 +21,7 @@ export default function CreationsLibrary({ initialCreations }: CreationsLibraryP
   const [activeTab, setActiveTab] = useState<'library' | 'community'>('library')
   const [searchTerm, setSearchTerm] = useState('')
   const [ageFilter, setAgeFilter] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null);
   const [filteredCreations, setFilteredCreations] = useState<Creation[]>([])
   const { userCreations, setUserCreations } = useSlideContext();
 
@@ -91,10 +92,10 @@ export default function CreationsLibrary({ initialCreations }: CreationsLibraryP
             transition={{ duration: 0.2 }}
           >
             <TabsContent value="library">
-              <UserCreations filteredCreations={filteredCreations} self={true}/>
+              <UserCreations filteredCreations={filteredCreations} self={true} setSuccess={setSuccess} success={success}/>
             </TabsContent>
             <TabsContent value="community">
-              <UserCreations filteredCreations={filteredCreations} self={false}/>
+              <UserCreations filteredCreations={filteredCreations} self={false} setSuccess={setSuccess} success={success}/>
             </TabsContent>
           </motion.div>
         </AnimatePresence>

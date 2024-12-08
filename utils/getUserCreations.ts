@@ -1,5 +1,5 @@
 // lib/getUserCreations.ts
-//import cache from '../lib/cache';
+import cache from '../lib/cache';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { creationsTable } from '@/drizzle/schema';
@@ -9,7 +9,7 @@ import { Creation } from '@/types/types';
 const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 hours
 
 export async function getUserCreations(userId: string): Promise<Creation[]> {
-  /*const cacheKey = `user-creations-${userId}`;
+  const cacheKey = `user-creations-${userId}`;
 
   // Attempt to retrieve from cache
   const cachedCreations = cache.get(cacheKey);
@@ -27,7 +27,7 @@ export async function getUserCreations(userId: string): Promise<Creation[]> {
     return formattedFromCache;
   }
 
-  console.log(`Cache miss for key: ${cacheKey}. Fetching from DB...`);*/
+  console.log(`Cache miss for key: ${cacheKey}. Fetching from DB...`);
 
   // Fetch from database
   const userCreations = await db
@@ -46,9 +46,7 @@ export async function getUserCreations(userId: string): Promise<Creation[]> {
   }));
 
   // Store in cache
-  /*cache.put(cacheKey, formattedCreations, CACHE_DURATION, (key, value) => {
-    console.log(`Cache entry expired for key: ${key}`);
-  });*/
+  cache.put(cacheKey, formattedCreations, CACHE_DURATION);
 
   return formattedCreations;
 }

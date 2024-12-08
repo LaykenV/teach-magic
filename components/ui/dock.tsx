@@ -38,12 +38,14 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     const renderChildren = () => {
       return React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            ...child.props,
-            mouseX: mouseX,
-            magnification: magnification,
-            distance: distance,
-          });
+          if ((child.type as any).isDockIcon) {
+            return React.cloneElement(child, {
+              ...child.props,
+              mouseX: mouseX,
+              magnification: magnification,
+              distance: distance,
+            }); 
+          }
         }
         return child;
       });
@@ -88,7 +90,7 @@ const DockIcon = ({
   mouseX,
   className,
   children,
-  ...props
+  ...restProps
 }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -118,7 +120,7 @@ const DockIcon = ({
         "flex aspect-square cursor-pointer items-center justify-center rounded-full",
         className,
       )}
-      {...props}
+      {...restProps}
     >
       {children}
     </motion.div>

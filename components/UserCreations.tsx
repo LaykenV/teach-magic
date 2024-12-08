@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Creation } from '@/types/types';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,15 +15,24 @@ import { useSlideContext } from '@/context/SlideContext';
 interface UserCreationsProps {
   filteredCreations: Creation[];
   self: boolean
+  success: string | null
+  setSuccess: (message: string | null) => void
 }
 
-export default function UserCreations({ filteredCreations, self }: UserCreationsProps) {
+export default function UserCreations({ filteredCreations, self, success, setSuccess }: UserCreationsProps) {
   //const [creations, setCreations] = useState<Creation[]>(userCreations);
   const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
   const router = useRouter();
   const { userCreations, setUserCreations } = useSlideContext();
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(null);
+      }, 10000)
+    }
+  }, [success, setSuccess])
 
   const deleteCreation = async (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -49,6 +58,7 @@ export default function UserCreations({ filteredCreations, self }: UserCreations
       const updatedCreations = userCreations.filter((creation) => creation.id !== id);
       setUserCreations(updatedCreations);
 
+      console.log('deleted')
       setSuccess('Creation deleted successfully.');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -74,7 +84,7 @@ export default function UserCreations({ filteredCreations, self }: UserCreations
     <div className="container mx-auto py-8">
 
       {success && (
-        <Alert variant="default" className="mb-6">
+        <Alert variant="default" className="mb-6 border-primary">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Success</AlertTitle>
           <AlertDescription>{success}</AlertDescription>
