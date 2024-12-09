@@ -147,7 +147,7 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={(e) => handleDelete(e)} className='text-white' disabled={deleting}>
+              <AlertDialogAction onClick={(e) => handleDelete(e)} className='bg-destructive/70 text-destructive-foreground hover:bg-destructive' disabled={deleting}>
                 {deleting ? (
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
                 ) : (

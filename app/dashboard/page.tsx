@@ -1,5 +1,5 @@
 // pages/dashboard.tsx
-import { auth } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { Creation } from '@/types/types';
 import { Header } from '@/components/Header';
@@ -21,7 +21,8 @@ interface DashboardProps {
 }
 
 export default async function Dashboard() {
-  const { userId } = auth();
+  const clerkUer = await currentUser();
+  const userId = clerkUer?.id;
   if (!userId) {
     redirect('/');
   }

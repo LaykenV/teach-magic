@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import CreationCard from './CreationCard';
 import CreateNewDrawer from './CreateNewDrawer';
 import { useSlideContext } from '@/context/SlideContext';
+import { useToast } from '@/hooks/use-toast';
 
 interface UserCreationsProps {
   filteredCreations: Creation[];
@@ -20,24 +21,25 @@ interface UserCreationsProps {
 }
 
 export default function UserCreations({ filteredCreations, self, success, setSuccess }: UserCreationsProps) {
-  //const [creations, setCreations] = useState<Creation[]>(userCreations);
   const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { userCreations, setUserCreations } = useSlideContext();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (success) {
-      setTimeout(() => {
-        setSuccess(null);
-      }, 10000)
+      toast({
+        title: "Success",
+        description: success,
+        duration: 5000,
+      });
+      setSuccess(null);
     }
-  }, [success, setSuccess])
+  }, [success, setSuccess, toast]);
 
   const deleteCreation = async (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     event.stopPropagation();
-    setError(null);
     setSuccess(null);
 
     setDeletingIds((prev) => new Set(prev).add(id));
@@ -58,12 +60,20 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
       const updatedCreations = userCreations.filter((creation) => creation.id !== id);
       setUserCreations(updatedCreations);
 
-      console.log('deleted')
-      setSuccess('Creation deleted successfully.');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.log('deleted');
+      toast({
+        title: "Success",
+        description: "Creation deleted successfully.",
+        duration: 5000,
+      });
     } catch (error: any) {
       console.error('Error deleting creation:', error);
-      setError(error.message || 'Failed to delete creation.');
+      toast({
+        title: "Error",
+        description: error.message || 'Failed to delete creation.',
+        variant: "destructive",
+        duration: 5000,
+      });
     } finally {
       setDeletingIds((prev) => {
         const newSet = new Set(prev);
@@ -75,30 +85,13 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
 
   const handleCreationSuccess = (newCreation: Creation) => {
     const c = [...userCreations];
-    c.push(newCreation)
+    c.push(newCreation);
     setUserCreations(c);
     router.push(`/SlideViewer?id=${newCreation.id}`);
   };
 
   return (
     <div className="container mx-auto py-8">
-
-      {success && (
-        <Alert variant="default" className="mb-6 border-primary">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>{success}</AlertDescription>
-        </Alert>
-      )}
-
-      {error && (
-        <Alert variant="destructive" className="mb-6">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-
       {filteredCreations.length === 0 ? (
         <Card>
           <CardContent className="pt-6">
@@ -133,3 +126,5 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
     </div>
   );
 }
+
+

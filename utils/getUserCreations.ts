@@ -1,4 +1,4 @@
-// lib/getUserCreations.ts
+"use server"
 import cache from '../lib/cache';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
