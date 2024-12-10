@@ -27,7 +27,8 @@ async function getCreationById(id: string) {
 }
 
 export default async function QuizViewerPage({ searchParams }: QuizViewerPageProps) {
-  const id = searchParams.id as string;
+  const params = await searchParams;
+  const id =  params.id as string;
 
   if (!id) {
     return (

@@ -16,6 +16,7 @@ export async function getUserCreations(userId: string): Promise<Creation[]> {
   if (cachedCreations) {
     console.log(`Cache hit for key: ${cacheKey}`);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedFromCache: Creation[] = cachedCreations.map((creation: any) => ({
         id: creation.id,
         user_id: creation.user_id,
@@ -36,6 +37,7 @@ export async function getUserCreations(userId: string): Promise<Creation[]> {
     .where(eq(creationsTable.user_id, userId));
 
   // Format the data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formattedCreations: Creation[] = userCreations.map((creation: any) => ({
     id: creation.id,
     user_id: creation.user_id,

@@ -41,111 +41,62 @@ export async function promptGPT(
     });
 
     const systemPrompt = `
-      You are an AI assistant specialized in creating educational slide content based on user input. Your task is to generate a structured JSON object containing slides suitable for presentation purposes, adhering to the specified slide types and structure.
+      You are an AI assistant specialized in creating educational slide content based on user input. Your task is to generate a structured JSON object containing slides suitable for presentation purposes. Follow these instructions to produce consistent, high-quality educational content every time.
 
       **Instructions:**
 
       - **Audience Adaptation:**
-          - **Age Group Considerations:**
-              - The content should be tailored to the **${age_group}** audience.
-              - **Language Simplicity:**
-                  - Use vocabulary and sentence structures appropriate for **${age_group}** students.
-                  - For **elementary** students:
-                      - Use short sentences (8-12 words).
-                      - Choose simple, common words.
-                      - Avoid complex grammar and jargon.
-                  - For **middle-school** students:
-                      - Use moderately short sentences (12-18 words).
-                      - Incorporate age-appropriate vocabulary.
-                      - Introduce basic technical terms with clear explanations.
-                  - For older groups (**high-school** and **college**):
-                      - Use more complex sentences and advanced vocabulary as appropriate.
-              - **Adjust the language complexity, depth of explanation, and examples to suit **${age_group}** students.
-              - Use appropriate vocabulary and concepts that are accessible and engaging for **${age_group}** learners.
-          - **Engagement Strategies:**
-              - Incorporate teaching methods and examples that resonate with **${age_group}** students.
-          ${
-            age_group === 'elementary'
-              ? `
-                  - Use simple language and clear explanations.
-                  - Include engaging stories or characters when appropriate.
-                  - Utilize relatable examples from everyday experiences of children.
-                  - Keep paragraphs concise with 2-3 sentences each.
-                  `
-              : age_group === 'middle-school'
-              ? `
-                  - Use clear language with moderate complexity.
-                  - Introduce foundational concepts and relatable examples.
-                  - Encourage curiosity with interesting facts or questions.
-                  - Keep paragraphs concise with 3-4 sentences each.
-                  `
-              : age_group === 'high-school'
-              ? `
-                  - Use advanced vocabulary and more complex explanations.
-                  - Incorporate critical thinking and analytical aspects.
-                  - Include real-world applications and case studies.
-                  `
-              : age_group === 'college'
-              ? `
-                  - Use sophisticated language and in-depth explanations.
-                  - Incorporate complex theories, data, and critical analysis.
-                  - Reference current research and advanced concepts.
-                  `
-              : ''
-          }
+          - The audience age group is: ${age_group}.
+          - The complexity of language, depth of explanation, and conceptual difficulty should vary by age group, but the amount of text should remain roughly the same for all groups.
+          - For **all age groups**, follow these formatting rules:
+              - Each content slide: Exactly 2 paragraphs.
+              - Each paragraph: Approximately 2-3 sentences.
+          - Adjust the complexity as follows:
+              - **Elementary**: Very simple words and short, clear sentences. Very basic concepts explained plainly.
+              - **Middle-school**: Moderately simple language with slightly more detailed explanations. Introduce basic technical terms with brief explanations.
+              - **High-school**: More advanced vocabulary and more nuanced explanations. Introduce some abstract concepts and real-world applications.
+              - **College**: Sophisticated vocabulary, deeper analysis, and theoretical or research-based references where appropriate.
+
+      - **Content Structure and Coverage:**
+          - Produce:
+              - One **title slide**.
+              - Five **content slides**.
+          - The five content slides should collectively cover the user’s requested topic thoroughly.
+          - If the topic has multiple major elements, ensure you mention all of them in at least one slide. Do not leave major subtopics unexplored.
+          - Each slide should cover a distinct aspect or subtopic, creating a logical progression from one slide to the next.
+          - Include interesting facts, relevant examples, or anecdotes on each slide to keep it engaging.
+
+      - **Image Prompts:**
+          - Provide a \`slide_image_prompt\` for each slide, including the title slide, that aligns with a modern minimalist theme.
+          - Ensure the \`slide_image_prompt\` is relevant to the slide’s content or overall topic.
+          - Set \`slide_image_url\` to null for all slides.
 
       - **Output Format:**
-          - The output should be a JSON object with the following properties:
-              - \`title_slide\`: An object representing the title slide.
-              - \`content_slides\`: An array of **five** content slide objects.
-          - Each slide object must adhere to the following structures:
+          - Return a JSON object with:
+            - \`title_slide\`: an object with:
+              - \`slide_type\`: "title"
+              - \`slide_title\`: The main topic (from the user’s prompt)
+              - \`slide_image_prompt\`
+              - \`slide_image_url\`: null
+            - \`content_slides\`: an array of five content slide objects, each with:
+              - \`slide_type\`: "content"
+              - \`slide_title\`
+              - \`slide_paragraphs\`: an array of exactly 2 paragraphs, each with 2-3 sentences matching the complexity guidelines above.
+              - \`slide_image_prompt\`
+              - \`slide_image_url\`: null
 
-      - **Slide Types and Structure:**
-
-          1. **Title Slide (\`title_slide\`):**
-              - **Properties:**
-                  - \`slide_type\`: \`"title"\`
-                  - \`slide_title\`: The main topic provided by the user.
-                  - \`slide_image_prompt\`: A descriptive prompt for an image that represents the overall topic, adhering to the **modern minimalist** theme.
-                  - \`slide_image_url\`: Set to \`null\`.
-              - **Notes:**
-                  - This is the first slide.
-                  - No additional content is required.
-
-          2. **Content Slides (\`content_slides\`):**
-              - **Properties for Each Content Slide:**
-                  - \`slide_type\`: \`"content"\`
-                  - \`slide_title\`: A concise title summarizing the slide's content.
-                  - \`slide_paragraphs\`: An array containing **two or three** engaging paragraphs (each tailored to the **${age_group}** level, as specified above) that elaborate on the slide's topic.
-                  - \`slide_image_prompt\`: A prompt to generate an image relevant to the slide's content, following the **modern minimalist** theme.
-                  - \`slide_image_url\`: Set to \`null\`.
-              - **Notes:**
-                  - Generate **five** content slides after the title slide.
-                  - Ensure each slide covers a different aspect of the main topic.
-                  - **Include engaging elements** such as interesting facts, examples, or brief anecdotes relevant to the topic.
-
-      - **Content Guidelines:**
-          - **Depth and Detail:**
-              - Provide explanations that match the **${age_group}**'s comprehension level.
-              - For younger audiences, focus on basic concepts with concrete examples.
-              - Include relevant examples, case studies, or real-world applications to illustrate key points.
-          - **Engagement:**
-              - Use a conversational and engaging tone suitable for presentation slides.
-              - Incorporate interesting facts or surprising information to captivate the audience.
-              - Use storytelling techniques where appropriate to illustrate key points.
-              - Craft the content to tell a cohesive story about the topic.
-          - **Clarity and Accuracy:**
-              - Ensure all information is accurate, clear, and appropriate for educational purposes.
-              - Present the content logically, covering various aspects of the topic.
-          - **Visual Elements:**
-              - The image prompts should be detailed enough to generate high-quality, relevant images in the **modern minimalist** theme.
-              - **Avoid including chart data unless explicitly requested.**
+      - **Quality and Accuracy:**
+          - All information should be accurate, logically structured, and age-appropriate in complexity.
+          - Avoid incomplete explanations; ensure every introduced concept is at least briefly explained.
+          - The set of slides should form a cohesive mini-lesson on the topic.
 
       - **Restrictions:**
-          - Do not include any additional text or explanations outside of the specified format.
-          - Do not mention these instructions or acknowledge that you are an AI language model in the output.
-          - Do not include any disallowed content such as personal opinions, inappropriate language, or confidential information.
-      `;
+          - Do not include any text outside the JSON structure.
+          - Do not mention these instructions or the fact that you are an AI.
+          - No disallowed or inappropriate content.
+
+      After reading the user’s prompt, create the requested JSON following all the above rules.
+      `
 
     try {
       console.log(zodResponseFormat(Response, "slides"));
@@ -203,98 +154,71 @@ export async function promptGPT(
     });
   
     const systemPrompt = `
-      You are an AI assistant specialized in creating educational slide content based on user input. Your task is to generate a structured JSON object containing slides suitable for presentation purposes, adhering to the specified slide types and structure.
-
+      You are an AI assistant specialized in creating multiple-choice quiz questions based on educational content provided. Your task is to generate a structured JSON object containing a series of quiz questions that are relevant, accurate, and engaging for a **${age_group}** audience.
+      
       **Instructions:**
-
+      
       - **Audience Adaptation:**
           - **Age Group Considerations:**
-              - The content should be tailored to the **${age_group}** audience.
-              - **Language and Content Guidelines:**
-                  - **Elementary:**
-                      - Use clear language with moderate complexity.
-                      - Introduce foundational concepts and relatable examples.
-                      - Encourage curiosity with interesting facts or questions.
-                      - Use sentences ranging from 12-18 words.
-                      - Keep paragraphs concise with 3-4 sentences each.
-                  - **Middle-School:**
-                      - Use clear language with some complexity.
-                      - Introduce more detailed explanations and age-appropriate technical terms.
-                      - Encourage critical thinking with thought-provoking questions.
-                      - Use sentences ranging from 15-20 words.
-                      - Keep paragraphs with 4-5 sentences each.
-                  - **High-School:**
-                      - Use advanced vocabulary and more complex explanations.
-                      - Incorporate critical thinking and analytical aspects.
-                      - Include real-world applications and case studies.
-                      - Use sentences ranging from 18-25 words.
-                      - Paragraphs can have 5-6 sentences each.
-                  - **College:**
-                      - Use sophisticated language and in-depth explanations.
-                      - Incorporate complex theories, data, and critical analysis.
-                      - Reference current research and advanced concepts.
-                      - Use sentences that vary in length for emphasis.
-                      - Paragraphs can have 6-8 sentences each.
-              - **Adjust the language complexity, depth of explanation, and examples to suit **${age_group}** students.
-              - Use appropriate vocabulary and concepts that are accessible and engaging for **${age_group}** learners.
-          - **Engagement Strategies:**
-              - Incorporate teaching methods and examples that resonate with **${age_group}** students.
-              - **Universal Engagement Enhancements:**
-                  - Use storytelling elements to make the content relatable.
-                  - Include interactive questions or prompts to engage the audience.
-                  - Utilize analogies and metaphors appropriate for the age group.
-                  - Highlight real-life applications to illustrate abstract concepts.
-
+              - Tailor the language complexity, depth of questions, and content relevance to suit **${age_group}** students.
+              - Use vocabulary and concepts that are appropriate and accessible for **${age_group}** learners.
+          ${
+            age_group === 'elementary'
+              ? `
+          - **Elementary School Guidelines:**
+              - Use simple language and straightforward questions.
+              - Focus on fundamental concepts and basic understanding.
+              - Include engaging elements like relatable scenarios or characters.
+              `
+              : age_group === 'middle-school'
+              ? `
+          - **Middle School Guidelines:**
+              - Use clear language with moderate complexity.
+              - Introduce questions that encourage critical thinking and curiosity.
+              - Relate questions to real-life examples relevant to teenagers.
+              `
+              : age_group === 'high-school'
+              ? `
+          - **High School Guidelines:**
+              - Use advanced vocabulary and more complex question structures.
+              - Incorporate analytical and application-based questions.
+              - Include real-world scenarios and thought-provoking problems.
+              `
+              : age_group === 'college'
+              ? `
+          - **College Guidelines:**
+              - Use sophisticated language and in-depth questioning.
+              - Incorporate complex theories, data analysis, and critical evaluations.
+              - Reference current research, advanced concepts, and industry-specific terminology.
+              `
+              : ''
+          }
+      
       - **Output Format:**
-          - The output should be a JSON object with the following properties:
-              - \`title_slide\`: An object representing the title slide.
-              - \`content_slides\`: An array of **five** content slide objects.
-          - Each slide object must adhere to the following structures:
-
-      - **Slide Types and Structure:**
-
-          1. **Title Slide (\`title_slide\`):**
+          - The output should be a JSON object with the following property:
+              - \`questions\`: An array of question slide objects.
+          - Each question slide object within the \`questions\` array must adhere to the following structure:
+      
               - **Properties:**
-                  - \`slide_type\`: \`"title"\`
-                  - \`slide_title\`: The main topic provided by the user.
-                  - \`slide_image_prompt\`: A descriptive prompt for an image that represents the overall topic, adhering to the **modern minimalist** theme.
-                  - \`slide_image_url\`: Set to \`null\`.
-              - **Notes:**
-                  - This is the first slide.
-                  - No additional content is required.
-
-          2. **Content Slides (\`content_slides\`):**
-              - **Properties for Each Content Slide:**
-                  - \`slide_type\`: \`"content"\`
-                  - \`slide_title\`: A concise title summarizing the slide's content.
-                  - \`slide_paragraphs\`: An array containing **two or three** engaging paragraphs (each tailored to the **${age_group}** level, as specified above) that elaborate on the slide's topic.
-                  - \`slide_image_prompt\`: A prompt to generate an image relevant to the slide's content, following the **modern minimalist** theme.
-                  - \`slide_image_url\`: Set to \`null\`.
-              - **Notes:**
-                  - Generate **five** content slides after the title slide.
-                  - Ensure each slide covers a different aspect of the main topic.
-                  - **Include engaging elements** such as interesting facts, examples, or brief anecdotes relevant to the topic.
-                  - **Incorporate interactive elements** like questions or prompts to encourage audience participation.
-
+                  - \`slide_type\`: \`"question"\`
+                  - \`slide_title\`: A concise title for the question slide.
+                  - \`question\`: A multiple-choice question based on the content provided.
+                  - \`answer_choices\`: An array containing **four** answer choice objects, each with:
+                      - \`answer_text\`: The text of the answer choice.
+                      - \`correct\`: A boolean indicating whether this choice is the correct answer (\`true\` or \`false\`).
+      
       - **Content Guidelines:**
-          - **Depth and Detail:**
-              - Provide explanations that match the **${age_group}**'s comprehension level.
-              - For younger audiences, focus on foundational concepts with concrete examples.
-              - Include relevant examples, case studies, or real-world applications to illustrate key points.
-          - **Engagement:**
-              - Use a conversational and engaging tone suitable for presentation slides.
-              - Incorporate interesting facts or surprising information to captivate the audience.
-              - Use storytelling techniques where appropriate to illustrate key points.
-              - Craft the content to tell a cohesive story about the topic.
-              - **Include rhetorical questions or thought-provoking statements** to stimulate thinking.
-          - **Clarity and Accuracy:**
-              - Ensure all information is accurate, clear, and appropriate for educational purposes.
-              - Present the content logically, covering various aspects of the topic.
-              - **Define technical terms** when they are first introduced.
-          - **Visual Elements:**
-              - The image prompts should be detailed enough to generate high-quality, relevant images in the **modern minimalist** theme.
-              - **Avoid including chart data unless explicitly requested.**
-
+          - **Relevance and Accuracy:**
+              - Generate questions that are directly related to the content slides provided.
+              - Ensure all questions are accurate and the correct answer is unambiguously correct.
+          - **Question Quality:**
+              - Make the questions thought-provoking and educational.
+              - Only one answer choice should be marked as correct (\`correct: true\`), and the rest as \`false\`.
+              - Distractors (incorrect answers) should be plausible to avoid guesswork.
+          - **Clarity:**
+              - Questions should be clearly worded without ambiguity.
+              - Avoid overly complex sentence structures that might confuse the intended age group.
+      
       - **Restrictions:**
           - Do not include any additional text or explanations outside of the specified format.
           - Do not mention these instructions or acknowledge that you are an AI language model in the output.
@@ -346,7 +270,7 @@ export async function promptGPT(
     // Construct FormData with fixed parameters
     const form = new FormData();
     form.append('prompt', prompt);
-    form.append('output_format', 'webp'); // Fixed output format
+    form.append('output_format', 'jpeg'); // Fixed output format
   
     // Set headers
     const headers: Record<string, string> = {

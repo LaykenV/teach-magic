@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Creation } from '@/types/types';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { AlertCircle, Plus } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Plus } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import CreationCard from './CreationCard';
@@ -17,10 +16,11 @@ interface UserCreationsProps {
   filteredCreations: Creation[];
   self: boolean
   success: string | null
-  setSuccess: (message: string | null) => void
+  setSuccess: (message: string | null) => void,
+  tokens: number | null
 }
 
-export default function UserCreations({ filteredCreations, self, success, setSuccess }: UserCreationsProps) {
+export default function UserCreations({ filteredCreations, self, success, setSuccess, tokens }: UserCreationsProps) {
   const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
   const router = useRouter();
   const { userCreations, setUserCreations } = useSlideContext();
@@ -66,6 +66,7 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
         description: "Creation deleted successfully.",
         duration: 5000,
       });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Error deleting creation:', error);
       toast({
@@ -121,7 +122,7 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
       )}
 
       <div className="flex items-center justify-center w-auto pt-20">
-        <CreateNewDrawer onSuccess={handleCreationSuccess} />
+        <CreateNewDrawer onSuccess={handleCreationSuccess} tokens={tokens}/>
       </div>
     </div>
   );

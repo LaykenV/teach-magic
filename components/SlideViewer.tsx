@@ -66,14 +66,14 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
         </Link>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center p-4">
+      <div className="absolute inset-0 flex items-center justify-center p-2">
         {slide ? (
-          <div className="w-full max-w-6xl flex flex-col items-center justify-center gap-[4%] h-full">
+          <div className="w-full max-w-6xl flex flex-col items-center justify-center gap-[2%] md:gap-[4%] h-full">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">{slide.slide_title}</h2>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">
               {(slide.slide_type === 'title' || slide.slide_type === 'content') && slide.slide_image_url && (
-                <div className="w-full md:w-1/2">
+                <div className="w-[70%] md:w-1/2">
                   <CldImage
                     width={960}
                     height={540}
@@ -89,7 +89,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
                   {slide.slide_type === 'content' && (
                     <div className="space-y-4">
                       {slide.slide_paragraphs.map((paragraph: string, idx: number) => (
-                        <p key={idx} className="text-lg md:text-xl">
+                        <p key={idx} className="text-md md:text-xl text-center">
                           {paragraph}
                         </p>
                       ))}

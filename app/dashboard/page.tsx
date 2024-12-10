@@ -1,7 +1,6 @@
 // pages/dashboard.tsx
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser} from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { Creation } from '@/types/types';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import CreationsLibrary from '@/components/CreationsLibrary';
@@ -15,18 +14,20 @@ import {
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { MyDock } from '@/components/MyDock';
 import { getUserCreations } from '@/utils/getUserCreations';
+import { db } from '@/drizzle/db';
+import { usersTable } from '@/drizzle/schema';
+import { eq } from 'drizzle-orm'
+import { getUser } from '@/utils/getUser';
 
-interface DashboardProps {
-  formattedCreations: Creation[];
-}
 
 export default async function Dashboard() {
-  const clerkUer = await currentUser();
-  const userId = clerkUer?.id;
+  const user = await currentUser();
+  const userId = user?.id;
   if (!userId) {
     redirect('/');
   }
 
+  const User = await getUser(userId);
   const formattedCreations = await getUserCreations(userId);
 
   return (
@@ -34,7 +35,7 @@ export default async function Dashboard() {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-12">
-          <CreationsLibrary initialCreations={formattedCreations} />
+          <CreationsLibrary initialCreations={formattedCreations} tokens={User.tokens}/>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">

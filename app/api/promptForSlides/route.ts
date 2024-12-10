@@ -115,6 +115,8 @@ export async function POST(request: NextRequest) {
 
       //invalidate user creations cache
       const cacheKey = `user-creations-${userId}`;
+      const userCacheKey = `user-${userId}`;
+      cache.del(userCacheKey);
       cache.del(cacheKey);
 
       // Return the updated creation record as a successful response

@@ -13,7 +13,7 @@ interface MyDockProps {
   dashboard: boolean;
 }
 
-export const MyDock = ({ dashboard }: MyDockProps) => {
+export const MyDock = ({ dashboard }: MyDockProps) => { 
   return (
     <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <Dock direction="middle" className="bg-background/80 backdrop-blur-sm border border-border rounded-full shadow-lg">

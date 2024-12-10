@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { Creation } from '@/types/types';
 import Link from 'next/link';
@@ -5,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from '@/components/ui/badge';
 import { Button } from "@/components/ui/button";
 import { CldImage } from "next-cloudinary";
-import { BookOpen, Loader2, Trash } from 'lucide-react';
+import { BookOpen, Loader2, Trash, Download, FileDown } from 'lucide-react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +18,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useToast } from '@/hooks/use-toast';
+import { createPptx } from '@/utils/createPowerpoint';
+import { exportQuizPdf } from '@/utils/exportQuizPdf';
 
 interface CreationCardProps {
   creation: Creation;
@@ -57,10 +67,46 @@ const getAgeGroupColor = (ageGroup: string) => {
 
 const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelete, self }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     onDelete(creation.id, e);
     setIsOpen(false);
+  };
+
+  const handleExportPptx = async () => {
+    try {
+      await createPptx(creation.slides);
+      toast({
+        title: "Success",
+        description: "Slides exported to PowerPoint successfully.",
+        variant: "default",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to export slides to PowerPoint.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleExportPdf = async () => {
+    try {
+      await exportQuizPdf(creation);
+      toast({
+        title: "Success",
+        description: "Quiz exported to PDF successfully.",
+        variant: "default",
+      });
+    } catch (error) {
+      console.log(error)
+      toast({
+        title: "Error",
+        description: "Failed to export quiz to PDF.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -70,6 +116,7 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
           {creation.slides[0]?.slide_image_url ? (
             <div className="relative aspect-video">
               <CldImage
+                priority
                 loading="eager"
                 width={400}
                 height={225}
@@ -125,6 +172,24 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
               <span className="sr-only">Take quiz</span>
             </Button>
           </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" className="group-hover:border-primary transition-colors duration-300">
+                <Download className="h-4 w-4" />
+                <span className="sr-only">Export options</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center" className='bg-background'>
+              <DropdownMenuItem onClick={handleExportPptx}>
+                <FileDown className="mr-2 h-4 w-4" />
+                <span>Export Slides to PowerPoint</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleExportPdf}>
+                <FileDown className="mr-2 h-4 w-4" />
+                <span>Export Quiz to PDF</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
           <AlertDialogTrigger asChild>

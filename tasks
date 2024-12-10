@@ -89,21 +89,24 @@ dashboard redesign - nice header, library and comm tabs, search, filter by grade
 
 //use cache on dashboard
 
-optomize ai prompts, pick prod models
+//optomize ai prompts, pick prod models
 create community creations
 
-export to ppt or google slides
+//export to ppt or google slides
+//export quiz to pdf and style both buttons
 
 //header meteors or text ani
 
 clean out unused components
 
+//caching on user
 
-redesign landing page with template // animated beam
+
+redesign landing page with template // animated beam, download bolt
 
 redo pricing and about page
 
-setup stripe and payment
+//setup stripe and payment
 
 add discord and others
 

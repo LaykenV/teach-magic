@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Gem, CheckCircle, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,9 +8,60 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { MyDock } from '@/components/MyDock'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { loadStripe } from "@stripe/stripe-js"
+import { useToast } from '@/hooks/use-toast'
 
-const PricingComponent = () => {
+interface PricingComponentProps {
+  paid: boolean | null;
+}
+
+export default function PricingComponent({ paid }: PricingComponentProps) {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (paid === false) {
+      toast({
+        title: "Error",
+        description: "Failed to process payment.",
+        variant: "destructive",
+      });
+    } else if (paid) {
+      toast({
+        title: "Success",
+        description: "Payment Processed Successfully.",
+        variant: "default",
+      });
+    }
+  }, [paid, toast]);
+
+  const handleCheckout = async (amt: number) => {
+    console.log('Initiating checkout...', amt);
+    try {
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      const response = await fetch("/api/checkoutSession", { method: "POST", body: JSON.stringify({amt}) });
+      const { sessionId } = await response.json();
+
+      if (stripe && sessionId) {
+        const result = await stripe.redirectToCheckout({ sessionId });
+        if (result.error) {
+          console.error('Stripe checkout error:', result.error);
+          toast({
+            title: "Error",
+            description: "Failed to initiate checkout. Please try again.",
+            variant: "destructive",
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    }
+  }
 
   const pricingOptions = [
     { name: 'Single Gem', price: '$1', gems: 1, popular: false },
@@ -68,7 +119,7 @@ const PricingComponent = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">
+                  <Button className="w-full" onClick={() => handleCheckout(option.gems)}>
                     Buy Now
                     <ArrowRight size={20} className="ml-2" />
                   </Button>
@@ -84,6 +135,4 @@ const PricingComponent = () => {
     </div>
   )
 }
-
-export default PricingComponent
 

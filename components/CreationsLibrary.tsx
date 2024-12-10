@@ -1,32 +1,34 @@
 'use client'
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Book, Users } from 'lucide-react'
+import { Search, Book, Users, Coins, Gem } from 'lucide-react'
 import UserCreations from './UserCreations'
 import { Creation } from '@/types/types'
+import { useRouter } from 'next/navigation'
 
 // Import your community creations here
 import { community_creations } from '@/lib/commCreations'
 import { useSlideContext } from '@/context/SlideContext'
 
 interface CreationsLibraryProps {
-  initialCreations: Creation[]
+  initialCreations: Creation[],
+  tokens: number | null
 }
 
-export default function CreationsLibrary({ initialCreations }: CreationsLibraryProps) {
+export default function CreationsLibrary({ initialCreations, tokens }: CreationsLibraryProps) {
   const [activeTab, setActiveTab] = useState<'library' | 'community'>('library')
   const [searchTerm, setSearchTerm] = useState('')
   const [ageFilter, setAgeFilter] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null);
   const [filteredCreations, setFilteredCreations] = useState<Creation[]>([])
   const { userCreations, setUserCreations } = useSlideContext();
+  const router = useRouter()
 
   useEffect(() => {
-    // On component mount, initialize context state with the server-provided data if it's empty
     if (userCreations.length === 0) {
       setUserCreations(initialCreations);
     }
@@ -47,9 +49,17 @@ export default function CreationsLibrary({ initialCreations }: CreationsLibraryP
 
   return (
     <div className="container mx-auto py-8">
-      <Tabs defaultValue="library" className="w-full" onValueChange={(value) => setActiveTab(value as 'library' | 'community')}>
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-          <TabsList className="mb-4 sm:mb-0">
+    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'library' | 'community')} className="w-full">
+      <div className="flex flex-col md:flex-row justify-between items-start mb-6">
+        <div className="flex items-center space-x-2 mb-4 md:mb-0">
+          <div 
+            className="flex items-center space-x-2 hover:bg-primary px-3 py-2 rounded-md cursor-pointer transition-colors h-10"
+            onClick={() => router.push('/pricing')}
+          >
+            <Gem className="w-5 h-5" />
+            <span className='no-wrap'>{tokens} gems</span>
+          </div>
+          <TabsList>
             <TabsTrigger value="library" className="flex items-center">
               <Book className="mr-2" />
               My Library
@@ -59,48 +69,49 @@ export default function CreationsLibrary({ initialCreations }: CreationsLibraryP
               Community
             </TabsTrigger>
           </TabsList>
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search creations..."
-                className="pl-10 bg-card"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-            <Select onValueChange={setAgeFilter}>
-              <SelectTrigger className="w-full sm:w-[180px] bg-card">
-                <SelectValue placeholder="Filter by age" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="elementary">elementary</SelectItem>
-                <SelectItem value="middle-school">middle school</SelectItem>
-                <SelectItem value="high-school">high school</SelectItem>
-                <SelectItem value="college">college</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`${activeTab}-${JSON.stringify(filteredCreations)}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-          >
-            <TabsContent value="library">
-              <UserCreations filteredCreations={filteredCreations} self={true} setSuccess={setSuccess} success={success}/>
-            </TabsContent>
-            <TabsContent value="community">
-              <UserCreations filteredCreations={filteredCreations} self={false} setSuccess={setSuccess} success={success}/>
-            </TabsContent>
-          </motion.div>
-        </AnimatePresence>
-      </Tabs>
-    </div>
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 w-full md:w-auto">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <Input
+              type="text"
+              placeholder="Search creations..."
+              className="pl-10 bg-card"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <Select onValueChange={setAgeFilter}>
+            <SelectTrigger className="w-full md:w-[180px] bg-card">
+              <SelectValue placeholder="Filter by age" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="elementary">elementary</SelectItem>
+              <SelectItem value="middle-school">middle school</SelectItem>
+              <SelectItem value="high-school">high school</SelectItem>
+              <SelectItem value="college">college</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`${activeTab}-${JSON.stringify(filteredCreations)}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+        >
+          <TabsContent value="library">
+            <UserCreations filteredCreations={filteredCreations} self={true} setSuccess={setSuccess} success={success} tokens={tokens}/>
+          </TabsContent>
+          <TabsContent value="community">
+            <UserCreations filteredCreations={filteredCreations} self={false} setSuccess={setSuccess} success={success} tokens={tokens}/>
+          </TabsContent>
+        </motion.div>
+      </AnimatePresence>
+    </Tabs>
+  </div>
   )
 }
 

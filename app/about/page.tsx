@@ -1,4 +1,4 @@
-import { auth } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -8,8 +8,8 @@ import { FAQAccordion } from '@/components/FAQAccordion';
 import { BookOpen, Image, FileQuestion, Layers, Lightbulb, GraduationCap } from 'lucide-react';
 
 const About = async () => {
-  const { userId } = auth();
-
+  const user = await currentUser();
+  const userId = user?.id;
   if (!userId) {
     redirect('/');
   }
