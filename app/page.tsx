@@ -1,13 +1,15 @@
 import { SignInButton, SignUpButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/FeatureCard";
 import { FAQAccordion } from "@/components/FAQAccordion";
-import { BookOpen } from 'lucide-react';
-import { Image as Image2, FileQuestion, Layers, Lightbulb, GraduationCap } from 'lucide-react';
-
+import { Zap, Layers, FileQuestion, Users, Download, GraduationCap, Sparkles, FileSearch, PenTool } from 'lucide-react';
+import { HeroSection } from "@/components/HeroSection";
+import { FeatureSection } from "@/components/FeatureSection";
+import { CTASection } from "@/components/CTASection";
+import { MarqueeReviews } from "@/components/MarqueeReviews";
+import { ModeToggle } from "@/components/theme/ThemeToggle";
 
 export default async function Home() {
   const user = await currentUser();
@@ -18,40 +20,54 @@ export default async function Home() {
 
   const features = [
     {
-      icon: <Lightbulb className="h-6 w-6" />,
-      title: "AI-Powered Content Generation",
-      description: "Simply provide a subject prompt, and our AI generates comprehensive educational slides tailored to your needs."
+      icon: <Zap className="h-6 w-6" />,
+      title: "Instant Content Creation",
+      description: "Generate comprehensive educational content on any topic in minutes, not hours."
     },
     {
       icon: <Layers className="h-6 w-6" />,
-      title: "Custom Slide Creation",
-      description: "Each slide includes a title, informative paragraphs, and a custom AI-generated image to illustrate the content."
-    },
-    {
-      icon: <GraduationCap className="h-6 w-6" />,
-      title: "Grade-Level Adaptation",
-      description: "Content is automatically adjusted to suit various grade levels, ensuring age-appropriate learning materials."
+      title: "Interactive Slides",
+      description: "Create engaging slides with AI-generated images, tailored to your specific subject matter."
     },
     {
       icon: <FileQuestion className="h-6 w-6" />,
-      title: "Interactive Quizzes",
-      description: "Each set of slides comes with a quiz to reinforce learning and test understanding of the material."
+      title: "Auto-Generated Quizzes",
+      description: "Reinforce learning with automatically created quizzes based on your slide content."
     },
     {
-      icon: <Image2 className="h-6 w-6" />,
-      title: "AI Image Generation",
-      description: "Unique, relevant images are created for each slide, enhancing visual learning and engagement."
+      icon: <Users className="h-6 w-6" />,
+      title: "Community Content",
+      description: "Explore and learn from a vast library of community-created educational materials."
     },
     {
-      icon: <BookOpen className="h-6 w-6" />,
-      title: "Diverse Subject Coverage",
-      description: "Generate slides on any subject, from history and science to literature and beyond."
+      icon: <Download className="h-6 w-6" />,
+      title: "Easy Export",
+      description: "Export your slides to PowerPoint and quizzes to PDF for offline use and sharing."
+    },
+    {
+      icon: <GraduationCap className="h-6 w-6" />,
+      title: "Adaptive Learning",
+      description: "Content automatically adjusts to various grade levels, ensuring age-appropriate materials."
     }
+  ];
+
+  const slideFeatures = [
+    { icon: <Sparkles size={20} />, title: "Niche Topics", description: "Generate content on ultra-specific subjects with ease." },
+    { icon: <Layers size={20} />, title: "Custom Visuals", description: "AI-generated images tailored to your content." },
+    { icon: <Download size={20} />, title: "PowerPoint Export", description: "Easily export slides for offline use." },
+    { icon: <Zap size={20} />, title: "Rapid Creation", description: "Create full slide decks in minutes, not hours." },
+  ];
+
+  const quizFeatures = [
+    { icon: <FileSearch size={20} />, title: "Content-Based", description: "Questions generated from your slide content." },
+    { icon: <PenTool size={20} />, title: "Multiple Choice", description: "Choose from four answer choices for each question." },
+    { icon: <Download size={20} />, title: "PDF Export", description: "Export quizzes for printing or digital distribution." },
+    { icon: <GraduationCap size={20} />, title: "Adaptive Difficulty", description: "Automatically adjust to different learning levels." },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="bg-background border-b">
+      <header className="bg-background border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-primary">TeachMagic</h1>
           <nav className="space-x-4">
@@ -59,42 +75,19 @@ export default async function Home() {
               <Button variant="ghost">Sign In</Button>
             </SignInButton>
             <SignUpButton mode="modal">
-              <Button>Create an account</Button>
+              <Button className="text-white">Start Free</Button>
             </SignUpButton>
           </nav>
         </div>
       </header>
 
       <main className="flex-grow">
-        <section className="container mx-auto px-4 py-16 md:py-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-                Unlock the Power of AI-Driven Learning
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Explore any topic imaginable with TeachMagics revolutionary AI-powered teaching platform.
-              </p>
-              <SignUpButton mode="modal">
-                <Button size="lg" className="mt-4">Get Started for Free</Button>
-              </SignUpButton>
-            </div>
-            <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
-              <Image 
-                src="/assets/Capture.png" 
-                layout="fill" 
-                objectFit="cover" 
-                alt="TeachMagic platform preview" 
-                className="rounded-xl"
-              />
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-muted py-16">
+        <HeroSection />
+        
+        <section className="py-16">
           <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-12">Key Features</h3>
-            <div className="grid md:grid-cols-3 gap-8">
+            <h3 className="text-3xl font-bold text-center mb-12">Revolutionize Your Teaching</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
                 <FeatureCard key={index} {...feature} />
               ))}
@@ -102,17 +95,39 @@ export default async function Home() {
           </div>
         </section>
 
+        <MarqueeReviews />
+
+        <FeatureSection
+          title="Interactive Slides"
+          description="Create engaging slides with AI-generated images on any topic imaginable, no matter how niche."
+          imageSrc="/assets/Capture.png"
+          imageAlt="TeachMagic Slides"
+          features={slideFeatures}
+        />
+
+        <FeatureSection
+          title="Auto-Generated Quizzes"
+          description="Reinforce learning with quizzes automatically created from your slide content, perfect for any subject."
+          imageSrc="/assets/Capture.png"
+          imageAlt="TeachMagic Quiz"
+          features={quizFeatures}
+          reversed
+        />
+
+        <CTASection />
+
         <section className="container mx-auto px-4 py-16">
           <h3 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h3>
           <FAQAccordion />
         </section>
       </main>
 
-      <footer className="bg-muted py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
+      <footer className="bg-gray-100 dark:bg-gray-800 py-8">
+        <div className="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
           <p>© 2024 TeachMagic. All rights reserved.</p>
         </div>
       </footer>
+      <ModeToggle />
     </div>
   );
 }
