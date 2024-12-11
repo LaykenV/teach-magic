@@ -23,7 +23,7 @@ export function FeatureSection({
     <section className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className={`grid md:grid-cols-2 gap-12 items-center ${reversed ? 'md:grid-flow-col-dense' : ''}`}>
-          <div className={`space-y-6 ${reversed ? 'md:col-start-2' : ''}`}>
+          <div className={`space-y-6 text-center md:text-left ${reversed ? 'md:col-start-2' : ''}`}>
             <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
             <p className="text-xl text-gray-700 dark:text-gray-300">{description}</p>
             <div className="grid grid-cols-2 gap-4">
