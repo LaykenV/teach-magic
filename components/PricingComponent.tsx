@@ -86,7 +86,7 @@ export default function PricingComponent({ paid }: PricingComponentProps) {
             >
               <Card className={`relative overflow-hidden ${option.popular ? 'border-primary border-2' : ''}`}>
                 {option.popular && (
-                  <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-3 py-1 text-sm font-semibold rounded-bl-lg">
+                  <div className="absolute top-0 right-0 bg-primary text-white px-3 py-1 text-sm font-semibold rounded-bl-lg">
                     Popular
                   </div>
                 )}
@@ -119,7 +119,7 @@ export default function PricingComponent({ paid }: PricingComponentProps) {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" onClick={() => handleCheckout(option.gems)}>
+                  <Button className="w-full text-white" onClick={() => handleCheckout(option.gems)}>
                     Buy Now
                     <ArrowRight size={20} className="ml-2" />
                   </Button>
