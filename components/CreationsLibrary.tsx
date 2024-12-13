@@ -11,8 +11,8 @@ import { Creation } from '@/types/types'
 import { useRouter } from 'next/navigation'
 
 // Import your community creations here
-import { community_creations } from '@/lib/commCreations'
 import { useSlideContext } from '@/context/SlideContext'
+import { getData } from '@/utils/getComCreations'
 
 interface CreationsLibraryProps {
   initialCreations: Creation[],
@@ -20,13 +20,14 @@ interface CreationsLibraryProps {
 }
 
 export default function CreationsLibrary({ initialCreations, tokens }: CreationsLibraryProps) {
-  const [activeTab, setActiveTab] = useState<'library' | 'community'>('library')
+  const [activeTab, setActiveTab] = useState<'library' | 'community'>('community')
   const [searchTerm, setSearchTerm] = useState('')
   const [ageFilter, setAgeFilter] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null);
   const [filteredCreations, setFilteredCreations] = useState<Creation[]>([])
   const { userCreations, setUserCreations } = useSlideContext();
   const router = useRouter()
+  const community_creations = getData();
 
   useEffect(() => {
     if (userCreations.length === 0) {

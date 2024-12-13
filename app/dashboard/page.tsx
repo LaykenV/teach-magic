@@ -30,6 +30,8 @@ export default async function Dashboard() {
   const User = await getUser(userId);
   const formattedCreations = await getUserCreations(userId);
 
+  console.log(formattedCreations);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />

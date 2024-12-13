@@ -37,6 +37,7 @@
     "drizzle-orm": "^0.34.1",
     "form-data": "^4.0.1",
     "framer-motion": "^11.13.1",
+    "ldrs": "^1.0.2",
     "lucide-react": "^0.452.0",
     "memory-cache": "^0.2.0",
     "next": "^15.0.4",

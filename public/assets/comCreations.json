@@ -1,0 +1,2220 @@
+[
+    {
+        "id": "c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "The Black Plague",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-0",
+                "slide_image_prompt": "A minimalist theme illustration of a medieval city with a dark atmosphere, representing the Black Plague."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Introduction to the Black Plague",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-1",
+                "slide_paragraphs": [
+                    "The Black Plague, also known as the Black Death, was one of the most devastating pandemics in human history. It occurred in Europe during the 14th century, between 1347 and 1351.",
+                    "Historians estimate that it killed about one-third of Europes population. The disease was caused by the bacterium Yersinia pestis, which primarily affects rodents but can be transmitted to humans."
+                ],
+                "slide_image_prompt": "A minimalist illustration of a medieval map of Europe with black plague outbreak locations marked."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Causes and Transmission",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-2",
+                "slide_paragraphs": [
+                    "The Black Plague is believed to have originated in Asia and traveled to Europe through trade routes. It spread rapidly because of fleas that lived on rats aboard ships.",
+                    "Once the fleas bit humans, they transmitted the plague. The crowded and unsanitary living conditions in medieval cities helped the disease to spread quickly."
+                ],
+                "slide_image_prompt": "An illustration focusing on a flea on a rat's fur, symbolizing the transmission of the plague."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Symptoms of the Plague",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-3",
+                "slide_paragraphs": [
+                    "The plague had several symptoms, including fever, chills, vomiting, and swollen and painful lymph nodes called buboes. These symptoms appeared suddenly after infection.",
+                    "If untreated, the disease often led to death within days. At the time, medical knowledge was limited, and there were no effective treatments."
+                ],
+                "slide_image_prompt": "A simple, stylized image showing a person with visible buboes and fever symptoms."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Impact on Society",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-4",
+                "slide_paragraphs": [
+                    "The Black Plague had a profound impact on European society. It caused a significant decrease in population, which led to labor shortages across many regions.",
+                    "This labor shortage transformed the economic system, as workers demanded higher wages. It also weakened the power of the feudal system and led to social changes."
+                ],
+                "slide_image_prompt": "A minimalist depiction of an empty medieval village street, symbolizing the societal impact of the plague."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Legacy of the Black Plague",
+                "slide_image_url": "generated_images/c6a18cea-9ab5-4f09-ad74-3f6a4a4aa0a8-5",
+                "slide_paragraphs": [
+                    "The Black Plague influenced the future of medical science and public health. It led to a better understanding of disease transmission and the importance of sanitation.",
+                    "In the long term, the plague contributed to the end of the Middle Ages and the beginning of the Renaissance, as it changed societal structures and ideas about science and human life."
+                ],
+                "slide_image_prompt": "An artistic representation of a transition from a dark medieval scene to a brighter Renaissance scene."
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "Origins of the Black Plague",
+                "question": "Where is the Black Plague believed to have originally started?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Europe",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Africa",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Asia",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "America",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Transmission of the Plague",
+                "question": "Which animal played a crucial role in spreading the Black Plague to humans?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Dogs",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Rats",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Cows",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Birds",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Symptoms of the Plague",
+                "question": "What is one of the key symptoms of the Black Plague?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Swollen lymph nodes called buboes",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Itchy skin rash",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Shortness of breath",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Blurred vision",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Societal Impact of the Plague",
+                "question": "How did the Black Plague affect the economic system in Europe?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Workers demanded higher wages",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "It caused food prices to drop",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It increased the power of the feudal system",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It led to more agricultural development",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Legacy of the Black Plague",
+                "question": "How did the Black Plague contribute to the beginning of the Renaissance?",
+                "answer_choices": [
+                    {
+                        "answer_text": "By encouraging more overseas exploration",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By changing societal structures and ideas about science",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "By promoting classical art and education",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By inspiring new religious movements",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T02:43:37.696Z",
+        "age_group": "middle-school"
+    },
+    {
+        "id": "e7fa58c0-6bef-4ce5-b708-d088b1a216cc",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "The American Federal Reserve",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-0",
+                "slide_image_prompt": "A modern minimalist depiction of the Federal Reserve building in Washington D.C."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Introduction to the Federal Reserve System",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-1",
+                "slide_paragraphs": [
+                    "The Federal Reserve System, often simply referred to as the Federal Reserve or 'the Fed,' serves as the central bank of the United States. Established in 1913 in response to financial panics, its primary purpose is to ensure the stability of the financial system.",
+                    "The Fed is composed of 12 regional Reserve Banks and the Board of Governors, which overlooks the economic activities of national banks and implements monetary policies. This structure is designed to balance both centralized and decentralized elements of the U.S. banking system."
+                ],
+                "slide_image_prompt": "A minimalist map illustrating the 12 Federal Reserve Districts."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Monetary Policy and the Fed",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-2",
+                "slide_paragraphs": [
+                    "The Federal Reserve plays a critical role in shaping U.S. monetary policy, which includes managing interest rates and regulating the money supply. Through tools like open market operations and the federal funds rate, the Fed aims to achieve maximum employment, stable prices, and moderate long-term interest rates.",
+                    "By adjusting these levers, the Fed can either stimulate borrowing and spending in the economy or, conversely, slow it down to curb inflation. This balancing act is central to its mission of maintaining a thriving economy."
+                ],
+                "slide_image_prompt": "An abstract representation of interest rate fluctuations over time in the U.S."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "The Role in Banking Supervision and Regulation",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-3",
+                "slide_paragraphs": [
+                    "The Federal Reserve is tasked with supervising and regulating banks to ensure the safety and soundness of the nation's financial system. This involves monitoring a range of financial activities and ensuring compliance with various banking regulations.",
+                    "By overseeing financial institutions, the Fed helps prevent fraudulent activities and potential banking failures, thereby safeguarding the economy and protecting consumers funds."
+                ],
+                "slide_image_prompt": "A minimalist design of a bank with security shields and graphs."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "The Feds Influence on Global Economics",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-4",
+                "slide_paragraphs": [
+                    "As the U.S. holds a vital position in the global economy, the Federal Reserve's policies can significantly impact international markets. Decisions made by the Fed influence global trade patterns, currency exchange rates, and foreign investment flows.",
+                    "Countries around the world closely monitor the Fed's policies as shifts in U.S. interest rates can affect inflation and economic growth elsewhere. Thus, the Fed plays a pivotal role in maintaining global financial stability."
+                ],
+                "slide_image_prompt": "A stylized globe with financial graphs emanating from the U.S."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Challenges Facing the Federal Reserve",
+                "slide_image_url": "generated_images/e7fa58c0-6bef-4ce5-b708-d088b1a216cc-5",
+                "slide_paragraphs": [
+                    "The Federal Reserve often grapples with dilemmas, such as managing economic downturns and addressing financial crises. The 2008 financial crisis, for example, tested the Fed's abilities in crisis management and implementing extraordinary monetary policies like quantitative easing.",
+                    "Additionally, the Fed faces the challenge of adapting to modern economic issues, including digital currencies and cybersecurity threats. These challenges require continuous innovation and adaptation within the Fed's regulatory and policy frameworks."
+                ],
+                "slide_image_prompt": "A conceptual image of digital currency symbols with traditional banking elements."
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "The Purpose of the Federal Reserve",
+                "question": "What was the primary reason for the establishment of the Federal Reserve System in 1913?",
+                "answer_choices": [
+                    {
+                        "answer_text": "To standardize global currency exchange rates.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To establish a central repository for gold.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To ensure the stability of the U.S. financial system.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "To regulate the real estate market.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Monetary Policy Tools",
+                "question": "Which of the following is NOT a tool used by the Federal Reserve to influence monetary policy?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Open market operations.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Federal funds rate adjustments.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Setting fiscal policy.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Regulating the money supply.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Banking Supervision Responsibilities",
+                "question": "How does the Federal Reserve help prevent banking failures?",
+                "answer_choices": [
+                    {
+                        "answer_text": "By offering direct loans to consumers.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By overseeing and regulating financial institutions.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "By setting international trade policies.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By directly managing stock markets.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Global Economic Influence",
+                "question": "How do Federal Reserve decisions impact global markets?",
+                "answer_choices": [
+                    {
+                        "answer_text": "By directly regulating foreign banks.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Through changes in U.S. interest rates that influence global trade patterns and currency valuation.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "By setting international wage standards.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By determining cryptocurrency values.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Challenges for the Federal Reserve",
+                "question": "Which modern issue is NOT a challenge currently facing the Federal Reserve?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Cybersecurity threats.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Digital currencies.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Establishing a global military presence.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Addressing economic downturns.",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T02:52:28.903Z",
+        "age_group": "college"
+    },
+    {
+        "id": "be3b5104-691b-4719-ae47-b789bd5ef4cf",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "The Ancient Egyptian Pyramids",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-0",
+                "slide_image_prompt": "A minimalist image of the Great Pyramid of Giza at sunset."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "What Are the Pyramids?",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-1",
+                "slide_paragraphs": [
+                    "The pyramids are huge stone structures in Egypt. They were built a very long time ago as tombs for pharaohs.",
+                    "These pyramids are large and have a triangle shape. They are famous all around the world."
+                ],
+                "slide_image_prompt": "A simple illustration of a triangular pyramid under a bright sky."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Why Were Pyramids Built?",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-2",
+                "slide_paragraphs": [
+                    "The pyramids were built to be the resting places for pharaohs. Pharaohs were the kings of ancient Egypt.",
+                    "Inside the pyramids, they put treasures and things the pharaohs might need in the afterlife."
+                ],
+                "slide_image_prompt": "A drawing of an ancient Egyptian pharaoh surrounded by treasures."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "How Were Pyramids Built?",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-3",
+                "slide_paragraphs": [
+                    "Building the pyramids was hard work and took a long time. Many workers used tools made of stone and copper.",
+                    "They moved big stones using logs and ramps to create the pyramid's shape."
+                ],
+                "slide_image_prompt": "A scene showing workers building a pyramid using logs and ramps."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "The Great Pyramid of Giza",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-4",
+                "slide_paragraphs": [
+                    "The Great Pyramid of Giza is the most famous of all the pyramids. It is very big and tall, and it is one of the Seven Wonders of the Ancient World.",
+                    "It was built for Pharaoh Khufu and is the largest pyramid still standing today."
+                ],
+                "slide_image_prompt": "An image of the Great Pyramid of Giza under a clear blue sky, with tourists around."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Amazing Facts About Pyramids",
+                "slide_image_url": "generated_images/be3b5104-691b-4719-ae47-b789bd5ef4cf-5",
+                "slide_paragraphs": [
+                    "The pyramids were originally covered with smooth white stones, making them shine brightly. Most of these stones are gone now, but they were very beautiful.",
+                    "Today, people from all over the world visit Egypt to see the pyramids and learn about their history."
+                ],
+                "slide_image_prompt": "A minimalist depiction of tourists observing the pyramids in a desert landscape."
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "What Are Pyramids Made For?",
+                "question": "What were the pyramids originally built as?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Schools for young pharaohs",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Tombs for pharaohs",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Homes for ordinary people",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Castles for generals",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Why Are Pyramids Famous?",
+                "question": "Why are the pyramids famous all around the world?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Because they are small and round",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Because they are made of gold",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Because they are large with a triangle shape",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Because they were built last year",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Who Built the Pyramids?",
+                "question": "Who were the pyramids built for?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Ancient Roman emperors",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Ancient Greek gods",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Pharaohs, the kings of ancient Egypt",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Modern day presidents",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Building the Pyramids",
+                "question": "What tools did workers use to build the pyramids?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Stone and copper tools",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Iron and steel tools",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Plastic and rubber tools",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Wood and clay tools",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "The Great Pyramid's Stature",
+                "question": "What is the Great Pyramid of Giza known for?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Being the smallest pyramid",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Being one of the Seven Wonders of the Ancient World",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Being built under water",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Being made in a single day",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Original Appearance of Pyramids",
+                "question": "What covered the pyramids originally to make them shine?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Smooth white stones",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Shiny gold bricks",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Bright green jewels",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Colorful paintings",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Visiting the Pyramids",
+                "question": "Why do people visit Egypt to see the pyramids today?",
+                "answer_choices": [
+                    {
+                        "answer_text": "To learn about their history and see their beauty",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "To buy things inside the pyramids",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To climb on top of every pyramid",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To build new pyramids",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T02:37:09.718Z",
+        "age_group": "elementary"
+    },
+    {
+        "id": "310d3e51-3c68-49f1-8f4f-569ce794e9b8",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "World War Two",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-0",
+                "slide_image_prompt": "A minimalist map of the world highlighting key countries involved in World War Two"
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Causes of World War Two",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-1",
+                "slide_paragraphs": [
+                    "World War Two was caused by numerous factors including unresolved issues from World War One. The Treaty of Versailles left Germany in economic turmoil and political instability, fostering resentment and the rise of Adolf Hitler.",
+                    "Additionally, fascism was on the rise, particularly in Italy and Germany, leading to aggressive expansionist policies. An ineffective League of Nations and global economic depression also played roles in exacerbating tensions."
+                ],
+                "slide_image_prompt": "A minimalist collage representing the Treaty of Versailles, Adolf Hitler, and the League of Nations"
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Major Battles and Turning Points",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-2",
+                "slide_paragraphs": [
+                    "Key battles such as the Battle of Britain and the Battle of Stalingrad were significant turning points during World War Two. The Battle of Britain halted Germany's plans for conquering Britain, while the Battle of Stalingrad marked a decisive Soviet victory.",
+                    "The Normandy Invasion, commonly known as D-Day, in 1944 was pivotal for the Allied forces, leading to the liberation of Western Europe from Nazi occupation. Each battle shifted the momentum towards the eventual Allied victory."
+                ],
+                "slide_image_prompt": "A minimalist depiction of the Battle of Britain and D-Day"
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "The Holocaust",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-3",
+                "slide_paragraphs": [
+                    "During World War Two, the Holocaust was a systematic, state-sponsored genocide of six million Jews and millions of others by Nazi Germany. The Nazis implemented policies of ethnic cleansing under the guise of 'racial purity.'",
+                    "Concentration and extermination camps were established, where countless individuals faced inhumane conditions and mass executions. The Holocaust remains one of history's darkest chapters, underscoring the devastating impact of prejudice and hatred."
+                ],
+                "slide_image_prompt": "A solemn minimalist representation of a concentration camp"
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Technological Advances",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-4",
+                "slide_paragraphs": [
+                    "World War Two spurred significant technological advancements, fundamentally changing warfare tactics. Radar technology improved, providing greater aerial detection and defense capabilities.",
+                    "Weaponry evolved with the development of tanks, jet engines, and, notably, the atomic bomb, which led to a new era in warfare technology. These innovations extended beyond military applications, influencing post-war civilian technologies."
+                ],
+                "slide_image_prompt": "Minimalist icons representing radar, tanks, and atomic bombs"
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Consequences and Aftermath",
+                "slide_image_url": "generated_images/310d3e51-3c68-49f1-8f4f-569ce794e9b8-5",
+                "slide_paragraphs": [
+                    "The aftermath of World War Two led to significant geopolitical changes, including the emergence of the United States and the Soviet Union as superpowers, initiating the Cold War. The formation of the United Nations aimed to maintain global peace.",
+                    "Economically, Europe was devastated, leading to initiatives like the Marshall Plan for reconstruction. Socially, there was a renewed commitment to human rights and the beginning of decolonization as colonies sought independence."
+                ],
+                "slide_image_prompt": "A minimalist representation of the United Nations and post-war Europe recovery"
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "Factors Leading to World War Two",
+                "question": "Which of the following factors contributed significantly to the outbreak of World War Two?",
+                "answer_choices": [
+                    {
+                        "answer_text": "The Treaty of Versailles and political instability in Germany.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "The Cold War tensions between the USA and the Soviet Union.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The abolishment of monarchies across Europe.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The discovery of new continents resulting in colonial expansion.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Turning Points of World War Two",
+                "question": "What was the significance of the Battle of Stalingrad during World War Two?",
+                "answer_choices": [
+                    {
+                        "answer_text": "It marked the first major Allied victory on the Eastern Front and turned the tide against Germany.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "It was the final battle of World War Two, leading to a German surrender.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It was a major naval battle that secured Allied control over the Atlantic Ocean.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It prevented Japan from advancing further into Southeast Asia.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Understanding the Holocaust",
+                "question": "What was one of the main objectives of Nazi Germany during the Holocaust?",
+                "answer_choices": [
+                    {
+                        "answer_text": "To enact policies of ethnic cleansing under the guise of 'racial purity.'",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "To establish a new economic system globally.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To promote international cooperation and peace.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To develop advanced space exploration technologies.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Technological Innovations in World War Two",
+                "question": "Which technological advancement during World War Two led to significant changes in both military and civilian fields post-war?",
+                "answer_choices": [
+                    {
+                        "answer_text": "The development of jet engines.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "The enhancement of steam engine technology.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The creation of new naval ships using sails.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The design of renewable energy wind turbines.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Aftereffects of World War Two",
+                "question": "How did World War Two impact the global political landscape?",
+                "answer_choices": [
+                    {
+                        "answer_text": "It resulted in the emergence of the United States and the Soviet Union as superpowers, beginning the Cold War.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "It led to the establishment of monarchies across Asia and Africa.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It caused the decline of industrialization in Europe and the United States.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It resulted in the permanent unification of European countries into one nation.",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T02:46:16.750Z",
+        "age_group": "high-school"
+    },
+    {
+        "id": "d1727fd8-9cf3-416c-8050-99ead1507eed",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "Ancient Mesopotamia",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-0",
+                "slide_image_prompt": "A minimalist design illustrating the ancient Mesopotamian landscape, with the Tigris and Euphrates rivers, ziggurats, and early settlements."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Geography and Significance",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-1",
+                "slide_paragraphs": [
+                    "Ancient Mesopotamia, known as the 'Cradle of Civilization', was located between the Tigris and Euphrates rivers. This fertile region is part of modern-day Iraq and parts of Syria, Turkey, and Iran.",
+                    "The geography of Mesopotamia provided rich soil due to annual flooding, which supported the development of early agricultural societies. This abundance of resources enabled the growth of some of the worlds first major cities."
+                ],
+                "slide_image_prompt": "Illustration showing a map of ancient Mesopotamia with the Tigris and Euphrates Rivers marked."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "The Sumerians and their Inventions",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-2",
+                "slide_paragraphs": [
+                    "The Sumerians were one of the first groups to inhabit Mesopotamia around 4500 BCE. They developed some of the earliest known cities, such as Ur and Uruk.",
+                    "Their innovative spirit led to the invention of cuneiform writing, one of the world's first writing systems, and the wheel, revolutionizing transportation and communication."
+                ],
+                "slide_image_prompt": "A depiction of Sumerian innovations, including a cuneiform tablet and a wheel."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Ziggurats and Religion",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-3",
+                "slide_paragraphs": [
+                    "Mesopotamian religion was polytheistic, involving numerous gods representing natural and celestial elements. The ziggurat served as a temple and a symbolic mountain, bringing worshippers closer to the gods.",
+                    "These massive structures were architectural marvels of their time, demonstrating the society's engineering skills and religious devotion. Ziggurats were often at the center of city life."
+                ],
+                "slide_image_prompt": "A ziggurat with steps and symbols representing various Mesopotamian gods."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Law and Society",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-4",
+                "slide_paragraphs": [
+                    "The Mesopotamians were among the first to create a codified system of laws. The Code of Hammurabi is one of the earliest and most complete written legal codes.",
+                    "This code established rules and justice in society, influencing legal systems of future civilizations. It is notable for the principle of retributive justice, often summarized as 'an eye for an eye'."
+                ],
+                "slide_image_prompt": "A stone tablet inscribed with the Code of Hammurabi, showing ancient legal text."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Legacy of Mesopotamia",
+                "slide_image_url": "generated_images/d1727fd8-9cf3-416c-8050-99ead1507eed-5",
+                "slide_paragraphs": [
+                    "The advancements made by ancient Mesopotamians laid the foundations for future civilizations. Their contributions to writing, law, and urban planning are still influential.",
+                    "Despite its ancient origins, the impact of Mesopotamian culture is evident in modern language, literature, and legal systems, showcasing their enduring legacy."
+                ],
+                "slide_image_prompt": "A timeline of Mesopotamian innovations leading to modern influences, such as writing and legal systems."
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "Geographic Significance of Mesopotamia",
+                "question": "What feature of Mesopotamia's geography contributed most significantly to its development as a cradle of civilization?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Its mountainous terrain provided protection from invasions.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The abundance of fertile soil from annual river flooding.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Its vast deserts offered extensive trade routes.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The proximity to the Mediterranean Sea facilitated exploration.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Sumerian Innovations",
+                "question": "Which of the following was NOT an invention credited to the Sumerians?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Cuneiform writing",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The wheel",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Papyrus paper",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "The city-state",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Religious Architecture",
+                "question": "What was the primary purpose of the ziggurat in Mesopotamian society?",
+                "answer_choices": [
+                    {
+                        "answer_text": "To serve as a defensive fortress against invaders.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "As a royal palace for the king.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "To act as a marketplace for trade.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "As a temple to bring worshippers closer to the gods.",
+                        "correct": true
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Mesopotamian Law",
+                "question": "How did the Code of Hammurabi influence future legal systems?",
+                "answer_choices": [
+                    {
+                        "answer_text": "By highlighting the importance of equality before the law.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Through the introduction of retributive justice principles.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Because it abolished all forms of punishment.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By mandating universal suffrage.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Enduring Legacy",
+                "question": "In what way did the contributions of ancient Mesopotamia continue to influence modern civilization?",
+                "answer_choices": [
+                    {
+                        "answer_text": "By developing the digital computer.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Through their creation of the first religious texts.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "By laying the foundations for modern writing and legal systems.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Through their invention of the steam engine.",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T02:48:46.509Z",
+        "age_group": "high-school"
+    },
+    {
+        "id": "637faaed-48d9-4ae9-9e8b-e08021cb52cf",
+        "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+        "slides": [
+            {
+                "slide_type": "title",
+                "slide_title": "Abraham Lincoln: A Biography",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-0",
+                "slide_image_prompt": "A minimalist, modern illustration of Abraham Lincoln with iconic tall hat and beard."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Early Life and Background",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-1",
+                "slide_paragraphs": [
+                    "Abraham Lincoln was born on February 12, 1809, in a small log cabin in Hardin County, Kentucky. His humble beginnings shaped his character and beliefs, as he was raised in a poor frontier family.",
+                    "Despite limited formal education, Lincoln was an avid reader and self-taught himself various disciplines. These early challenges forged his determination and intellectual curiosity, which were key aspects of his later political success."
+                ],
+                "slide_image_prompt": "A minimalist depiction of a log cabin representing Lincoln's birthplace in Kentucky."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Path to Politics",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-2",
+                "slide_paragraphs": [
+                    "Lincoln's political career began in Illinois, where he served as a postmaster and then as a member of the Illinois State Legislature. During this time, he developed his skills in debating and public speaking.",
+                    "He became a prominent member of the Whig Party and subsequently joined the newly formed Republican Party. His reputation as a strong orator and his opposition to slavery increased his political influence."
+                ],
+                "slide_image_prompt": "Illustration of a young Abraham Lincoln practicing public speaking on a small town stage."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Presidency and the Civil War",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-3",
+                "slide_paragraphs": [
+                    "Elected in 1860 as the 16th President of the United States, Lincoln faced the immediate challenge of the Civil War. His leadership was marked by a commitment to preserving the Union.",
+                    "Lincoln's issuance of the Emancipation Proclamation in 1863 was a critical turning point, as it declared all slaves in Confederate territories free. This demonstrated his dedication to ending slavery in America."
+                ],
+                "slide_image_prompt": "Symbolic artwork of the Emancipation Proclamation being signed, with subtle elements of freedom and unity."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Assassination and Legacy",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-4",
+                "slide_paragraphs": [
+                    "On April 14, 1865, Lincoln was assassinated by John Wilkes Booth at Ford's Theatre, just days after the Confederate surrender. His death was a major shock to the nation.",
+                    "Lincoln is remembered as one of Americas greatest presidents, celebrated for his leadership during the Civil War and his efforts to abolish slavery. His legacy continues to influence the United States today."
+                ],
+                "slide_image_prompt": "A somber representation of Ford's Theatre, capturing the gravity of Lincoln's assassination and legacy."
+            },
+            {
+                "slide_type": "content",
+                "slide_title": "Impact on Modern America",
+                "slide_image_url": "generated_images/637faaed-48d9-4ae9-9e8b-e08021cb52cf-5",
+                "slide_paragraphs": [
+                    "Abraham Lincolns leadership set precedents for presidential conduct and expanded the role of the federal government. His dedication to equality paved the way for civil rights movements.",
+                    "The Gettysburg Address remains one of his most famous speeches, emphasizing national unity and democratic ideals. Lincolns vision for a united country with equal rights for all continues to be a guiding principle."
+                ],
+                "slide_image_prompt": "Artistic interpretation of the Gettysburg Address with visual elements symbolizing unity and democracy."
+            }
+        ],
+        "quiz": [
+            {
+                "slide_type": "question",
+                "slide_title": "Abraham Lincoln's Early Life",
+                "question": "Where was Abraham Lincoln born?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Springfield, Illinois",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Richmond, Virginia",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Hardin County, Kentucky",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Charleston, South Carolina",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Lincoln's Political Beginnings",
+                "question": "Which political party did Abraham Lincoln become a prominent member of before joining the Republican Party?",
+                "answer_choices": [
+                    {
+                        "answer_text": "Democratic Party",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Federalist Party",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Whig Party",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "Liberty Party",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Lincoln's Presidency and Emancipation",
+                "question": "What was the significance of the Emancipation Proclamation issued by Lincoln in 1863?",
+                "answer_choices": [
+                    {
+                        "answer_text": "It declared all slaves in Union territories free.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It declared all slaves in Confederate territories free.",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "It ended the Civil War immediately.",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "It was the reason Lincoln joined the Republican Party.",
+                        "correct": false
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Lincoln's Assassination",
+                "question": "Who assassinated Abraham Lincoln?",
+                "answer_choices": [
+                    {
+                        "answer_text": "James Earl Ray",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Charles J. Guiteau",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "Lee Harvey Oswald",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "John Wilkes Booth",
+                        "correct": true
+                    }
+                ]
+            },
+            {
+                "slide_type": "question",
+                "slide_title": "Lincoln's Legacy",
+                "question": "What remains one of Abraham Lincoln's most famous speeches emphasizing national unity?",
+                "answer_choices": [
+                    {
+                        "answer_text": "The Emancipation Proclamation",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The Gettysburg Address",
+                        "correct": true
+                    },
+                    {
+                        "answer_text": "The Second Inaugural Address",
+                        "correct": false
+                    },
+                    {
+                        "answer_text": "The Cooper Union Address",
+                        "correct": false
+                    }
+                ]
+            }
+        ],
+        "created_at": "2024-12-13T01:52:20.072Z",
+        "age_group": "high-school"
+    },
+        {
+            "id": "c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "Biography of JFK",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-0",
+                    "slide_image_prompt": "A minimalist portrait of John F. Kennedy, 35th President of the United States"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Early Life and Education",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-1",
+                    "slide_paragraphs": [
+                        "John Fitzgerald Kennedy was born on May 29, 1917, in Brookline, Massachusetts, into a wealthy and politically influential family. He was the second son of Joseph Kennedy Sr., a prominent businessman, and Rose Fitzgerald Kennedy, the daughter of a Boston mayor.",
+                        "JFK's education included time at prestigious institutions like Choate, the London School of Economics, and Harvard University, where he graduated with a degree in International Affairs in 1940. Throughout his education, he showed an early interest in politics and international relations."
+                    ],
+                    "slide_image_prompt": "An image of Harvard University campus in the 1930s"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "World War II Military Service",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-2",
+                    "slide_paragraphs": [
+                        "During World War II, Kennedy served in the U.S. Navy and commanded the PT-109 boat in the Pacific theater. His leadership was tested when the boat was struck by a Japanese destroyer, requiring extraordinary efforts to save his crew.",
+                        "The incident made Kennedy a war hero due to his courageous rescue of the surviving crew members. This experience also solidified his resolve in leadership, a quality that later resonated with American voters."
+                    ],
+                    "slide_image_prompt": "A PT-109 boat on a calm Pacific Ocean background"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Political Career and Rise to Presidency",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-3",
+                    "slide_paragraphs": [
+                        "JFK's political career began as a Congressman for Massachusetts in 1947, followed by a successful Senate bid in 1953. His political acumen, coupled with his family's influence, propelled his swift ascent in American politics.",
+                        "In 1960, Kennedy ran for President against Richard Nixon, winning by a narrow margin. He became the 35th President, marking a new era of youthful energy and progressive policies known as the New Frontier."
+                    ],
+                    "slide_image_prompt": "A campaign rally with JFK addressing an enthusiastic crowd"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Presidency and Major Initiatives",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-4",
+                    "slide_paragraphs": [
+                        "Kennedy's presidency was marked by significant international and domestic initiatives, focusing on economic expansion, civil rights, and space exploration. He famously declared the goal of landing a man on the Moon by the end of the 1960s.",
+                        "The Cuban Missile Crisis was a critical moment in his tenure, showcasing his diplomatic skills in averting nuclear conflict. His leadership during this period strengthened his reputation as a cautious yet decisive leader on the global stage."
+                    ],
+                    "slide_image_prompt": "A profile of JFK with a backdrop of a space rocket launch"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Assassination and Legacy",
+                    "slide_image_url": "generated_images/c4ffdf2b-5adb-4f4a-9677-258fbfcc0e9d-5",
+                    "slide_paragraphs": [
+                        "John F. Kennedy's presidency was abruptly ended by his assassination on November 22, 1963, in Dallas, Texas, a tragedy that stunned the nation and world. His funeral was marked by a massive outpouring of grief and respect.",
+                        "JFK's legacy endures through his inspirational speeches, his vision for America, and his charismatic leadership. The continuation of his civil rights efforts and the space program remained significant aspects of his enduring influence."
+                    ],
+                    "slide_image_prompt": "A solemn candlelit vigil in memory of JFK"
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "JFK's Early Life and Education",
+                    "question": "Which institution did John F. Kennedy graduate from with a degree in International Affairs in 1940?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "London School of Economics",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Harvard University",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Choate",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Yale University",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "World War II Service",
+                    "question": "What leadership role did John F. Kennedy hold during World War II?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Commander of PT-109",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Pilot in the Air Force",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Army General",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Marine Corps Sergeant",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Political Career",
+                    "question": "In what year did John F. Kennedy begin his political career as a Congressman for Massachusetts?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "1953",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "1947",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "1960",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "1940",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Presidency Initiatives",
+                    "question": "Which major space exploration goal did JFK famously declare during his presidency?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Establishing a space station by 1965",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Landing a man on the Moon by the end of the 1960s",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Exploring Mars by 1970",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Launching a satellite by 1962",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Kennedy's Legacy",
+                    "question": "What remained a significant aspect of JFK's enduring influence after his assassination?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "His efforts to reduce taxes",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Continuation of the space program and civil rights efforts",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Policies to end prohibition",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Fostering military expansion",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:00:28.725Z",
+            "age_group": "college"
+        },
+        {
+            "id": "ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "The Revolutionary War",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-0",
+                    "slide_image_prompt": "A minimalist depiction of colonial and British soldiers facing each other, symbolizing the American Revolutionary War."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Causes of the Revolutionary War",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-1",
+                    "slide_paragraphs": [
+                        "The Revolutionary War started because American colonists were unhappy with British rule. They were upset about taxes imposed by Britain without having any say in the decisions, which was summed up by their slogan No taxation without representation.",
+                        "Additionally, the British government passed laws that limited the colonists freedoms, like the Intolerable Acts, which led to rising tensions and desire for independence."
+                    ],
+                    "slide_image_prompt": "Illustration of a colonial protest against British taxation, with slogans and signs."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Key Events and Battles",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-2",
+                    "slide_paragraphs": [
+                        "One of the first major events was the Battle of Lexington and Concord in 1775, known as the shot heard round the world. This marked the beginning of open conflict between the British and the American colonies.",
+                        "Another significant event was the Battle of Saratoga in 1777, which was a turning point because it led to French support for the American cause, providing crucial aid and alliances."
+                    ],
+                    "slide_image_prompt": "Map showing key battles of the Revolutionary War, like Lexington, Concord, and Saratoga."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Important Figures",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-3",
+                    "slide_paragraphs": [
+                        "George Washington was a central figure, serving as the commander-in-chief of the Continental Army. His leadership was crucial in bringing about American victory and eventual independence.",
+                        "Other notable figures include Thomas Jefferson, who drafted the Declaration of Independence, and Benjamin Franklin, who secured French support for the war effort."
+                    ],
+                    "slide_image_prompt": "Portraits of George Washington, Thomas Jefferson, and Benjamin Franklin."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "The Declaration of Independence",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-4",
+                    "slide_paragraphs": [
+                        "The Declaration of Independence was adopted on July 4, 1776, and it announced that the American colonies were breaking away from British rule. It was primarily written by Thomas Jefferson and explained the colonies' reasons for seeking independence.",
+                        "This document proclaimed that all men are created equal and have rights to life, liberty, and the pursuit of happiness, setting important principles for the new nation."
+                    ],
+                    "slide_image_prompt": "An illustration or replica of the Declaration of Independence with signatures."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Outcome and Impact",
+                    "slide_image_url": "generated_images/ed8305d2-aaa9-4fc0-bf2b-2fdbd08c8e96-5",
+                    "slide_paragraphs": [
+                        "The Revolutionary War ended in 1783 with the signing of the Treaty of Paris, which recognized the independence of the United States. This marked the end of British control over the colonies.",
+                        "The revolution had a profound impact worldwide, inspiring other countries and peoples to fight for their rights and self-governance, leading to a wave of democratic movements."
+                    ],
+                    "slide_image_prompt": "A map of the newly independent United States post-Treaty of Paris."
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "Understanding Causes",
+                    "question": "What was one of the main reasons American colonists were unhappy with British rule, leading to the Revolutionary War?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "They wanted more British soldiers.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "They had no representation in the British Parliament to voice their opinions on taxes.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "They preferred the French over the British.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "They wanted British laws to be stricter.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Key Events and Battles",
+                    "question": "Which battle marked the beginning of open conflict between the British and American colonies?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Battle of Yorktown",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Battle of Lexington and Concord",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Battle of Saratoga",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Battle of Bunker Hill",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Important Figures",
+                    "question": "Who was the commander-in-chief of the Continental Army during the Revolutionary War?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Thomas Jefferson",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Benjamin Franklin",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "George Washington",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "John Adams",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "The Declaration of Independence",
+                    "question": "What important document announced the American colonies' decision to break away from British rule?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "The Magna Carta",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The U.S. Constitution",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The Bill of Rights",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The Declaration of Independence",
+                            "correct": true
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Outcome and Impact",
+                    "question": "What was the name of the treaty that ended the Revolutionary War and recognized the United States' independence?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Treaty of Versailles",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Treaty of Ghent",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Treaty of Paris",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Treaty of Tordesillas",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:09:58.519Z",
+            "age_group": "middle-school"
+        },
+        {
+            "id": "bfa86f96-fde6-4ccd-852b-3362c5ddd2ce",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "The History of German Shepherds",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-2",
+                    "slide_image_prompt": "A minimalist image of a German Shepherd dog silhouette with historical elements in the background."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Origins of German Shepherds",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-1",
+                    "slide_paragraphs": [
+                        "German Shepherds originated in Germany in the late 19th century. They were initially bred for herding sheep and protecting them from predators, thanks to their intelligence and agility.",
+                        "The breed was developed by Captain Max von Stephanitz, who aimed to create the perfect working dog. His vision was a dog that was not only versatile but also loyal and hard-working."
+                    ],
+                    "slide_image_prompt": "A historic depiction of German shepherding, with shepherd dogs in the foreground."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Characteristics and Traits",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-0",
+                    "slide_paragraphs": [
+                        "German Shepherds are known for their keen intelligence, making them excellent working dogs. They are often employed in roles such as police, military, and search and rescue due to their trainability and courage.",
+                        "These dogs are also recognized for their physical characteristics, including a strong build and a thick, weather-resistant coat. Their alert expressions convey their readiness and attentiveness, which are essential traits for service dogs."
+                    ],
+                    "slide_image_prompt": "A detailed, minimalist illustration showing the distinctive features of a German Shepherd."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Role During Wars",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-3",
+                    "slide_paragraphs": [
+                        "German Shepherds played significant roles during both World Wars, serving as messenger dogs, sentries, and search and rescue dogs. Their ability to follow commands and perform under pressure made them invaluable.",
+                        "Military forces around the world have recognized German Shepherds for their bravery and reliability. They often carried important messages and helped medics find wounded soldiers on the battlefield."
+                    ],
+                    "slide_image_prompt": "A vintage-style image of a German Shepherd in a World War setting, depicting a military dog in action."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Popularity and Influence",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-4",
+                    "slide_paragraphs": [
+                        "Following their impressive war service, German Shepherds became popular as family pets and working dogs in various fields. Their loyalty and protective nature make them great companions and guardians.",
+                        "The breed's popularity surged in the United States after World War I, aided by film stars like Rin Tin Tin, a German Shepherd who starred in silent films. This helped cement their status as beloved pets."
+                    ],
+                    "slide_image_prompt": "A classic movie scene featuring a German Shepherd, emphasizing its role in popular culture."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Modern Roles and Recognition",
+                    "slide_image_url": "generated_images/bfa86f96-fde6-4ccd-852b-3362c5ddd2ce-5",
+                    "slide_paragraphs": [
+                        "Today, German Shepherds continue to be highly valued in roles such as service dogs for the disabled, therapy dogs, and companions for families. Their versatile nature allows them to excel in many disciplines.",
+                        "The breed is consistently ranked as one of the most popular in the world, known for its excellence in various canine sports and as dependable working dogs in public safety roles."
+                    ],
+                    "slide_image_prompt": "A modern, dynamic image depicting a German Shepherd in a service or sporting role."
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "Origins of German Shepherds",
+                    "question": "Who was responsible for developing the German Shepherd breed?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Captain Max von Stephanitz",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Baron von Richthofen",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Friedrich Wilhelm I",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Otto von Bismarck",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Characteristics of German Shepherds",
+                    "question": "What is not a typical role for a German Shepherd due to its traits and characteristics?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Search and rescue",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Therapy dog",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Military service",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Aquatic rescue",
+                            "correct": true
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "German Shepherds in War",
+                    "question": "Which task was NOT performed by German Shepherds during World Wars?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Carrying messages",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Finding wounded soldiers",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Guiding tanks",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Serving as sentries",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Popularity Surge in the U.S.",
+                    "question": "Which film star helped increase the popularity of German Shepherds in the United States?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Rin Tin Tin",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Lassie",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Old Yeller",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Toto",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Modern Roles of German Shepherds",
+                    "question": "In which of the following roles are modern German Shepherds NOT typically used?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Seeing-eye dogs for the blind",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Herding sheep",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Aquarium performers",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Police work",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:28:48.858Z",
+            "age_group": "middle-school"
+        },
+        {
+            "id": "9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "The Mystery of Easter Island",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-0",
+                    "slide_image_prompt": "A serene view of Easter Island with its famous Moai statues under a clear blue sky."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Introduction to Easter Island",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-1",
+                    "slide_paragraphs": [
+                        "Easter Island is a small island in the Pacific Ocean. It is famous for its large stone statues called Moai.",
+                        "People visit from all around the world to see these statues and learn about the island's history."
+                    ],
+                    "slide_image_prompt": "An aerial view of Easter Island showing the landscape and several Moai statues."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "The Moai Statues",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-2",
+                    "slide_paragraphs": [
+                        "The Moai are giant stone figures with large heads and small bodies. They were made by the Rapa Nui people long ago.",
+                        "These statues are carved from volcanic rock and can weigh many tons."
+                    ],
+                    "slide_image_prompt": "Close-up of a Moai statue standing on the grassy plains of Easter Island."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "The Rapa Nui People",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-3",
+                    "slide_paragraphs": [
+                        "The Rapa Nui are the native people who live on Easter Island. They have a rich culture and history.",
+                        "They created the Moai statues and have many stories about them passed down through generations."
+                    ],
+                    "slide_image_prompt": "Traditional Rapa Nui cultural elements, such as dance or traditional clothing, with a Moai statue in the background."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "How the Moai Were Moved",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-4",
+                    "slide_paragraphs": [
+                        "One mystery is how the heavy Moai were moved around the island. Some scientists think they used logs and ropes.",
+                        "Others believe the statues were 'walked' to their places using a rocking motion and teamwork."
+                    ],
+                    "slide_image_prompt": "Illustration showing ancient Rapa Nui people trying to transport a Moai statue using ropes and logs."
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Unsolved Mysteries",
+                    "slide_image_url": "generated_images/9f4d95f1-6d3a-46c2-b0d5-0d6f5043309a-5",
+                    "slide_paragraphs": [
+                        "There are still many things we don't know about Easter Island. How did the Rapa Nui carve these giant stones?",
+                        "And why did they stop making them? These questions continue to puzzle scientists today."
+                    ],
+                    "slide_image_prompt": "A mysterious and artistic rendering of Easter Island with Moai statues under a starry night sky, suggesting the unknown secrets of the island."
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "Location of Easter Island",
+                    "question": "Where is Easter Island located?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "In the Atlantic Ocean",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "In the Pacific Ocean",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "In the Indian Ocean",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "In the Arctic Ocean",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Characteristic of Moai Statues",
+                    "question": "What is special about the Moai statues?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "They are made of wood",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "They are very small",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "They have large heads and small bodies",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "They have wings",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Rapa Nui Culture",
+                    "question": "Who made the Moai statues on Easter Island?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "The Vikings",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The Rapa Nui people",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "The Aztecs",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The Incas",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Moving the Moai",
+                    "question": "According to some scientists, how did the Rapa Nui people move the Moai statues?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "By floating them on water",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "By using cars",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "By using logs and ropes or 'walking' them",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "By pushing them with their hands",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Unanswered Questions",
+                    "question": "What is still a mystery about the Moai statues?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Who carved them",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "How and why they were made",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "How many there are",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "If they are alive",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:33:51.676Z",
+            "age_group": "elementary"
+        },
+        {
+            "id": "fc365bb6-be54-4667-b637-d3f0aaaa433e",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "The Industrial Revolution",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-0",
+                    "slide_image_prompt": "A minimalist collage of factories, smokestacks, and vintage machinery representing the Industrial Revolution"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "What Was the Industrial Revolution?",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-1",
+                    "slide_paragraphs": [
+                        "The Industrial Revolution was an exciting time when lots of big changes happened. People started using machines to make things instead of making them by hand.",
+                        "This change began in the late 1700s and made things faster and cheaper to produce. It also changed how people lived and worked."
+                    ],
+                    "slide_image_prompt": "A simple illustration of an old factory with workers and machines inside, symbolizing early industrial changes"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Inventions and Innovations",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-2",
+                    "slide_paragraphs": [
+                        "During the Industrial Revolution, many new inventions were created, like the steam engine. The steam engine helped trains and ships move much faster.",
+                        "Other inventions included machines that could spin threads and weave cloth really quickly. These made it easier to make clothes."
+                    ],
+                    "slide_image_prompt": "A minimalist illustration of a steam engine and textile machinery, showing key inventions of the era"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Factories and Work",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-3",
+                    "slide_paragraphs": [
+                        "Factories were big buildings where machines were placed. People worked in factories to help run the machines and they worked long hours.",
+                        "Before factories, many people worked at home or in small workshops. Life changed a lot when everyone started working in factories."
+                    ],
+                    "slide_image_prompt": "A simple diagram of a historical factory interior with workers, highlighting the working environment"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Changes in Daily Life",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-4",
+                    "slide_paragraphs": [
+                        "With the coming of factories, many people moved to cities to find work. Cities grew bigger because more people needed jobs at factories.",
+                        "The way people lived changed too, with new inventions like the telephone and electricity making life easier and more fun."
+                    ],
+                    "slide_image_prompt": "A cityscape showing factories with smokestacks and people moving to urban areas, reflecting the urbanization"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Impacts on the World",
+                    "slide_image_url": "generated_images/fc365bb6-be54-4667-b637-d3f0aaaa433e-5",
+                    "slide_paragraphs": [
+                        "The Industrial Revolution had effects all around the world. It helped to connect different countries through trade and new technologies.",
+                        "However, it also led to pollution and hard working conditions. People began to think about how to make factories safer and cleaner."
+                    ],
+                    "slide_image_prompt": "A global map with icons of factories and ships, indicating worldwide connections and impacts"
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "Understanding the Industrial Revolution",
+                    "question": "What was a significant change during the Industrial Revolution?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Using more candles for light.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Making things by hand more efficiently.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Using machines to make things instead of by hand.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Traveling by horseback more often.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Inventions of the Industrial Revolution",
+                    "question": "Which invention helped trains move faster during the Industrial Revolution?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "The electric trolley",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The steam engine",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "The sewing machine",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "The telephone",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Factory Work",
+                    "question": "Where did many people start to work during the Industrial Revolution?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "At home",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "In factories",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "On farms",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "In schools",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Life Changes with Factories",
+                    "question": "What was one reason cities grew during the Industrial Revolution?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "More people needed jobs at factories.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "People wanted to live on farms.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "There were more schools in the cities.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Cities became famous for their theaters.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Global Impact of the Industrial Revolution",
+                    "question": "What was one negative effect of the Industrial Revolution mentioned in the slides?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "It created cleaner environments.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "It improved health care systems.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "It led to pollution.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "It ended all trade between countries.",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:40:23.464Z",
+            "age_group": "elementary"
+        },
+        {
+            "id": "ce3ffe57-da1d-47de-b3b8-e440e773d8e5",
+            "user_id": "user_2nKVGHQJn825IKRfgWrXKdo1lzL",
+            "slides": [
+                {
+                    "slide_type": "title",
+                    "slide_title": "Julius Caesar's Life",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-0",
+                    "slide_image_prompt": "A portrait of Julius Caesar with Roman symbols in a minimalist style"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Early Life and Background",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-1",
+                    "slide_paragraphs": [
+                        "Julius Caesar was born in 100 BCE into the patrician Julii family in Rome, a family with a rich history yet recent political dormancy. His youth coincided with a tumultuous period in Roman history, marked by social and political upheaval that shaped his early ambitions.",
+                        "Despite his noble lineage, his youth was marked by the necessity for careful navigation through Rome's complex social strata, as his family had lost much of its former influence. He enhanced his education by studying rhetoric and philosophy, which later equipped him for a life in public service."
+                    ],
+                    "slide_image_prompt": "Ancient Roman cityscape representing Julius Caesar's early life"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Military Achievements",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-2",
+                    "slide_paragraphs": [
+                        "Caesar's military career began in earnest in 58 BCE when he was appointed to govern the Roman province of Gaul. Displaying extraordinary military acumen, he expanded Roman territories through a series of campaigns, which later became known as the Gallic Wars.",
+                        "His conquests not only demonstrated his strategic brilliance but also increased his popularity and political clout in Rome. His Commentaries on the Gallic War served to inform and often manipulate public perception of his military exploits."
+                    ],
+                    "slide_image_prompt": "Minimalist illustration of Roman soldiers marching in Gaul"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Political Rise",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-3",
+                    "slide_paragraphs": [
+                        "Julius Caesar's political ascent was marked by his alliance with Crassus and Pompey, forming the First Triumvirate. This union allowed him to amass unparalleled power and effectively bypass traditional republican checks on personal authority.",
+                        "Through adept political maneuvering, he secured a series of key governmental positions. However, his accumulating power stirred fear among senators, who worried about the erosion of the Republic's traditional governance structures."
+                    ],
+                    "slide_image_prompt": "Abstract representation of a Roman political meeting"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Dictatorship and Reforms",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-4",
+                    "slide_paragraphs": [
+                        "Upon his return to Rome in 49 BCE, Caesar found a fractured political landscape. Amid civil unrest, he seized control and was eventually appointed dictator for life, a title that symbolized unprecedented personal authority.",
+                        "His dictatorship was marked by numerous reforms, ranging from the reorganization of the calendar (introducing the Julian calendar) to land redistribution policies aimed at addressing economic disparities. Caesar's actions were met with both acclaim and apprehension."
+                    ],
+                    "slide_image_prompt": "Roman parliament with Julius Caesar overseeing in a minimalist style"
+                },
+                {
+                    "slide_type": "content",
+                    "slide_title": "Assassination and Legacy",
+                    "slide_image_url": "generated_images/ce3ffe57-da1d-47de-b3b8-e440e773d8e5-5",
+                    "slide_paragraphs": [
+                        "On the Ides of March, 44 BCE, Caesar was assassinated by a group of conspirators aiming to restore the Republic's authority. This dramatic event ended Caesar's reign and precipitated a series of civil wars that would eventually lead to the fall of the Roman Republic.",
+                        "Caesar's death did not erase his influence; his life and reforms profoundly affected Roman society and government. His adoptive heir, Octavian, rose to power and laid the foundation for the Roman Empire, ensuring Caesar's lasting legacy."
+                    ],
+                    "slide_image_prompt": "A minimalist depiction of Julius Caesar's assassination scene"
+                }
+            ],
+            "quiz": [
+                {
+                    "slide_type": "question",
+                    "slide_title": "Julius Caesar's Family Background",
+                    "question": "What was significant about Julius Caesar's family background in the context of his early life?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "His family had always held continuous power in Rome.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "He belonged to a patrician family that had recently experienced political dormancy.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "His family was of humble origins without any notable history.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "He was born into a military family with strong influence.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Military Achievements in Gaul",
+                    "question": "Which of the following statements about Caesar's military achievements is true?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Caesar failed to gain popularity in Rome despite his conquests.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "His campaigns in Gaul were unsuccessful and led to his political decline.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Caesar expanded Roman territories and increased his political influence through the Gallic Wars.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "His military strategies were poorly documented, leaving little impact on Roman history.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "First Triumvirate",
+                    "question": "What was the significance of the First Triumvirate in Caesar's political career?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "It limited Caesar's political ambitions by confining his role to military affairs.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "It was a coalition that allowed Caesar to gain unprecedented power, alongside Crassus and Pompey.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "It was an alliance primarily with Pompey to suppress the influence of Crassus.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "It was formed to restore the Republic's traditional governance structures.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Caesar's Dictatorship and Reforms",
+                    "question": "Which reform during Caesar's dictatorship had a lasting impact on society?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "Establishing the Second Triumvirate.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Introducing the Julian calendar.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "Replacing senatorial positions with governors.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "Forming an alliance with Egypt.",
+                            "correct": false
+                        }
+                    ]
+                },
+                {
+                    "slide_type": "question",
+                    "slide_title": "Caesar's Legacy",
+                    "question": "How did Julius Caesar's assassination ultimately impact Roman history?",
+                    "answer_choices": [
+                        {
+                            "answer_text": "It led to a period of peace and the restoration of the Republic's governance.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "His death had little impact on subsequent Roman society and politics.",
+                            "correct": false
+                        },
+                        {
+                            "answer_text": "It initiated a series of civil wars that contributed to the fall of the Roman Republic.",
+                            "correct": true
+                        },
+                        {
+                            "answer_text": "It immediately resulted in Octavian's downfall and the collapse of the Roman Empire.",
+                            "correct": false
+                        }
+                    ]
+                }
+            ],
+            "created_at": "2024-12-13T02:54:54.056Z",
+            "age_group": "college"
+        }
+    ]

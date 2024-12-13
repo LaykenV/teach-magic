@@ -100,18 +100,20 @@ export default async function Home() {
         <FeatureSection
           title="Interactive Slides"
           description="Create engaging slides with AI-generated images on any topic imaginable, no matter how niche."
-          imageSrc="/assets/Capture.png"
+          imageSrc="/assets/SlidesSS.png"
           imageAlt="TeachMagic Slides"
           features={slideFeatures}
+          isAbout={false}
         />
 
         <FeatureSection
           title="Auto-Generated Quizzes"
           description="Reinforce learning with quizzes automatically created from your slide content, perfect for any subject."
-          imageSrc="/assets/Capture.png"
+          imageSrc="/assets/QuizSS.png"
           imageAlt="TeachMagic Quiz"
           features={quizFeatures}
           reversed
+          isAbout={false}
         />
 
         <CTASection />

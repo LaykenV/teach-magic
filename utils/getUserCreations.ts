@@ -25,7 +25,8 @@ export async function getUserCreations(userId: string): Promise<Creation[]> {
         created_at: creation.created_at,
         age_group: creation.age_group,
       }));
-    return formattedFromCache;
+
+      return formattedFromCache;
   }
 
   console.log(`Cache miss for key: ${cacheKey}. Fetching from DB...`);

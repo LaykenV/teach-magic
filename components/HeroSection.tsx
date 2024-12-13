@@ -1,8 +1,13 @@
+"use client";
+
 import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export function HeroSection() {
+  const { theme } = useTheme();
+
   return (
     <section className="container mx-auto px-4 py-16 md:py-24">
       <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -19,14 +24,24 @@ export function HeroSection() {
             </SignUpButton>
           </div>
         </div>
-        <div className="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-xl">
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl">
+        { theme === 'dark' ? 
           <Image 
-            src="/assets/Capture.png" 
-            layout="fill" 
-            objectFit="cover" 
+            src="/assets/DashboardSS.png" 
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt="TeachMagic platform preview" 
-            className="rounded-xl"
+            className="rounded-xl object-cover"
           />
+          :
+          <Image
+            src="/assets/DashboardSSDark.png"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="TeachMagic platform preview" 
+            className="rounded-xl object-cover"
+          />
+          }
         </div>
       </div>
     </section>
