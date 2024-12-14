@@ -26,8 +26,11 @@ export default async function Dashboard() {
   if (!userId) {
     redirect('/');
   }
+  const email = user?.emailAddresses[0].emailAddress;
+  const name = user?.firstName + ' ' + user?.lastName;
 
-  const User = await getUser(userId);
+
+  const User = await getUser(userId, email, name);
   const formattedCreations = await getUserCreations(userId);
 
   console.log(formattedCreations);

@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw, BookOpen } from 'lucide-react'
+import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw, BookOpen, ClipboardCheck } from 'lucide-react'
 import { Creation } from '@/types/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,6 +13,12 @@ import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { ModeToggle } from './theme/ThemeToggle'
 import confetti from 'canvas-confetti';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 interface QuizViewerProps {
   creation: Creation
@@ -101,19 +107,24 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 overflow-y-auto">
-      <div className="absolute top-4 left-4 z-10 flex space-x-2">
-        <Link href="/dashboard" prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
-            <Home className="h-4 w-4" />
-            <span className="sr-only">Back to Dashboard</span>
-          </Button>
-        </Link>
-        <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
-          <Button variant="outline" size="icon" className="rounded-full hover:bg-foreground/10">
-            <BookOpen className="h-4 w-4" />
-            <span className="sr-only">View slides</span>
-          </Button>
-        </Link>
+      <div className="absolute bottom-4 sm:top-4 left-4 z-10 flex flex-row space-y-0 space-x-4">
+        
+              <Link href="/dashboard" prefetch={true}>
+                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-black hover:text-black transition-all duration-300 ease-in-out w-full sm:w-auto">
+                  <Home className="h-5 w-5 sm:mr-2" />
+                  <span className="hidden sm:inline">Dashboard</span>
+                </Button>
+              </Link>
+            
+
+        
+              <Link href={`/SlideViewer?id=${creation.id}`} prefetch={true}>
+                <Button variant="default" size="lg" className="rounded-full hover:bg-primary/90 transition-all duration-300 ease-in-out w-full sm:w-auto">
+                  <BookOpen className="h-5 w-5 sm:mr-2" />
+                  <span className="hidden sm:inline">View Slides</span>
+                </Button>
+              </Link>
+            
       </div>
       <AnimatePresence mode="wait">
         <motion.div

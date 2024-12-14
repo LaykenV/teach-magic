@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { UserButton } from "@clerk/nextjs";
 import { DockToggle } from "@/components/theme/DockToggle";
@@ -14,6 +14,16 @@ interface MyDockProps {
 }
 
 export const MyDock = ({ dashboard }: MyDockProps) => { 
+  const [mounted, setMounted] = useState(false);
+
+  // Ensures the component is only rendered on the client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Prevents rendering on the server
+  }
   return (
     <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <Dock direction="middle" className="bg-background/80 backdrop-blur-sm border border-border rounded-full shadow-lg">

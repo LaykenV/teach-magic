@@ -4,9 +4,20 @@ import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+    // Ensures the component is only rendered on the client
+    useEffect(() => {
+      setMounted(true);
+    }, []);
+
+    if (!mounted) {
+      return null; // Prevents rendering on the server
+    }
 
   return (
     <section className="container mx-auto px-4 py-16 md:py-24">
