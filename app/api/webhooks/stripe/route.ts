@@ -28,10 +28,11 @@ export async function POST(req: NextRequest) {
   // Handle the event
   if (event.type === 'payment_intent.succeeded') {
     const session = event.data.object as Stripe.PaymentIntent
-    console.log(session)
-    const tokenCount = session.amount / 1000;
+    console.log(event)
+    const dollarsSpent = session.amount / 100;
+    const tokenCount = dollarsSpent === 10 ? 15 : 1;
     console.log('adding', tokenCount, 'tokens')
-    const userEmail = 'laykenv@gmail.com';
+    const userEmail = 'laykenv@gmail.com'; // grab from session
     const [user] = await db
       .select()
       .from(usersTable)
