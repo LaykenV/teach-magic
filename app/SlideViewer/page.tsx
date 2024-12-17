@@ -5,9 +5,10 @@ import { Creation } from '@/types/types'
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { Slide, Quiz } from '@/types/types';
+import { PageProps } from '@/.next/types/app/page';
 
-interface SlideViewerPageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+interface MyPageProps extends PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 async function getCreationById(id: string) {
@@ -26,7 +27,7 @@ async function getCreationById(id: string) {
   return c;
 }
 
-export default async function SlideViewerPage({ searchParams }: SlideViewerPageProps) {
+export default async function SlideViewerPage({ searchParams }: MyPageProps) {
   const params = await searchParams;
   const id = params.id as string;
 
