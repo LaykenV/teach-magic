@@ -7,8 +7,8 @@ import { Slide, Quiz } from '@/types/types';
 import QuizViewer from '@/components/QuizViewer';
 
 interface PageProps {
-  params: { [key: string]: string | string[] | undefined };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 async function getCreationById(id: string) {

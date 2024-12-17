@@ -7,8 +7,8 @@ import { eq } from 'drizzle-orm/expressions';
 import { Slide, Quiz } from '@/types/types';
 
 interface PageProps {
-  params: { [key: string]: string | string[] | undefined };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 async function getCreationById(id: string) {

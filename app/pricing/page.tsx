@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation';
 import PricingComponent from '@/components/PricingComponent';
 
 interface PageProps {
-  params: { [key: string]: string | string[] | undefined };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const Pricing = async ({ searchParams }: PageProps) => {
@@ -16,7 +16,7 @@ const Pricing = async ({ searchParams }: PageProps) => {
   let paymentResult = '';
   const paramaters = await searchParams;
   if (paramaters.payment) {
-    paymentResult = searchParams.payment as string;
+    paymentResult = paramaters.payment as string;
   }
 
   if (paymentResult == 'success') {
