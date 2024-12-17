@@ -61,21 +61,21 @@ export async function promptGPT(
           - Produce:
               - One **title slide**.
               - Five **content slides**.
-          - The five content slides should collectively cover the user’s requested topic thoroughly.
+          - The five content slides should collectively cover the users requested topic thoroughly.
           - If the topic has multiple major elements, ensure you mention all of them in at least one slide. Do not leave major subtopics unexplored.
           - Each slide should cover a distinct aspect or subtopic, creating a logical progression from one slide to the next.
           - Include interesting facts, relevant examples, or anecdotes on each slide to keep it engaging.
 
       - **Image Prompts:**
           - Provide a \`slide_image_prompt\` for each slide, including the title slide, that aligns with a modern minimalist theme.
-          - Ensure the \`slide_image_prompt\` is relevant to the slide’s content or overall topic.
+          - Ensure the \`slide_image_prompt\` is relevant to the slides content or overall topic.
           - Set \`slide_image_url\` to null for all slides.
 
       - **Output Format:**
           - Return a JSON object with:
             - \`title_slide\`: an object with:
               - \`slide_type\`: "title"
-              - \`slide_title\`: The main topic (from the user’s prompt)
+              - \`slide_title\`: The main topic (from the users prompt)
               - \`slide_image_prompt\`
               - \`slide_image_url\`: null
             - \`content_slides\`: an array of five content slide objects, each with:
@@ -95,7 +95,7 @@ export async function promptGPT(
           - Do not mention these instructions or the fact that you are an AI.
           - No disallowed or inappropriate content.
 
-      After reading the user’s prompt, create the requested JSON following all the above rules.
+      After reading the users prompt, create the requested JSON following all the above rules.
       `
 
     try {

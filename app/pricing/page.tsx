@@ -1,22 +1,22 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import PricingComponent from '@/components/PricingComponent';
-import { PageProps } from '@/.next/types/app/page';
 
-interface MyPageProps extends PageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+interface PageProps {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const Pricing = async ({ searchParams }: MyPageProps) => {
+const Pricing = async ({ searchParams }: PageProps) => {
   const user = await currentUser();
   const userId = user?.id;
   if (!userId) {
     redirect('/');
   }
-  const params = await searchParams;
   let paymentResult = '';
-  if (params.payment) {
-    paymentResult = params.payment as string;
+  const paramaters = await searchParams;
+  if (paramaters.payment) {
+    paymentResult = searchParams.payment as string;
   }
 
   if (paymentResult == 'success') {

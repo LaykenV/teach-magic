@@ -132,11 +132,16 @@ confetti 3/5
 
 //meta title and logo create next app
 
-make sure stripe is gtg, test with ngrok? go back to test and figure out how to pass id
+//make sure stripe is gtg, test with ngrok? go back to test and figure out how to pass id
 
-optomize comcreations
+//optomize comcreations
 
-deploy
+//deploy
+
+//remove /generate
+update clerk keys
+particle speed?
+//prompt for slides not working
 
 how to secure domain? 
 
@@ -145,3 +150,5 @@ buy domain
 
 market ???
 
+
+{ type: 'json_schema', json_schema: { name: 'slides', strict: true, schema: { type: 'object', properties: [Object], required: [Array], additionalProperties: false, '$schema': 'http://json-schema.org/draft-07/schema#' } } }

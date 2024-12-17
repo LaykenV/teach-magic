@@ -5,10 +5,10 @@ import { Creation } from '@/types/types'
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
 import { Slide, Quiz } from '@/types/types';
-import { PageProps } from '@/.next/types/app/page';
 
-interface MyPageProps extends PageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+interface PageProps {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 async function getCreationById(id: string) {
@@ -27,7 +27,7 @@ async function getCreationById(id: string) {
   return c;
 }
 
-export default async function SlideViewerPage({ searchParams }: MyPageProps) {
+export default async function SlideViewerPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const id = params.id as string;
 
@@ -35,8 +35,8 @@ export default async function SlideViewerPage({ searchParams }: MyPageProps) {
     return (
       <div className="flex flex-col items-center justify-start min-h-screen p-4">
         <p className="text-center mt-10">No creation ID provided.</p>
-        <Link href="/generate" className="text-blue-500 hover:underline">
-          Go back to Generate
+        <Link href="/dashboard" className="text-blue-500 hover:underline" prefetch>
+          Go back to Dashboard
         </Link>
       </div>
     );

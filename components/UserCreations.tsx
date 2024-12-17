@@ -99,11 +99,11 @@ export default function UserCreations({ filteredCreations, self, success, setSuc
             <p className="text-center text-muted-foreground">You have no creations.</p>
           </CardContent>
           <CardFooter className="justify-center">
-            <Button asChild>
-              <Link prefetch={true} href="/generate">
+            <Button asChild onClick={() => document.getElementById('triggerButton')?.click()} className='cursor-pointer'>
+              <div>
                 <Plus className="mr-2 h-4 w-4" />
                 Create your first
-              </Link>
+              </div>
             </Button>
           </CardFooter>
         </Card>
