@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { Creation } from '@/types/types';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Plus } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
