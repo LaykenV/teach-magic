@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw, BookOpen, ClipboardCheck } from 'lucide-react'
+import { Home, ChevronLeft, ChevronRight, Check, X, Award, RefreshCw, BookOpen } from 'lucide-react'
 import { Creation } from '@/types/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,12 +13,8 @@ import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { ModeToggle } from './theme/ThemeToggle'
 import confetti from 'canvas-confetti';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { set } from 'zod'
+
 
 interface QuizViewerProps {
   creation: Creation
@@ -30,11 +26,22 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [score, setScore] = useState(0)
 
+  const calculateScore = () => {
+    let score = 0
+    creation.quiz.forEach((question, index) => {
+      const userAnswerIndex = userAnswers[index]
+      if (userAnswerIndex !== undefined && question.answer_choices[userAnswerIndex].correct) {
+        score += 1
+      }
+    })
+    return score
+  }
+
   useEffect(() => {
     if (isSubmitted) {
       setScore(calculateScore())
     }
-  }, [isSubmitted])
+  }, [isSubmitted, calculateScore, setScore])
 
   const handleAnswerSelect = (answerIndex: number) => {
     setUserAnswers({
@@ -55,17 +62,6 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
-  }
-
-  const calculateScore = () => {
-    let score = 0
-    creation.quiz.forEach((question, index) => {
-      const userAnswerIndex = userAnswers[index]
-      if (userAnswerIndex !== undefined && question.answer_choices[userAnswerIndex].correct) {
-        score += 1
-      }
-    })
-    return score
   }
 
   const resetQuiz = () => {

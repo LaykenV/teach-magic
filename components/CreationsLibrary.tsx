@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, Book, Users, Coins, Gem } from 'lucide-react'
+import { Search, Book, Users, Gem } from 'lucide-react'
 import UserCreations from './UserCreations'
 import { Creation } from '@/types/types'
 import { useRouter } from 'next/navigation'
@@ -46,6 +46,7 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
         return matchesSearch && matchesAge
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, searchTerm, ageFilter, userCreations])
 
   return (

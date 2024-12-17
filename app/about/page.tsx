@@ -6,8 +6,7 @@ import { MyDock } from '@/components/MyDock';
 import { FeatureSection } from '@/components/FeatureSection';
 import { FAQAccordion } from '@/components/FAQAccordion';
 import { HowItWorks } from '@/components/HowItWorks';
-import { Zap, Layers, FileQuestion, Users, Download, GraduationCap, Sparkles, FileSearch, PenTool } from 'lucide-react';
-import { ModeToggle } from '@/components/theme/ThemeToggle';
+import { Zap, Layers, Download, GraduationCap, Sparkles, FileSearch, PenTool } from 'lucide-react';
 
 const About = async () => {
   const user = await currentUser();

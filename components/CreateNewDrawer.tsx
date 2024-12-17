@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   Drawer,
   DrawerClose,
@@ -14,7 +13,6 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { RainbowButton } from '@/components/ui/rainbow-button';
 import { Loader2, Plus } from 'lucide-react';
 import { Creation } from '@/types/types';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -31,7 +29,6 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess, tokens }) 
   const [ageGroup, setAgeGroup] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     if (loading) {
@@ -90,13 +87,14 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess, tokens }) 
 
   return (
     <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+      { error && <p className="text-red-500">{error}</p>}
       <DrawerTrigger asChild>
-        <RainbowButton
+        <Button
           id="triggerButton"
           className="inline-flex items-center space-x-2 px-4 py-2 text-sm font-medium sm:text-base hidden"
         >
           <Plus className="mr-2 h-4 w-4" /> Create New Content
-        </RainbowButton>
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-gradient-to-b from-background/80 to-background dark:from-background/90 dark:to-background/70 backdrop-blur-sm border-l border-primary">
         <DrawerHeader>

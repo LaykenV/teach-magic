@@ -1,5 +1,4 @@
 import Particles from "@/components/ui/particles";
-import { Icon, Omega, Pencil } from "lucide-react";
 import Link from "next/link";
 
 

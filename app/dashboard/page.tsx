@@ -14,9 +14,6 @@ import {
 import { BookOpen, ImageIcon, BrainCircuit } from 'lucide-react';
 import { MyDock } from '@/components/MyDock';
 import { getUserCreations } from '@/utils/getUserCreations';
-import { db } from '@/drizzle/db';
-import { usersTable } from '@/drizzle/schema';
-import { eq } from 'drizzle-orm'
 import { getUser } from '@/utils/getUser';
 
 

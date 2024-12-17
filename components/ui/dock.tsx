@@ -38,6 +38,7 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     const renderChildren = () => {
       return React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           if ((child.type as any).isDockIcon) {
             return React.cloneElement(child, {
               ...child.props,
