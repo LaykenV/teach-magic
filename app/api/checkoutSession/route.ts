@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
     // Parse the request body if needed (for example, if you'd like to dynamically set product/price)
     // const { priceId } = await request.json();
 
-    const price = amt === 15 ? 'price_1QWWADD5RAHwsfrKkzum8Nln' : 'price_1QWWAFD5RAHwsfrK62CyOB3A';
+    const price = amt === 15 ? 'price_1QWVX7D5RAHwsfrKDafBnoQR' : 'price_1QUJW0D5RAHwsfrKNzWqBVy6';
     if (userId === null) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: "payment",
-      metadata: {order_id: userId},
+      metadata: { userId: userId },
+      client_reference_id: userId,
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing?payment=success`,  // Ensure you have this URL set in .env
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing?payment=fail`,
     });

@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Handle the event
-  if (event.type === 'payment_intent.succeeded') {
+ /* if (event.type === 'payment_intent.succeeded') {
     const session = event.data.object as Stripe.PaymentIntent
     console.log(event)
     const dollarsSpent = session.amount / 100;
@@ -47,6 +47,23 @@ export async function POST(req: NextRequest) {
     .where(eq(usersTable.email, userEmail));  
     const userCacheKey = `user-${user.id}`;
     cache.del(userCacheKey);
+} else */if (event.type === 'checkout.session.completed') {
+    const session = event.data.object as Stripe.Checkout.Session;
+    if (session.payment_status === 'paid' && session.mode === 'payment' && session.status === 'complete' && session.amount_subtotal && session.client_reference_id) {
+        console.log(session);
+        const dollarsSpent = session.amount_subtotal / 100;
+        const tokenCount = dollarsSpent === 10 ? 15 : 1;
+        console.log('adding', tokenCount, 'tokens')
+        const userId = session.client_reference_id;
+        await db
+        .update(usersTable)
+        .set({
+          tokens: sql`${usersTable.tokens} + ${tokenCount}`,
+        })
+        .where(eq(usersTable.id, userId));  
+        const userCacheKey = `user-${userId}`;
+        cache.del(userCacheKey);
+    }
 }
 
 

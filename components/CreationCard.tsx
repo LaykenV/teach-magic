@@ -138,7 +138,7 @@ const CreationCard: React.FC<CreationCardProps> = ({ creation, deleting, onDelet
           </CardTitle>
           <div className="flex flex-wrap gap-2">
             <Badge variant="default" className="text-xs text-white bg-primary hover:bg-primary">
-              {creation.slides.length} {creation.slides.length === 1 ? 'slide' : 'slides'}
+              {/*{creation.slides.length} {creation.slides.length === 1 ? 'slide' : 'slides'} */} 6 Slides
             </Badge>
             <Badge variant="default" className={`text-xs text-white ${getAgeGroupColor(creation.age_group)}`}>
               {getAgeGroup(creation.age_group)}

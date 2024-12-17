@@ -20,7 +20,7 @@ interface CreationsLibraryProps {
 }
 
 export default function CreationsLibrary({ initialCreations, tokens }: CreationsLibraryProps) {
-  const [activeTab, setActiveTab] = useState<'library' | 'community'>('community')
+  const [activeTab, setActiveTab] = useState<'library' | 'community'>('community');
   const [searchTerm, setSearchTerm] = useState('')
   const [ageFilter, setAgeFilter] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null);
