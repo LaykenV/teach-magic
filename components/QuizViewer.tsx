@@ -13,7 +13,6 @@ import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { ModeToggle } from './theme/ThemeToggle'
 import confetti from 'canvas-confetti';
-import { set } from 'zod'
 
 
 interface QuizViewerProps {
