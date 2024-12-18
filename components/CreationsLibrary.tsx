@@ -55,7 +55,7 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
       <div className="flex flex-col md:flex-row justify-between items-start mb-6">
         <div className="flex items-center space-x-2 mb-4 md:mb-0">
           <div 
-            className="flex items-center space-x-2 hover:bg-primary px-3 py-2 rounded-md cursor-pointer transition-colors h-10"
+            className="flex items-center space-x-2 hover:bg-primary hover:text-white px-3 py-2 rounded-md cursor-pointer transition-colors h-10"
             onClick={() => router.push('/pricing')}
           >
             <Gem className="w-5 h-5" />
