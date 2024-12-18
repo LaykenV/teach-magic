@@ -63,6 +63,8 @@ export async function POST(request: NextRequest) {
       // Create a new creation record in the database
       const creation = await createCreation({ user_id: userId, slides, quiz: questions, age_group });
 
+      console.log('created')
+
       // Prepare promises for image generation and uploading
       const imagePromises: Promise<void>[] = [];
 

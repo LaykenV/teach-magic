@@ -280,6 +280,7 @@ export async function promptGPT(
     };
   
     try {
+      console.log('Sending image request...');
       const response = await axios.post(apiUrl, form, {
         headers,
         responseType: 'arraybuffer', // Receive binary data
