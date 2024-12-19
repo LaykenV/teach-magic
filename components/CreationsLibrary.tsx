@@ -32,6 +32,7 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
   useEffect(() => {
     if (userCreations.length === 0) {
       setUserCreations(initialCreations);
+      initialCreations.length === 0 ? setActiveTab('community') : setActiveTab('library');
     }
   }, [initialCreations, userCreations, setUserCreations]);
 
