@@ -230,7 +230,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/dashboard" prefetch={true}>
-                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-black hover:text-black transition-all duration-300 ease-in-out">
+                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-white hover:text-black transition-all duration-300 ease-in-out">
                   <Home className="h-5 w-5 mr-2" />
                   <span>Dashboard</span>
                 </Button>

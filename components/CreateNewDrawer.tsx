@@ -32,7 +32,7 @@ const CreateNewDrawer: React.FC<CreateNewDrawerProps> = ({ onSuccess, tokens }) 
 
   useEffect(() => {
     if (loading) {
-      const timer = setTimeout(() => setProgress(100), 30000);
+      const timer = setTimeout(() => setProgress(100), 40000);
       const interval = setInterval(() => {
         setProgress((oldProgress) => {
           if (oldProgress === 100) {
