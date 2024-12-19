@@ -105,7 +105,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
       <div className="absolute bottom-4 sm:top-4 left-4 z-10 flex flex-row space-y-0 space-x-4">
         
               <Link href="/dashboard" prefetch={true}>
-                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-white hover:text-black transition-all duration-300 ease-in-out w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-black hover:text-black transition-all duration-300 ease-in-out w-full sm:w-auto">
                   <Home className="h-5 w-5 sm:mr-2" />
                   <span className="hidden sm:inline">Dashboard</span>
                 </Button>

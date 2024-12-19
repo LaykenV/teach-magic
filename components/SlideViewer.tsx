@@ -89,7 +89,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
               ) : (
                 <div className="flex flex-col md:flex-row items-center justify-center gap-8 w-full">
                   {slide.slide_image_url && (
-                    <div className="w-full md:w-1/2">
+                    <div className="w-[95%] md:w-1/2">
                       <CldImage
                         width={960}
                         height={540}
@@ -230,7 +230,7 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href="/dashboard" prefetch={true}>
-                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-white hover:text-black transition-all duration-300 ease-in-out">
+                <Button variant="outline" size="lg" className="rounded-full bg-background/10 hover:bg-background/90 text-black hover:text-black transition-all duration-300 ease-in-out">
                   <Home className="h-5 w-5 mr-2" />
                   <span>Dashboard</span>
                 </Button>
