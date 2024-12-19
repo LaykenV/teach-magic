@@ -57,14 +57,14 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
   return (
     <div className="container mx-auto py-8">
     <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'library' | 'community')} className="w-full">
-      <div className="flex flex-col md:flex-row justify-between items-start mb-6">
+      <div className="flex flex-col lg:flex-row justify-between items-start mb-6">
         <div className="flex items-center space-x-2 mb-4 md:mb-0">
           <div 
-            className="flex items-center space-x-2 hover:bg-primary hover:text-white px-3 py-2 rounded-md cursor-pointer transition-colors h-10"
+            className="flex flex-col lg:flex-row items-center justify-center space-x-2 hover:bg-primary hover:text-white px-3 py-2 rounded-md cursor-pointer transition-colors h-18 lg:h-10"
             onClick={() => router.push('/pricing')}
           >
             <Gem className="w-5 h-5" />
-            <span className='no-wrap'>{tokens} gems</span>
+            <span className='text-no-wrap'>{tokens} gems</span>
           </div>
           <TabsList>
             <TabsTrigger value="library" className="flex items-center">
@@ -77,7 +77,7 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
             </TabsTrigger>
           </TabsList>
         </div>
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 w-full md:w-auto">
+        <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 w-full lg:w-auto">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
@@ -89,7 +89,7 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
             />
           </div>
           <Select onValueChange={setAgeFilter}>
-            <SelectTrigger className="w-full md:w-[180px] bg-card">
+            <SelectTrigger className="w-full lg:w-[180px] bg-card">
               <SelectValue placeholder="Filter by age" />
             </SelectTrigger>
             <SelectContent>
