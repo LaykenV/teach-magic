@@ -101,7 +101,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-start sm:justify-center p-4 overflow-y-auto">
+    <div className="min-h-screen w-full flex flex-col items-center justify-start sm:justify-center pt-8 sm:pt-4 p-4 overflow-y-auto">
       <div className="absolute bottom-4 sm:top-4 left-4 z-10 flex flex-row space-y-0 space-x-4">
         
               <Link href="/dashboard" prefetch={true}>

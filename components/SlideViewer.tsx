@@ -25,8 +25,6 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
   console.log(creation)
 
   const slide = creation.slides[slideIndex]
-  const nextSlide = creation.slides[slideIndex + 1]
-  const prevSlide = creation.slides[slideIndex - 1]
   const isLastSlide = slideIndex === creation.slides.length - 1
   
   const handleNextSlide = () => {
@@ -37,25 +35,20 @@ export default function SlideViewer({ creation }: SlideViewerProps) {
     setSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
   }
 
+  // Preload all slide images on mount
   useEffect(() => {
-    const preloadImage = (url: string) => {
-      const img = new Image()
-      const cloudUrl = getCldImageUrl({
-        width: 960,
-        height: 540,
-        src: url
-      })
-      img.src = cloudUrl
-    }
-
-    if (nextSlide?.slide_image_url) {
-      preloadImage(nextSlide.slide_image_url)
-    }
-
-    if (prevSlide?.slide_image_url) {
-      preloadImage(prevSlide.slide_image_url)
-    }
-  }, [slideIndex, creation, nextSlide?.slide_image_url, prevSlide?.slide_image_url])
+    creation.slides.forEach((slide) => {
+      if (slide.slide_image_url) {
+        const img = new Image()
+        const cloudUrl = getCldImageUrl({
+          width: 960,
+          height: 540,
+          src: slide.slide_image_url
+        })
+        img.src = cloudUrl
+      }
+    })
+  }, [creation])
 
   return (
     <div className="relative h-screen w-screen text-foreground overflow-hidden flex flex-col">
