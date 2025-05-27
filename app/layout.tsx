@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head />
-      <body className="bg-gradient-to-b from-primary/10 to-primary/5">
+      <body className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 min-h-screen">
         <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
           <Provider>
             <ThemeProvider

@@ -30,14 +30,26 @@ const faqs = [
 
 export function FAQAccordion() {
   return (
-    <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
-      {faqs.map((faq, index) => (
-        <AccordionItem key={index} value={`item-${index}`}>
-          <AccordionTrigger>{faq.question}</AccordionTrigger>
-          <AccordionContent>{faq.answer}</AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+    <div className="w-full max-w-3xl mx-auto bg-background/70 backdrop-blur-lg border border-border/40 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
+      <Accordion type="single" collapsible className="w-full">
+        {faqs.map((faq, index) => (
+          <AccordionItem 
+            key={index} 
+            value={`item-${index}`}
+            className="border-b border-border/20 last:border-b-0"
+          >
+            <AccordionTrigger className="px-6 py-5 text-left font-semibold bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 hover:bg-primary/5 group">
+              <span className="group-hover:translate-x-1 transition-transform duration-300">
+                {faq.question}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent className="px-6 pb-5 text-muted-foreground leading-relaxed bg-gradient-to-r from-transparent via-primary/2 to-transparent">
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 }
 
