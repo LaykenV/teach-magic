@@ -231,10 +231,6 @@ export function MarqueeReviews() {
               <ReviewCard key={index} {...review} />
             ))}
           </Marquee>
-          
-          {/* Enhanced gradient overlays for fade effect */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-l from-background via-background/80 to-transparent"></div>
         </div>
 
         {/* Trust indicators */}

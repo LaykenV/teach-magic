@@ -38,7 +38,7 @@ export function FAQAccordion() {
             value={`item-${index}`}
             className="border-b border-border/20 last:border-b-0"
           >
-            <AccordionTrigger className="px-6 py-5 text-left font-semibold bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent hover:from-primary/90 hover:to-secondary/90 transition-all duration-300 hover:bg-primary/5 group">
+            <AccordionTrigger className="px-6 py-5 text-left font-semibold text-primary transition-all duration-300 group">
               <span className="group-hover:translate-x-1 transition-transform duration-300">
                 {faq.question}
               </span>

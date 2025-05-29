@@ -7,9 +7,9 @@ import { FAQAccordion } from "@/components/FAQAccordion";
 import { Zap, Layers, FileQuestion, Users, Download, GraduationCap, Sparkles, FileSearch, PenTool, BookOpen } from 'lucide-react';
 import { HeroSection } from "@/components/HeroSection";
 import { FeatureSection } from "@/components/FeatureSection";
-import { CTASection } from "@/components/CTASection";
 import { MarqueeReviews } from "@/components/MarqueeReviews";
 import { ModeToggle } from "@/components/theme/ThemeToggle";
+import { CTA } from "@/components/CTA";
 
 export default async function Home() {
   const user = await currentUser();
@@ -100,7 +100,7 @@ export default async function Home() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-4">
               <SignInButton mode="modal">
-                <Button variant="ghost" className="text-sm font-medium hover:bg-primary/10 transition-colors">
+                <Button variant="ghost" className="text-sm font-medium hover:bg-primary/70 cursor-pointer transition-colors">
                   Sign In
                 </Button>
               </SignInButton>
@@ -151,7 +151,7 @@ export default async function Home() {
           isAbout={false}
         />
 
-        <CTASection />
+        <CTA />
 
         <section className="relative py-16 sm:py-20 lg:py-24">
           {/* Section-specific gradient overlay */}

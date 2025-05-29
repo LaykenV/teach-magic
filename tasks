@@ -158,5 +158,11 @@ fb group? reddit? tiktok?
 
 market ???
 
+//marquee gradient
+//faq slected text
+
+dashboard, quiz and slide screens, about and pricing page
+
+
 
 { type: 'json_schema', json_schema: { name: 'slides', strict: true, schema: { type: 'object', properties: [Object], required: [Array], additionalProperties: false, '$schema': 'http://json-schema.org/draft-07/schema#' } } }

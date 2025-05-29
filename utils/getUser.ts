@@ -2,8 +2,8 @@
 import cache from '../lib/cache';
 import { db } from '@/drizzle/db';
 import { eq } from 'drizzle-orm/expressions';
-import { creationsTable, User, usersTable } from '@/drizzle/schema';
-import { Creation, UserEntry } from '@/types/types';
+import { User, usersTable } from '@/drizzle/schema';
+import { UserEntry } from '@/types/types';
 
 // Define cache duration in milliseconds (e.g., 24 hours)
 const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24 hours
@@ -51,6 +51,8 @@ export async function getUser(userId: string, email: string, name: string): Prom
       .select()
       .from(usersTable)
       .where(eq(usersTable.id, userId));
+
+      console.log(newUser);
 
       const formattedUser: User = {
         id: newUser.id,

@@ -2,7 +2,7 @@ import { SignUpButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
 
-export function CTASection() {
+export function CTA() {
   return (
     <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Complex mesh gradient background */}
