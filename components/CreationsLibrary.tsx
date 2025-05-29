@@ -55,70 +55,93 @@ export default function CreationsLibrary({ initialCreations, tokens }: Creations
   }, [activeTab, searchTerm, ageFilter, userCreations])
 
   return (
-    <div className="container mx-auto py-8">
-    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'library' | 'community')} className="w-full">
-      <div className="flex flex-col lg:flex-row justify-between items-start mb-6">
-        <div className="flex items-center space-x-2 mb-4 md:mb-0">
-          <div 
-            className="flex flex-col lg:flex-row items-center justify-center space-x-2 hover:bg-primary hover:text-white px-3 py-2 rounded-md cursor-pointer transition-colors h-18 lg:h-10"
-            onClick={() => router.push('/pricing')}
-          >
-            <Gem className="w-5 h-5" />
-            <span className='text-no-wrap'>{tokens} gems</span>
-          </div>
-          <TabsList>
-            <TabsTrigger value="library" className="flex items-center">
-              <Book className="mr-2" />
-              My Library
-            </TabsTrigger>
-            <TabsTrigger value="community" className="flex items-center">
-              <Users className="mr-2" />
-              Community
-            </TabsTrigger>
-          </TabsList>
-        </div>
-        <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2 w-full lg:w-auto">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <Input
-              type="text"
-              placeholder="Search creations..."
-              className="pl-10 bg-card"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <Select onValueChange={setAgeFilter}>
-            <SelectTrigger className="w-full lg:w-[180px] bg-card">
-              <SelectValue placeholder="Filter by age" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="elementary">elementary</SelectItem>
-              <SelectItem value="middle-school">middle school</SelectItem>
-              <SelectItem value="high-school">high school</SelectItem>
-              <SelectItem value="college">college</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+    <section className="relative">
+      {/* Section-specific gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/6 to-transparent rounded-2xl" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/4 via-transparent to-accent/4 rounded-2xl" />
+      
+      {/* Enhanced floating elements for this section */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-8 right-8 w-40 h-40 bg-gradient-to-br from-secondary/8 to-primary/6 rounded-full blur-3xl animate-pulse delay-300" />
+        <div className="absolute bottom-8 left-8 w-48 h-48 bg-gradient-to-tr from-accent/6 to-secondary/8 rounded-full blur-3xl animate-pulse delay-700" />
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${activeTab}-${JSON.stringify(filteredCreations)}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.2 }}
-        >
-          <TabsContent value="library">
-            <UserCreations filteredCreations={filteredCreations} self={true} setSuccess={setSuccess} success={success} tokens={tokens}/>
-          </TabsContent>
-          <TabsContent value="community">
-            <UserCreations filteredCreations={filteredCreations} self={false} setSuccess={setSuccess} success={success} tokens={tokens}/>
-          </TabsContent>
-        </motion.div>
-      </AnimatePresence>
-    </Tabs>
-  </div>
+
+      <div className="relative bg-card/30 backdrop-blur-sm border border-border/30 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg">
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'library' | 'community')} className="w-full">
+          <div className="flex flex-col space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+            {/* Header section with improved mobile layout */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                {/* Mobile: Gems and tabs in same row */}
+                <div className="flex items-center justify-between sm:justify-start w-full sm:w-auto space-x-3 sm:space-x-4">
+                  <div 
+                    className="flex items-center justify-center space-x-2 hover:bg-primary hover:text-white px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary hover:to-secondary border border-primary/20 hover:border-primary group"
+                    onClick={() => router.push('/pricing')}
+                  >
+                    <Gem className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span className='font-medium'>{tokens} gems</span>
+                  </div>
+                  <TabsList className="bg-background/60 backdrop-blur-sm border border-border/30">
+                    <TabsTrigger value="library" className="flex items-center space-x-2 data-[state=active]:bg-primary/20">
+                      <Book className="w-4 h-4" />
+                      <span className="hidden sm:inline">My Library</span>
+                      <span className="sm:hidden">Library</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="community" className="flex items-center space-x-2 data-[state=active]:bg-primary/20">
+                      <Users className="w-4 h-4" />
+                      <span className="hidden sm:inline">Community</span>
+                      <span className="sm:hidden">Community</span>
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
+              </div>
+              
+              {/* Search and filter controls */}
+              <div className="flex flex-col xs:flex-row space-y-2 xs:space-y-0 xs:space-x-3 w-full sm:w-auto">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search creations..."
+                    className="pl-10 bg-background/60 backdrop-blur-sm border-border/30 focus:border-primary/50 w-full xs:w-64"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <Select onValueChange={setAgeFilter}>
+                  <SelectTrigger className="w-full xs:w-[160px] bg-background/60 backdrop-blur-sm border-border/30 focus:border-primary/50">
+                    <SelectValue placeholder="Filter by age" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background/95 backdrop-blur-sm border-border/30">
+                    <SelectItem value="elementary">Elementary</SelectItem>
+                    <SelectItem value="middle-school">Middle School</SelectItem>
+                    <SelectItem value="high-school">High School</SelectItem>
+                    <SelectItem value="college">College</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${activeTab}-${JSON.stringify(filteredCreations)}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <TabsContent value="library" className="mt-0">
+                <UserCreations filteredCreations={filteredCreations} self={true} setSuccess={setSuccess} success={success} tokens={tokens}/>
+              </TabsContent>
+              <TabsContent value="community" className="mt-0">
+                <UserCreations filteredCreations={filteredCreations} self={false} setSuccess={setSuccess} success={success} tokens={tokens}/>
+              </TabsContent>
+            </motion.div>
+          </AnimatePresence>
+        </Tabs>
+      </div>
+    </section>
   )
 }
 
