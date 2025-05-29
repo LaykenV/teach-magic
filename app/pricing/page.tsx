@@ -10,21 +10,26 @@ interface PageProps {
 const Pricing = async ({ searchParams }: PageProps) => {
   const user = await currentUser();
   const userId = user?.id;
+  
   if (!userId) {
     redirect('/');
   }
-  let paymentResult = '';
-  const paramaters = await searchParams;
-  if (paramaters.payment) {
-    paymentResult = paramaters.payment as string;
+
+  let paymentResult: string | null = null;
+  const parameters = await searchParams;
+  
+  if (parameters.payment) {
+    const payment = parameters.payment as string;
+    if (payment === 'success') {
+      paymentResult = 'success';
+    } else if (payment === 'fail') {
+      paymentResult = 'fail';
+    }
   }
 
-  if (paymentResult == 'success') {
-    return <PricingComponent paid={true}/>;
-  } else if (paymentResult == 'fail') {
-    return <PricingComponent paid={false}/>;
-  } else   return <PricingComponent paid={null}/>;
+  const paid = paymentResult === 'success' ? true : paymentResult === 'fail' ? false : null;
 
+  return <PricingComponent paid={paid} />;
 };
 
 export default Pricing;
