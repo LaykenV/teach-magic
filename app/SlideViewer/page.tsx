@@ -33,11 +33,13 @@ export default async function SlideViewerPage({ searchParams }: PageProps) {
 
   if (!id) {
     return (
-      <div className="flex flex-col items-center justify-start min-h-screen p-4">
-        <p className="text-center mt-10">No creation ID provided.</p>
-        <Link href="/dashboard" className="text-blue-500 hover:underline" prefetch>
-          Go back to Dashboard
-        </Link>
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-br from-background via-card to-background">
+        <div className="text-center space-y-4 p-8 bg-background/80 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg">
+          <p className="text-xl text-foreground">No creation ID provided.</p>
+          <Link href="/dashboard" className="inline-block px-6 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-full hover:from-primary/90 hover:to-secondary/90 transition-all duration-300" prefetch>
+            Go back to Dashboard
+          </Link>
+        </div>
       </div>
     );
   }
@@ -47,18 +49,16 @@ export default async function SlideViewerPage({ searchParams }: PageProps) {
 
   if (!creation) {
     return (
-      <div className="flex flex-col items-center justify-start min-h-screen p-4">
-        <p className="text-center mt-10">Creation not found.</p>
-        <Link href="/generate" className="text-blue-500 hover:underline">
-          Go back to Generate
-        </Link>
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-br from-background via-card to-background">
+        <div className="text-center space-y-4 p-8 bg-background/80 backdrop-blur-sm rounded-2xl border border-border/50 shadow-lg">
+          <p className="text-xl text-foreground">Creation not found.</p>
+          <Link href="/generate" className="inline-block px-6 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-full hover:from-primary/90 hover:to-secondary/90 transition-all duration-300">
+            Go back to Generate
+          </Link>
+        </div>
       </div>
     );
   }
 
-  return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
-      <SlideViewer creation={creation} />
-    </div>
-  );
+  return <SlideViewer creation={creation} />;
 }

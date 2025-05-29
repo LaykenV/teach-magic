@@ -34,6 +34,50 @@ body {
     border: 1px solid transparent;
   }
 
+  /* SlideViewer specific gradients */
+  .slide-gradient-bg {
+    background: 
+      radial-gradient(ellipse at top left, hsl(var(--primary)/0.12) 0%, transparent 40%),
+      radial-gradient(ellipse at bottom right, hsl(var(--secondary)/0.10) 0%, transparent 40%),
+      radial-gradient(ellipse at center, hsl(var(--accent)/0.08) 0%, transparent 60%),
+      linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--card)) 50%, hsl(var(--background)) 100%);
+  }
+
+  .slide-floating-orb-1 {
+    background: linear-gradient(135deg, hsl(var(--primary)/0.15), hsl(var(--secondary)/0.10));
+    filter: blur(60px);
+    animation: float 8s ease-in-out infinite, pulse 4s ease-in-out infinite alternate;
+  }
+
+  .slide-floating-orb-2 {
+    background: linear-gradient(225deg, hsl(var(--accent)/0.12), hsl(var(--primary)/0.08));
+    filter: blur(80px);
+    animation: float 10s ease-in-out infinite reverse, pulse 6s ease-in-out infinite alternate-reverse;
+  }
+
+  .slide-floating-orb-3 {
+    background: linear-gradient(45deg, hsl(var(--secondary)/0.10), hsl(var(--accent)/0.12));
+    filter: blur(70px);
+    animation: float 12s ease-in-out infinite, pulse 5s ease-in-out infinite alternate;
+  }
+
+  /* Smooth transitions for interactive elements */
+  .smooth-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .smooth-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px hsl(var(--primary)/0.3);
+  }
+
+  /* Enhanced backdrop blur for better glass effects */
+  .glass-effect {
+    backdrop-filter: blur(20px) saturate(180%);
+    background: hsl(var(--background)/0.8);
+    border: 1px solid hsl(var(--border)/0.3);
+  }
+
   /* Responsive floating animations */
   @media (prefers-reduced-motion: no-preference) {
     .animate-float-slow {
@@ -53,6 +97,12 @@ body {
     
     .animate-pulse {
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .slide-floating-orb-1,
+    .slide-floating-orb-2,
+    .slide-floating-orb-3 {
+      filter: blur(40px);
     }
   }
 }
