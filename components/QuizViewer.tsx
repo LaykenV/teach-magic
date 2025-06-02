@@ -357,7 +357,7 @@ export default function QuizViewer({ creation }: QuizViewerProps) {
                                       id={`answer-${index}`}
                                       className="peer sr-only"
                                     />
-                                    <div className="relative w-5 h-5 border-2 border-primary rounded-full flex items-center justify-center">
+                                    <div className="relative w-5 h-5 flex-shrink-0 border-2 border-primary rounded-full flex items-center justify-center">
                                       <motion.div
                                         initial={false}
                                         animate={{
