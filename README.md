@@ -2,7 +2,7 @@
 
 > Transform teaching with AI magic - Create engaging educational content effortlessly with our AI-powered platform designed for modern educators.
 
-![TeachMagic Landing Page](./assets/landingScreen.png)
+![TeachMagic Landing Page](/public/assets/landingScreen.png.png)
 *Screenshot placeholder - Landing page of TeachMagic platform*
 
 ## 🚀 Overview
